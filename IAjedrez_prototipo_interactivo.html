@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IAjedrez — Análisis de ajedrez con IA | Prototipo</title>
+<style>
+:root{color-scheme:light;--ink:#1c2c42;--muted:#65758a;--line:#dfe5ed;--card:#fff;--page:#f5f7fb;--blue:#1d62d8;--blue-dark:#1445a6;--blue-soft:#eaf2ff;--teal:#147c79;--teal-soft:#e8f6f3;--amber:#ac6411;--amber-soft:#fff4df;--red:#b94840;--red-soft:#fff0ed;--shadow:0 2px 8px rgba(18,42,74,.035),0 12px 36px rgba(18,42,74,.035);--radius:16px}
+*,*::before,*::after{box-sizing:border-box}html{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--page)}body{margin:0;min-height:100vh}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #80a8ff;outline-offset:3px}a{color:var(--blue)}
+.topbar{height:71px;background:#182f51;color:white;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,2.3vw,36px);gap:20px}.brand{display:flex;align-items:center;gap:13px;min-width:0}.logo{width:40px;height:40px;display:grid;place-items:center;background:#ffffff1f;border:1px solid #ffffff35;border-radius:11px;font:29px Georgia,serif}.brand h1{font-size:17px;letter-spacing:-.02em;margin:0;font-weight:750;white-space:nowrap}.brand small{display:block;color:#bfcfe6;font-size:12px;margin-top:1px}.topmeta{display:flex;align-items:center;gap:10px;font-size:12px}.top-pill{border:1px solid #9fb3d340;background:#fff2;color:#dce9fb;padding:7px 11px;border-radius:24px}.text-btn{color:#e7effe;background:transparent;border:1px solid #aec3e34d;border-radius:10px;padding:9px 12px;font-size:12px}.text-btn:hover{background:#fff2}
+.layout{max-width:1920px;margin:0 auto;display:grid;grid-template-columns:minmax(222px,.7fr) minmax(370px,1.18fr) minmax(470px,1.54fr);gap:16px;padding:18px;min-height:calc(100vh - 71px)}.panel{min-width:0;min-height:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.panel-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:17px 17px 14px;border-bottom:1px solid #e9edf3}.panel-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:740;margin:0;letter-spacing:-.01em}.subtle{color:var(--muted);font-size:12px}.small-button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 10px;color:#33455a;font-size:12px;font-weight:620;white-space:nowrap}.small-button:hover{background:#f2f6fc;border-color:#afc7e8}.small-button.active{color:var(--blue-dark);background:var(--blue-soft);border-color:#a7c6fa}.icon-dot{font-size:17px;color:var(--blue)}
+/* Tree */
+.tree-panel{display:flex;flex-direction:column}.tree-scroll{overflow:auto;padding:16px 14px 18px;flex:1;min-height:0}.tree-help{background:#f6f9ff;border:1px solid #e6effd;color:#607087;border-radius:9px;padding:10px;margin-bottom:14px;font-size:11px;line-height:1.5}.tree-list{position:relative;margin-left:12px;padding-left:15px;border-left:2px solid #d4dee9}.tree-entry{position:relative;margin:0 0 6px}.tree-entry::before{content:"";position:absolute;left:-21px;top:16px;width:10px;height:10px;border:2px solid #a3b0c1;background:white;border-radius:50%;z-index:1}.tree-entry.selected::before{border:3px solid var(--blue);background:var(--blue-soft);box-shadow:0 0 0 3px #dfebff}.tree-move{display:flex;align-items:center;justify-content:space-between;text-align:left;gap:8px;min-height:35px;width:100%;background:transparent;color:#3b4a5d;border:1px solid transparent;border-radius:9px;padding:6px 8px;font-size:13px;font-weight:600}.tree-move:hover{background:#f2f6fc}.tree-entry.selected>.tree-move{background:var(--blue-soft);border-color:#82b1ff;color:#124aa9;box-shadow:inset 3px 0 var(--blue)}.tree-move.muted{color:#8b98a7}.query-count{display:flex;align-items:center;gap:4px;white-space:nowrap;font-size:10px;font-weight:700;padding:3px 6px;color:var(--blue-dark);background:#fff;border:1px solid #c8d9f7;border-radius:6px}.flag{font-size:11px;font-weight:750;color:var(--amber)}.flag.severe{color:var(--red)}.branch-wrap{margin:7px 0 10px 9px;border-left:2px solid #b7cef4;padding-left:12px}.branch-label{font-size:10px;color:#718096;text-transform:uppercase;letter-spacing:.09em;font-weight:730;margin:2px 0 7px}.branch-wrap .tree-entry::before{left:-19px;width:8px;height:8px;top:13px}.branch-wrap .tree-move{font-size:12px;min-height:31px}.tree-footer{border-top:1px solid #edf0f5;padding:12px 16px;color:#758397;font-size:11px;line-height:1.5}
+/* Board */
+.board-panel{display:flex;flex-direction:column}.board-main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:18px 19px 8px;gap:15px}.board-info{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;max-width:575px}.player{display:flex;gap:9px;align-items:center;color:#4b5b70;font-size:12px;font-weight:670}.player-icon{width:27px;height:27px;border-radius:8px;border:1px solid #dee4ed;background:#fafbfc;display:grid;place-items:center;font:23px Georgia,serif}.player-icon.black{background:#e4e7ec}.player-meta{color:#8a96a6;font-size:11px;font-weight:500}.board-frame{width:100%;max-width:min(575px, 62vh);display:grid;grid-template-columns:22px minmax(0,1fr);grid-template-rows:minmax(0,1fr) 20px;align-items:stretch}.ranks{grid-row:1;grid-column:1;display:flex;flex-direction:column;justify-content:space-around;text-align:center;color:#65768b;font-size:12px;font-weight:650}.files{grid-row:2;grid-column:2;display:grid;grid-template-columns:repeat(8,1fr);align-items:center;text-align:center;font-size:12px;font-weight:650;color:#65768b}.chessboard{grid-row:1;grid-column:2;display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;border:1px solid #c4cfdd;border-radius:5px;overflow:hidden;box-shadow:0 9px 24px #21304715}.square{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;user-select:none}.square.light{background:#f0eee7}.square.dark{background:#93aeb8}.square.from.light,.square.from.dark{background:#f3d587}.square.to.light,.square.to.dark{background:#c4d890}.square.selected-square::after{position:absolute;content:"";inset:2px;border:2px solid #1b65d9;border-radius:3px;pointer-events:none}.piece{font-family:"DejaVu Sans","Segoe UI Symbol","Noto Sans Symbols 2","Arial Unicode MS",serif;line-height:1;font-size:clamp(25px,3.35vw,54px);z-index:1;filter:drop-shadow(0 1px 1px #26374b22)}.piece.white{color:#fff;text-shadow:0 1px #151d25,1px 0 #151d25,-1px 0 #151d25,0 -1px #151d25,1px 2px #151d25}.piece.black{color:#1e2834}.board-caption{display:flex;justify-content:center;align-items:center;gap:10px;color:#738197;font-size:11px}.board-controls{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:12px 20px 19px;width:100%;max-width:610px;margin:0 auto}.move-current{min-width:0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;background:#eff5ff;border:1px solid #d4e4ff;border-radius:11px;padding:10px 8px}.move-current strong{font-size:15px;color:#1b4e9e}.move-current span{font-size:11px;color:#6e829c}.nav-arrow{flex-shrink:0;background:#fff;border:1px solid #d6e0ed;width:42px;height:45px;border-radius:11px;font-size:22px;color:#32445b}.nav-arrow:not(:disabled):hover{border-color:#a4c5f5;background:#f1f6ff}.board-bottom{padding:0 21px 17px;display:flex;justify-content:center}.sample-tag{color:#72819a;font-size:10px;text-align:center}
+/* AI / output */
+.right-panel{display:flex;flex-direction:column;position:relative;min-height:0}.right-head{padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #e9edf3}.right-head h2{margin:0;font-size:17px;letter-spacing:-.02em}.right-head p{margin:4px 0 0;color:#74839a;font-size:11px}.change-view{display:inline-flex;align-items:center;gap:8px;border:1px solid #b2cafa;background:#edf4ff;color:#174cac;padding:10px 12px;border-radius:10px;font-size:12px;font-weight:750;white-space:nowrap}.change-view:hover,.change-view[aria-expanded=true]{background:#dfeeff;border-color:#7eadf2}.vicon{font-size:13px}.view-menu-wrap{position:relative}.view-menu{position:absolute;right:0;top:calc(100% + 9px);z-index:10;display:grid;grid-template-columns:1fr;gap:7px;width:250px;padding:9px;border:1px solid #dce5f1;border-radius:13px;box-shadow:0 15px 35px #1b35582d;background:#fff}.view-menu[hidden]{display:none}.view-option{display:flex;align-items:center;gap:12px;text-align:left;padding:12px;border:1px solid #e1e7ee;border-radius:10px;background:#f9fbfe;color:#3b4a60;font-size:13px;font-weight:680}.view-option:hover,.view-option:focus-visible{background:#ecf4ff;border-color:#b4cdf9}.view-option.chosen{background:#eaf2ff;border-color:#9cbeff;color:#1453ad}.view-option span:first-child{font-size:19px}.result-area{padding:17px;overflow:auto;flex:1;min-height:320px}.context-line{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;margin-bottom:14px;border:1px solid #e2e9f5;border-radius:11px;background:#f6f9ff;font-size:12px;color:#546886}.context-line strong{color:#184ea6}.chip{display:inline-flex;align-items:center;gap:6px;border-radius:24px;padding:6px 9px;font-size:11px;font-weight:730;border:1px solid #e1e7f0;background:white;white-space:nowrap}.view-intro{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:12px}.view-intro h3{font-size:15px;margin:0;letter-spacing:-.015em}.view-intro .hint{font-size:11px;color:#73849b}.table-wrap{overflow:auto;border:1px solid #dce3eb;border-radius:11px}.results-table{width:100%;border-collapse:collapse;font-size:12px;line-height:1.45;text-align:left;min-width:585px}.results-table thead{background:#f2f5f9;color:#40516a}.results-table th{white-space:nowrap;font-size:11px;font-weight:750}.results-table th,.results-table td{padding:11px 10px;border-bottom:1px solid #e7ebf1;vertical-align:top}.results-table tr:last-child td{border-bottom:none}.results-table tbody tr{cursor:pointer}.results-table tbody tr:hover{background:#f6f9ff}.results-table tr.highlight-row{background:#edf4ff}.results-table th:not(:last-child),.results-table td:not(:last-child){border-right:1px solid #f0f2f6}.kind{white-space:nowrap;font-size:11px;font-weight:750;padding:4px 7px;border-radius:5px;display:inline-block}.kind.warning{color:#995b12;background:#fff0d6}.kind.danger{color:#a13b38;background:#fff0ec}.kind.neutral{color:#226e69;background:#e5f4f1}.table-foot{margin:11px 0 0;font-size:11px;color:#77879a;line-height:1.5}.link-resource{text-decoration:none;display:inline-flex;align-items:center;gap:5px;font-weight:740}.link-resource:hover{text-decoration:underline}
+/* Recorridos demostrativos, una sola región de resultados */
+.demo-intro{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 9px}.demo-intro strong{font-size:12px;color:#304761}.demo-intro small{font-size:10px;color:var(--muted)}
+.demo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:17px}.demo-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;text-align:left;gap:7px;padding:11px;border-radius:11px;background:#f8fbff;border:1px solid #dce7f5;min-height:100px;color:var(--ink)}.demo-card:hover{border-color:#93b7f1;background:#eef5ff}.demo-card .task-no{background:#e8f1ff;color:#1256b6;border-radius:7px;padding:3px 6px;font-size:10px;font-weight:800}.demo-card strong{font-size:12px;line-height:1.35}.demo-card small{font-size:10px;color:var(--muted);line-height:1.4}
+.task-badge{display:inline-flex;align-items:center;gap:6px;background:#f0f6ff;border:1px solid #d3e3fc;border-radius:9px;padding:8px 10px;font-size:11px;color:#204f94;font-weight:700;margin-bottom:12px}
+.secondary-box{border:1px solid #a9c5f5;background:#f4f8ff;border-radius:13px;padding:15px;margin-bottom:13px;box-shadow:inset 3px 0 #4382e2}.secondary-box h3{margin:0 0 9px;font-size:14px}.secondary-box p{font-size:12px;line-height:1.6;margin:6px 0}.secondary-label{display:inline-block;font-size:10px;text-transform:uppercase;font-weight:750;letter-spacing:.06em;color:#4971aa}.secondary-return{margin-top:10px;border-radius:9px;border:1px solid #a1bdf1;padding:9px 12px;background:white;color:#1452a8;font-size:12px;font-weight:750}.secondary-return:hover{background:#eaf3ff}
+.question-suggestions{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.question-suggestions button{border:1px solid #c9daf6;background:white;border-radius:16px;color:#315d99;padding:6px 9px;font-size:11px}.question-suggestions button:hover{background:#eaf2ff}.thread-entry .sim-answer{margin-top:5px;border-radius:7px;padding:7px 8px;background:white;color:#334d65;font-size:11px}.thread-entry .sim-question{color:#2052a5;font-weight:700}
+/* Aprendizaje guiado. El tablero central se vuelve seleccionable solo en esta vista. */
+.square.learn-square{appearance:none;border:0;border-radius:0;padding:0;cursor:pointer}.square.learn-square:hover{box-shadow:inset 0 0 0 3px #2572d9}.square.learn-square:focus-visible{outline:3px solid #184ddd;outline-offset:-4px;z-index:3}.square.target-hint:after{content:"";width:23%;aspect-ratio:1;border-radius:50%;background:#276dc470;position:absolute;pointer-events:none}.square.learn-origin{box-shadow:inset 0 0 0 4px #175bc7}.board-mode-hint{width:100%;max-width:575px;background:#eaf4ff;border:1px solid #c1dcff;color:#1e528d;font-size:11px;line-height:1.4;border-radius:9px;padding:8px 11px;text-align:center}.board-mode-hint[hidden]{display:none}
+.lesson-hero{background:linear-gradient(120deg,#eff6ff,#f8fbff);padding:15px;border:1px solid #d4e5fa;border-radius:12px;margin-bottom:14px}.lesson-hero h3{margin:3px 0 7px;font-size:16px}.lesson-hero p{margin:0;font-size:12px;line-height:1.55;color:#526c89}.lesson-hero .eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:10px;font-weight:800;color:#1764b2}.lesson-prompt{background:#fafbfe;border-radius:11px;padding:12px;border:1px solid #e0e6f1;font-size:12px;line-height:1.65}.lesson-status{margin:13px 0;border:1px solid #cfdef1;background:#f5f9ff;border-radius:11px;padding:12px;font-size:12px;line-height:1.6;color:#2d526f}.lesson-status.success{background:#edf9f3;border-color:#b5dfc8;color:#22644f}.lesson-status.warning{background:#fff7ea;border-color:#f2d3a2;color:#875618}.lesson-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.lesson-actions button{border:1px solid #bbd1ef;border-radius:9px;padding:9px 11px;color:#1d55a5;background:#fff;font-size:11px;font-weight:700}.lesson-actions button:hover{background:#eaf3ff}.lesson-actions button.primary{background:#216bd7;color:white;border-color:#216bd7}.lesson-actions button.primary:hover{background:#1456b6}.compare-box{border:1px solid #e1e6ef;border-radius:11px;margin-top:12px;overflow:hidden}.compare-row{display:grid;grid-template-columns:75px 1fr;align-items:start;gap:10px;padding:10px 12px;font-size:11px;line-height:1.5}.compare-row+.compare-row{border-top:1px solid #e8edf3}.compare-row b{color:#1e54a2}.compare-row.recommended{background:#f2faf7}.lesson-footer{font-size:11px;color:#748298;line-height:1.6;margin:12px 0}
+/* Chain */
+.chain-summary{margin:2px 0 17px;display:flex;justify-content:space-between;align-items:center;gap:12px}.chain-summary strong{font-size:13px}.chain-status{font-size:11px;color:#55718d;background:#f1f6fd;border-radius:7px;padding:6px 9px;white-space:nowrap}.steps{position:relative;display:grid;gap:10px;margin:0 0 18px;padding:0;list-style:none}.steps::before{content:"";position:absolute;top:19px;bottom:21px;left:16px;width:2px;background:#cad8e9}.step{position:relative;min-width:0}.step-main{display:grid;grid-template-columns:34px minmax(0,1fr) 24px;gap:10px;align-items:center;text-align:left;border:1px solid #dfe7ef;background:#fbfcfe;border-radius:12px;width:100%;padding:10px 12px;min-height:68px}.step-main:hover{border-color:#aac6f2;background:#f6f9ff}.step.active .step-main{background:#eef5ff;border-color:#96bbfa}.step.is-done .step-main{background:#f3faf8;border-color:#d6e9e3}.step-no{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;border:2px solid #b8c8da;background:white;position:relative;z-index:1;font-weight:780;font-size:12px;color:#5c7087}.step.is-done .step-no{color:#107768;border-color:#9fd3c6;background:#e3f6f0}.step.active .step-no{color:white;border-color:#216bdc;background:#216bdc}.step-heading{display:block;font-size:12px;font-weight:790;margin-bottom:5px}.step-description{display:block;color:#62748a;font-size:11px;line-height:1.45}.step-expand{color:#6e83a1;font-size:19px}.step-details{margin:6px 0 0 45px;padding:10px 11px 12px;border:1px solid #dbe7fb;background:#f9fbff;border-radius:10px}.step-details p{margin:0;font-size:12px;line-height:1.55;color:#45566e}.micro-caption{text-transform:uppercase;font-size:10px!important;color:#7d90aa!important;letter-spacing:.08em;font-weight:760;margin-bottom:5px!important}.thread{margin-top:9px;display:grid;gap:7px}.thread-entry{border-left:2px solid #94bafb;background:#edf4ff;padding:8px 10px;border-radius:0 7px 7px 0;font-size:11px;color:#37547a;line-height:1.55}.thread-entry b{display:block;font-size:11px;color:#2453a6;margin-bottom:3px}.pending{color:#8a6e3d}.step-ask{margin-top:10px;border:1px solid #bdd4f8;border-radius:8px;padding:7px 10px;color:#1957b5;background:#fff;font-size:11px;font-weight:750}.step-ask:hover{background:#eaf3ff}.chain-footer{margin-top:7px;padding:10px 12px;background:#f7f9fc;border:1px dashed #d4dce8;border-radius:9px;font-size:11px;line-height:1.5;color:#6b7b8e}
+/* Composer */
+.composer{margin-top:auto;border-top:1px solid #e9edf3;padding:13px 16px 14px;background:#fdfefe;border-radius:0 0 var(--radius) var(--radius)}.composer-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.composer-label{font-size:12px;font-weight:770;color:#405067}.composer-context{font-size:11px;color:#2062bd;background:#edf4ff;border-radius:24px;padding:5px 8px}.compose-controls{display:flex;align-items:flex-end;gap:9px}.question{min-width:0;flex:1;resize:vertical;min-height:48px;max-height:130px;border:1px solid #cfd8e7;border-radius:10px;padding:12px;color:#23354c;font-size:13px;line-height:1.55}.question::placeholder{color:#8492a5}.send{border:1px solid #1556c5;background:var(--blue);color:#fff;border-radius:10px;min-height:48px;padding:10px 18px;font-weight:750;font-size:12px}.send:hover{background:#1552b9}.composer-tip{margin:8px 0 0;font-size:10px;color:#8b96a6;line-height:1.5}.notice{display:none;margin-top:9px;padding:9px 11px;border:1px solid #c6e5d8;background:#edf9f3;border-radius:8px;color:#225f4d;font-size:11px;line-height:1.5}.notice.show{display:block}
+@media(max-width:1270px){.layout{grid-template-columns:minmax(188px,.55fr) minmax(340px,1fr) minmax(425px,1.4fr);gap:12px;padding:12px}.panel-header{padding:15px 12px}.result-area{padding:12px}.piece{font-size:clamp(24px,3.5vw,49px)}.topbar{padding:0 17px}}@media(max-width:1020px){.layout{grid-template-columns:minmax(220px,.65fr) minmax(340px,1fr);align-items:stretch}.right-panel{grid-column:1/-1;min-height:560px}.tree-panel,.board-panel{min-height:630px}.piece{font-size:clamp(32px,5vw,55px)}.result-area{min-height:260px}}@media(max-width:660px){.demo-grid{grid-template-columns:1fr}.demo-card{min-height:0}.secondary-box{padding:12px}.lesson-hero{padding:12px}.layout{grid-template-columns:1fr;padding:10px;gap:12px}.board-panel{grid-row:1;min-height:auto}.tree-panel{grid-row:2;min-height:450px;max-height:540px}.right-panel{grid-column:1;grid-row:3;min-height:620px}.topbar{height:auto;min-height:65px;padding:10px 14px}.brand h1{font-size:15px}.top-pill{display:none}.board-frame{max-width:480px}.board-main{padding:10px 12px 0}.piece{font-size:clamp(28px,9vw,54px)}.right-head{padding:13px}.right-head h2{font-size:15px}.change-view{font-size:11px;padding:9px}.view-menu{width:min(250px,85vw)}.result-area{padding:12px}.context-line{flex-wrap:wrap}.topmeta{gap:4px}.text-btn{font-size:11px;padding:7px}.tree-scroll{max-height:450px}}@media(prefers-reduced-motion:no-preference){.tree-move,.view-option,.change-view,.nav-arrow,.step-main,.send{transition:background .14s ease,border-color .14s ease}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo" aria-hidden="true">♙</span><div><h1>IAjedrez <span style="font-weight:450;color:#cbdcf2">/ Análisis de partida</span></h1><small>Aprende de tus jugadas, paso a paso</small></div></div>
+  <div class="topmeta"><span class="top-pill">✦ 3 recorridos de demostración</span><button class="text-btn" id="reset" type="button" title="Restablecer la vista inicial">↺ Reiniciar</button></div>
+</header>
+<main class="layout">
+  <section class="panel tree-panel" aria-label="Árbol de jugadas">
+    <div class="panel-header"><h2 class="panel-title"><span class="icon-dot" aria-hidden="true">⑂</span> Jugadas y variantes</h2><span class="subtle">Partida ejemplo</span></div>
+    <div class="tree-scroll">
+      <div class="tree-help">Selecciona una jugada para verla en el tablero. Las consultas que añadas quedarán vinculadas a esa jugada.</div>
+      <nav aria-label="Seleccionar jugada" class="tree-list" id="tree"></nav>
+    </div>
+    <div class="tree-footer">● Azul: jugada seleccionada &nbsp; · &nbsp; ◌ Rama: alternativa<br>Los diagnósticos son ejemplos de interfaz, no análisis de motor.</div>
+  </section>
+  <section class="panel board-panel" aria-label="Tablero de ajedrez">
+    <div class="panel-header"><h2 class="panel-title">Posición de la partida</h2><span class="subtle" id="side-to-move">Turno: negras</span></div>
+    <div class="board-main">
+      <div class="board-info"><div class="player"><span class="player-icon black" aria-hidden="true">♟</span><span>Negras <span class="player-meta">· rival</span></span></div><span class="subtle">Partida de ejemplo</span></div>
+      <div class="board-frame"><div class="ranks" aria-hidden="true"><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span></div><div class="chessboard" id="board" role="group" aria-label="Posición de ajedrez luego de la jugada seleccionada"></div><div class="files" aria-hidden="true"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div></div>
+      <div id="board-mode-hint" class="board-mode-hint" hidden></div>
+      <div class="board-info"><div class="player"><span class="player-icon" aria-hidden="true">♙</span><span>Blancas <span class="player-meta">· tú</span></span></div><span class="subtle">Vista desde blancas</span></div>
+    </div>
+    <div class="board-controls"><button class="nav-arrow" id="prev" type="button" aria-label="Jugada anterior">‹</button><div class="move-current"><strong id="current-move">12. h3</strong><span id="move-subtitle">Seleccionada en el árbol</span></div><button class="nav-arrow" id="next" type="button" aria-label="Jugada siguiente">›</button></div>
+    <div class="board-bottom"><span class="sample-tag">Tablero navegable • jugadas de demostración • sin motor de ajedrez</span></div>
+  </section>
+  <section class="panel right-panel" aria-label="Resultados del análisis">
+    <div class="right-head"><div><h2 id="result-title">Resumen de errores</h2><p id="result-subtitle">Observaciones destacadas de la partida</p></div>
+      <div class="view-menu-wrap"><button id="view-toggle" class="change-view" type="button" aria-haspopup="true" aria-controls="view-menu" aria-expanded="false"><span class="vicon" aria-hidden="true">▦</span> Otras respuestas <span aria-hidden="true">⌄</span></button>
+        <!-- Opciones ocultas al iniciar. Solo los botones están en este módulo; todas las vistas reemplazan #results. -->
+        <div id="view-menu" class="view-menu" hidden role="group" aria-label="Otras respuestas de IA">
+          <button type="button" class="view-option" data-view="advice"><span aria-hidden="true">◉</span> Consejos</button>
+          <button type="button" class="view-option" data-view="resources"><span aria-hidden="true">▤</span> Referencias</button>
+          <button type="button" class="view-option" data-view="chain"><span aria-hidden="true">⑂</span> Cadena</button>
+          <button type="button" class="view-option" data-view="learn"><span aria-hidden="true">♙</span> Aprende</button>
+        </div>
+      </div>
+    </div>
+    <!-- ÚNICO CONTENEDOR de salida: la tabla o la cadena se dibujan AQUÍ. -->
+    <div id="results" class="result-area" aria-live="polite" aria-atomic="false"></div>
+    <form class="composer" id="ask-form">
+      <div class="composer-top"><label class="composer-label" for="question">Tu consulta</label><span class="composer-context" id="composer-context">Vinculada a 12. h3</span></div>
+      <div class="compose-controls"><textarea id="question" class="question" rows="1" maxlength="300" required placeholder="Pregunta sobre esta jugada o un paso del análisis..."></textarea><button class="send" type="submit">Enviar ↗</button></div>
+      <div id="notice" class="notice" role="status"></div>
+      <p class="composer-tip">Demostración con respuestas predefinidas: no consulta un modelo de IA ni calcula jugadas con un motor.</p>
+    </form>
+  </section>
+</main>
+<script>
+'use strict';
+// Cada jugada se representa con la casilla de origen y destino: suficiente para este prototipo visual.
+const moves = [
+ ['1. e4','e2','e4'],['1... e5','e7','e5'],['2. Cf3','g1','f3'],['2... Cc6','b8','c6'],
+ ['3. Ac4','f1','c4'],['3... Ac5','f8','c5'],['4. c3','c2','c3'],['4... Cf6','g8','f6'],
+ ['5. d3','d2','d3'],['5... d6','d7','d6'],['6. O-O','e1','g1'],['6... O-O','e8','g8'],
+ ['7. Te1','f1','e1'],['7... a6','a7','a6'],['8. Ab3','c4','b3'],['8... Aa7','c5','a7'],
+ ['9. Cbd2','b1','d2'],['9... Ae6','c8','e6'],['10. Cf1','d2','f1'],['10... h6','h7','h6'],
+ ['11. Cg3','f1','g3'],['11... Te8','f8','e8'],['12. h3','h2','h3'],['12... d5','d6','d5'],
+ ['13. exd5','e4','d5'],['13... Cxd5','f6','d5'],['14. Axd5','b3','d5'],['14... Axd5','e6','d5'],
+ ['15. Db3','d1','b3'],['15... Dd7','d8','d7'],['16. Dxb7','b3','b7'],['16... Tab8','a8','b8'],
+ ['17. Dxa6','b7','a6'],['17... Tb6','b8','b6'],['18. Dc4','a6','c4'],['18... Ca5','c6','a5'],
+ ['19. Da4','c4','a4'],['19... Txb2','b6','b2'],['20. Axb2','c1','b2'],['20... Dxa4','d7','a4'],
+ ['21. Tf1','e1','f1'],['21... Dxa2','a4','a2'],['22. Txa2','a1','a2'],['22... Cc6','a5','c6']
+].map(([san,from,to])=>({san,from,to}));
+const alternatives={d4:{san:'12. d4',from:'d3',to:'d4',base:21},be3:{san:'12. Ae3',from:'c1',to:'e3',base:21}};
+const errorRows=[
+ {index:22,no:'12',kind:'Imprecisión',grade:'warning',error:'Pierde un tiempo para disputar el centro.',best:'12. d4',explanation:'Considerar la ruptura central antes de una jugada preventiva.'},
+ {index:34,no:'18',kind:'Error',grade:'danger',error:'No examina una captura disponible.',best:'18. Dxb6',explanation:'Comprobar capturas, amenazas y respuestas forzadas.'},
+ {index:41,no:'21...',kind:'Error grave',grade:'danger',error:'Deja la dama capturable.',best:'21... Dc6',explanation:'La respuesta 22. Txa2 captura la dama negra.'}
+];
+const adviceRows=[
+ {index:22,no:'12',strength:'Rey enrocado.',threat:'...d5 disputa el centro.',weakness:'Desarrollo incompleto.',chance:'Avanzar d4.',tip:'Antes de h3, revisa las rupturas centrales.'},
+ {index:34,no:'18',strength:'Dama activa.',threat:'...Ca5 ataca con tempo.',weakness:'Exposición de la dama.',chance:'Capturar en b6.',tip:'Busca primero capturas y respuestas forzadas.'},
+ {index:41,no:'21...',strength:'Actividad de piezas.',threat:'22. Txa2 gana la dama.',weakness:'Dama sin escape seguro.',chance:'Retirar la dama.',tip:'Verifica piezas indefensas antes de mover.'}
+];
+const referenceRows=[
+ {index:22,no:'12',concept:'Plan central en estructuras abiertas',resource:'Principios de apertura',url:'https://lichess.org/learn'},
+ {index:34,no:'18',concept:'Capturas y cálculo de variantes',resource:'Ejercicios tácticos',url:'https://lichess.org/practice'},
+ {index:41,no:'21...',concept:'Seguridad de la dama y piezas indefensas',resource:'Estudios de posiciones',url:'https://lichess.org/study'}
+];
+const baseStepSets={
+ h3:[
+  ['Observar la posición','¿Qué está ocurriendo en el tablero?','Ambos bandos han enrocado; el centro sigue en disputa.'],
+  ['Identificar el problema','¿Qué cambia con 12. h3?','La jugada consume un tiempo sin aumentar el control central.'],
+  ['Explorar amenazas','¿Qué puede intentar el rival?','En la línea ilustrativa, ...d5 confronta el centro.'],
+  ['Comparar y decidir','¿Qué alternativa merece estudiarse?','Compara 12. d4 con 12. h3 y revisa las respuestas.']
+ ],
+ dc4:[
+  ['Localizar piezas','¿Dónde está la dama?','La dama blanca está en a6 antes de la jugada.'],
+  ['Detectar recursos','¿Hay una captura táctica?','La torre negra se encuentra en b6.'],
+  ['Comparar candidatos','¿Qué opciones hay?','Compara 18. Dxb6 y 18. Dc4.'],
+  ['Extraer una regla','¿Qué recordar para otra partida?','Busca capturas, jaques y amenazas antes de mover.']
+ ],
+ qa2:[
+  ['Observar el movimiento','¿Dónde queda la dama negra?','La dama negra termina en a2.'],
+  ['Reconocer amenazas','¿Qué pieza puede capturarla?','La torre blanca de a1 puede jugar 22. Txa2.'],
+  ['Probar alternativas','¿Cómo evitar la pérdida?','Estudia 21... Dc6 y verifica la seguridad de la dama.'],
+  ['Sintetizar el aprendizaje','¿Cuál es el principio general?','Inspecciona las piezas atacadas antes de terminar un turno.']
+ ],
+ generic:[
+  ['Describir la posición','¿Dónde están las piezas relevantes?','Identifica material, seguridad de los reyes y actividad.'],
+  ['Detectar el cambio','¿Qué modifica esta jugada?','Compara la posición antes y después del movimiento.'],
+  ['Explorar respuestas','¿Qué puede hacer el rival?','Busca jaques, capturas y amenazas.'],
+  ['Elegir un plan','¿Qué aprender de esta situación?','Anota una alternativa y contrasta sus consecuencias.']
+ ]
+};
+let currentIndex=22,branch=null,view='summary',expandedStep=1,queryStep=null,expandedOpening=false;
+const threads=Object.create(null);
+let secondary=null; // duda temporal abierta (padre = jugada y etapa)
+let taskMode=null;
+let learnReturn=null,learnStage='ready',learnSelected='',learnShowReply=false,learnMessage='Selecciona el peón de d3 y luego la casilla d4.',learnHint=false;
+const $=id=>document.getElementById(id);
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const currentMove=()=>branch?alternatives[branch]:moves[currentIndex];
+const currentKey=()=>branch?'branch-'+branch:'move-'+currentIndex;
+const moveThreads=(key=currentKey())=>threads[key]||(threads[key]={});
+const countThreads=key=>Object.values(threads[key]||{}).reduce((sum,items)=>sum+items.length,0);
+function mapFromFEN(fen){const map={};let rank=8;for(const row of fen.split('/')){let col=0;for(const c of row){if(/\d/.test(c))col+=Number(c);else map['abcdefgh'[col++]+rank]=c;}rank--;}return map;}
+const initialFEN='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+function apply(map,m){const piece=map[m.from];if(!piece)return;delete map[m.from];map[m.to]=piece;if(m.san.includes('O-O')){const white=piece==='K',from=white?'h1':'h8',to=white?'f1':'f8';map[to]=map[from];delete map[from];}}
+function state(){const map=mapFromFEN(initialFEN),last=branch?alternatives[branch].base:currentIndex;for(let i=0;i<=last;i++)apply(map,moves[i]);if(branch)apply(map,alternatives[branch]);return map;}
+const symbols={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙',k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟'};
+const names={K:'rey blanco',Q:'dama blanca',R:'torre blanca',B:'alfil blanco',N:'caballo blanco',P:'peón blanco',k:'rey negro',q:'dama negra',r:'torre negra',b:'alfil negro',n:'caballo negro',p:'peón negro'};
+function lessonMap(){const map=state();if(learnStage==='d4')apply(map,{from:'d3',to:'d4',san:'12. d4'});if(learnStage==='h3')apply(map,{from:'h2',to:'h3',san:'12. h3'});if(learnShowReply&&learnStage!=='ready')apply(map,{from:'d6',to:'d5',san:'12... d5'});return map;}
+function renderBoard(){
+ const lesson=view==='learn',m=currentMove(),map=lesson?lessonMap():state();
+ const from=lesson?(learnShowReply?'d6':learnStage==='d4'?'d3':learnStage==='h3'?'h2':''):m.from;
+ const to=lesson?(learnShowReply?'d5':learnStage==='d4'?'d4':learnStage==='h3'?'h3':''):m.to;
+ const targets=learnStage==='ready'&&learnSelected==='$d3'?['d4']:learnStage==='ready'&&learnSelected==='$h2'?['h3']:[];
+ let html='';for(let r=8;r>=1;r--)for(const file of 'abcdefgh'){
+  const pos=file+r,p=map[pos],dark=(('abcdefgh'.indexOf(file)+r)%2===0),classes=`square ${dark?'dark':'light'} ${pos===from?'from':''} ${pos===to?'to selected-square':''} ${lesson?'learn-square':''} ${learnSelected==='$'+pos?'learn-origin':''} ${targets.includes(pos)?'target-hint':''}`;
+  const inner=p?`<span class="piece ${p===p.toUpperCase()?'white':'black'}" aria-hidden="true">${symbols[p]}</span>`:'';
+  html+=lesson?`<button type="button" class="${classes}" data-square="${pos}" aria-label="${pos}${p?', '+names[p]:', vacía'}" title="${pos}${p?' · '+names[p]:''}">${inner}</button>`:`<div class="${classes}" title="${pos}${p?' · '+names[p]:''}">${inner}</div>`;
+ }
+ $('board').innerHTML=html;
+ $('board').setAttribute('aria-label',lesson?'Tablero de práctica interactivo. Selecciona una pieza y luego la casilla de destino.':`Tablero después de ${m.san}, de ${m.from} a ${m.to}.`);
+ $('current-move').textContent=lesson?(learnShowReply?'12... d5 (simulado)':learnStage==='ready'?'Tu turno: blancas':learnStage==='d4'?'12. d4 (prueba)':'12. h3 (prueba)'):m.san;
+ $('move-subtitle').textContent=lesson?'Modo Aprende · ejercicio guiado':branch?'Variante alternativa':'Posición seleccionada';
+ $('side-to-move').textContent=lesson?'Modo práctica':branch||currentIndex%2===0?'Turno: negras':'Turno: blancas';
+ $('prev').disabled=lesson||(!branch&&currentIndex<=0);$('next').disabled=lesson||(!branch&&currentIndex>=moves.length-1);
+ const hint=$('board-mode-hint');hint.hidden=!lesson;if(lesson)hint.textContent=learnStage==='ready'?'Tablero interactivo: toca d3 y después d4, o prueba h2 → h3.':learnShowReply?'Respuesta ilustrativa ...d5 sobre el tablero.':`Has probado ${learnStage==='d4'?'12. d4':'12. h3'}. Explora la respuesta o reinicia.`;
+}
+const defaultShow=[0,1,2,3,20,21,22,23,24,34,35,41,42];
+function treeNode(i){const m=moves[i],selected=!branch&&currentIndex===i,bad=errorRows.find(x=>x.index===i),count=countThreads('move-'+i);return `<div class="tree-entry ${selected?'selected':''}"><button type="button" class="tree-move" data-index="${i}" ${selected?'aria-current="true"':''}><span>${escapeHTML(m.san)} ${bad?`<span class="flag ${bad.grade==='danger'?'severe':''}" title="Jugada para revisar">●</span>`:''}</span>${count?`<span class="query-count">◌ ${count}</span>`:''}</button></div>`;}
+function branchNode(id){const alt=alternatives[id],selected=branch===id,count=countThreads('branch-'+id);return `<div class="tree-entry ${selected?'selected':''}"><button type="button" class="tree-move" data-branch="${id}" ${selected?'aria-current="true"':''}><span>${escapeHTML(alt.san)}</span>${count?`<span class="query-count">◌ ${count}</span>`:''}</button></div>`;}
+function renderTree(){let html='';for(let i=0;i<moves.length;i++){
+ if(!expandedOpening&&i===4){html+=`<div class="tree-entry"><button class="tree-move muted" type="button" data-open="1">⋯ &nbsp; Mostrar jugadas 3–10</button></div>`;i=19;continue;}
+ if(!expandedOpening&&i>=25&&!defaultShow.includes(i)){if(i===25||i===36)html+=`<div class="tree-entry"><button class="tree-move muted" type="button" data-open="1">⋯ &nbsp; Ver secuencia completa</button></div>`;continue;}
+ html+=treeNode(i);
+ if(i===22)html+=`<div class="branch-wrap"><div class="branch-label">Variantes para explorar</div>${branchNode('d4')}${branchNode('be3')}</div>`;
+ }
+ if(expandedOpening)html+=`<div class="tree-entry"><button class="tree-move muted" type="button" data-open="0">− &nbsp; Contraer jugadas anteriores</button></div>`;
+ $('tree').innerHTML=html;
+}
+function selectMove(index,b){if(view==='learn'){learnReturn=null;learnStage='ready';learnSelected='';learnShowReply=false;view='summary';}
+ currentIndex=index;branch=b||null;expandedStep=1;queryStep=null;secondary=null;taskMode=null;$('notice').classList.remove('show');render();}
+function contextBar(){const m=currentMove();return `<div class="context-line"><span>⌁ Contexto: <strong>${escapeHTML(m.san)}</strong> · consultas asociadas: <strong>${countThreads(currentKey())}</strong></span><span class="chip">Posición vinculada</span></div>`;}
+function intro(title,hint){return `<div class="view-intro"><h3>${title}</h3><span class="hint">${hint}</span></div>`;}
+function taskCards(){return `<div class="demo-intro"><strong>Explora tres tareas simuladas</strong><small>Prueba cualquiera de los recorridos</small></div><div class="demo-grid">
+<button class="demo-card" data-task="error"><span class="task-no">TAREA 1</span><strong>Entender un error</strong><small>Localiza 12. h3 y comprende qué cambia.</small></button>
+<button class="demo-card" data-task="doubt"><span class="task-no">TAREA 2</span><strong>Resolver una duda</strong><small>Haz una pregunta secundaria y regresa.</small></button>
+<button class="demo-card" data-task="learn"><span class="task-no">TAREA 3</span><strong>Probar en el tablero</strong><small>Compara una alternativa mediante clics.</small></button></div>`;}
+function renderSummary(){return contextBar()+intro('Errores prioritarios','Selecciona una fila para localizarla')+`<div class="table-wrap"><table class="results-table"><thead><tr><th>N.º</th><th>Tipo de jugada</th><th>Error</th><th>Mejor jugada</th><th>Explicación</th></tr></thead><tbody>${errorRows.map(x=>`<tr class="${!branch&&currentIndex===x.index?'highlight-row':''}" data-jump="${x.index}" tabindex="0" title="Ir a la jugada ${x.no}"><td><b>${x.no}</b></td><td><span class="kind ${x.grade}">${x.kind}</span></td><td>${x.error}</td><td><strong>${x.best}</strong></td><td>${x.explanation}</td></tr>`).join('')}</tbody></table></div>${taskCards()}<p class="table-foot">Los errores y las recomendaciones son de ejemplo, no una evaluación con Stockfish ni con IA real.</p>`;}
+function renderAdvice(){return contextBar()+intro('Consejos por jugada','Síntesis de la posición de ejemplo')+`<div class="table-wrap"><table class="results-table" style="min-width:730px"><thead><tr><th>N.º</th><th>Fortalezas</th><th>Amenazas</th><th>Debilidades</th><th>Oportunidades</th><th>Consejos</th></tr></thead><tbody>${adviceRows.map(x=>`<tr class="${!branch&&currentIndex===x.index?'highlight-row':''}" data-jump="${x.index}" tabindex="0"><td><b>${x.no}</b></td><td>${x.strength}</td><td>${x.threat}</td><td>${x.weakness}</td><td>${x.chance}</td><td>${x.tip}</td></tr>`).join('')}</tbody></table></div><p class="table-foot">Haz clic en una fila para localizar la jugada.</p>`;}
+function renderResources(){return contextBar()+intro('Referencias para aprender','Recursos educativos generales')+`<div class="table-wrap"><table class="results-table" style="min-width:490px"><thead><tr><th>N.º de jugada</th><th>Apertura / táctica</th><th>Recurso de referencia</th></tr></thead><tbody>${referenceRows.map(x=>`<tr class="${!branch&&currentIndex===x.index?'highlight-row':''}" data-jump="${x.index}" tabindex="0"><td><b>${x.no}</b></td><td>${x.concept}</td><td><a class="link-resource" href="${x.url}" target="_blank" rel="noopener noreferrer" title="Abrir recurso en otra pestaña" onclick="event.stopPropagation()">${x.resource} ↗</a></td></tr>`).join('')}</tbody></table></div><p class="table-foot">Enlaces externos generales de Lichess. No implican comprobación automática de la posición.</p>`;}
+function getSteps(){if(branch)return baseStepSets.generic;if(currentIndex===22)return baseStepSets.h3;if(currentIndex===34)return baseStepSets.dc4;if(currentIndex===41)return baseStepSets.qa2;return baseStepSets.generic;}
+function simulatedAnswer(question,step){const q=question.toLocaleLowerCase('es');
+ if(/d5|ruptura|centro/.test(q))return '...d5 significa que el peón negro de d6 avanza a d5. En este ejemplo es una forma de disputar el centro. Puedes revisar d5 en el tablero mediante «Aprende».';
+ if(/notaci|significa|símbolo|algebraic/.test(q))return 'En notación algebraica, 12. h3 indica que las blancas avanzan su peón a h3 en la jugada 12; 12... d5 es una respuesta de negras. Haz clic en el árbol para visualizar la posición.';
+ if(/amenaz|rival|negras/.test(q))return 'Revisa primero jaques, capturas y amenazas. En el recorrido de muestra, el recurso ilustrativo de las negras es ...d5 para presionar el centro.';
+ if(/mejor|alternativa|d4|compar|elegir/.test(q))return 'La demostración propone comparar 12. h3 con 12. d4. Esta preferencia es parte del guion didáctico; compruébala con «Aprende» en lugar de aceptarla como infalible.';
+ if(/error|por qu|equivoc|h3/.test(q))return 'El punto que se estudia no es que h3 sea ilegal, sino que dedica un tiempo a una medida preventiva mientras el centro necesita atención. La evaluación real dependería de un motor y de la posición exacta.';
+ return `Respuesta de ejemplo para el paso ${step+1}: observa qué cambia en la posición, considera la respuesta del rival y contrasta tu idea en el tablero. Esta demo solo reconoce un conjunto limitado de consultas.`;
+}
+function appendThread(question,step){const slot=moveThreads(),item={q:question,a:simulatedAnswer(question,step)};if(!slot[step])slot[step]=[];slot[step].push(item);return item;}
+function openSecondary(question,step,create=true){const item=create?appendThread(question,step):{q:question,a:simulatedAnswer(question,step)};
+ queryStep=step;expandedStep=step;secondary={step,q:item.q,a:item.a,parentIndex:currentIndex,parentBranch:branch};view='chain';taskMode='doubt';hideMenu();render();$('results').scrollTop=0;}
+function secondaryHtml(){if(!secondary)return '';return `<div class="secondary-box"><span class="secondary-label">↳ Duda secundaria · paso ${secondary.step+1}</span><h3>${escapeHTML(secondary.q)}</h3><p>${escapeHTML(secondary.a)}</p><button class="secondary-return" type="button" data-return-analysis>← Volver al análisis original</button><p style="color:#6d819c;font-size:10px">Al volver se conserva la jugada, el paso abierto y la consulta vinculada al árbol.</p></div>`;}
+function renderChain(){const steps=getSteps(),messages=moveThreads();const introTask=taskMode==='error'?`<div class="task-badge">Tarea 1 · Identifica el problema de la jugada ${escapeHTML(currentMove().san)}</div>`:taskMode==='doubt'?`<div class="task-badge">Tarea 2 · Pregunta temporal sin perder la línea principal</div>`:'';
+ return contextBar()+introTask+secondaryHtml()+`<div class="chain-summary"><strong>Comprende la jugada en 4 pasos</strong><span class="chain-status">Pulsa una etapa para desplegarla</span></div>`+`<ol class="steps">${steps.map(([title,question,answer],i)=>{const open=expandedStep===i,done=i<expandedStep,items=messages[i]||[];return `<li class="step ${open?'active':''} ${done?'is-done':''}"><button type="button" class="step-main" data-step="${i}" aria-expanded="${open}"><span class="step-no">${done?'✓':i+1}</span><span><span class="step-heading">${i+1}. ${title}${items.length?` <span style="color:var(--blue);font-size:10px">· ${items.length} duda(s)</span>`:''}</span><span class="step-description">${question}</span></span><span class="step-expand" aria-hidden="true">${open?'⌃':'⌄'}</span></button>${open?`<div class="step-details"><p class="micro-caption">Resultado del paso</p><p>${answer}</p>${items.length?`<div class="thread">${items.map(item=>`<div class="thread-entry"><div class="sim-question">↳ ${escapeHTML(item.q)}</div><div class="sim-answer">${escapeHTML(item.a)}</div></div>`).join('')}</div>`:''}<div class="question-suggestions"><button type="button" data-preset="¿Qué significa ...d5?" data-preset-step="${i}">¿Qué significa ...d5?</button><button type="button" data-preset="¿Por qué es importante revisar el centro?" data-preset-step="${i}">¿Por qué revisar el centro?</button></div><button type="button" class="step-ask" data-ask="${i}">＋ Formular mi propia pregunta</button></div>`:''}</li>`;}).join('')}</ol><div class="chain-footer">Las etapas descomponen un problema en objetivos pequeños. Las preguntas temporales quedan vinculadas a la jugada y puedes regresar a esta secuencia sin perderlas.</div>`;
+}
+function renderLearn(){const success=learnStage==='d4', tried=learnStage!=='ready';return `
+ <div class="lesson-hero"><span class="eyebrow">Tarea 3 · Práctica interactiva</span><h3>¿Qué jugarías en la jugada 12?</h3><p>Partimos de la posición tras <strong>11... Te8</strong>. No memorices una recomendación: compara dos movimientos y observa qué cambia en el tablero.</p></div>
+ <div class="lesson-prompt"><strong>Tu reto:</strong> pulsa un peón blanco del tablero y elige dónde moverlo. Prueba <strong>d3 → d4</strong> (disputar el centro) o <strong>h2 → h3</strong> (prevenir molestias en el flanco).</div>
+ <div class="lesson-status ${success?'success':learnStage==='h3'?'warning':''}" role="status">${escapeHTML(learnMessage)}</div>
+ <div class="lesson-actions"><button data-lesson="hint">✧ Ver pista</button><button data-lesson="reset">↺ Reintentar</button>${tried?`<button data-lesson="reply" class="primary">${learnShowReply?'Ocultar':'Ver'} respuesta ...d5</button>`:''}<button data-lesson="exit">← Volver al análisis</button></div>
+ ${learnHint?`<div class="task-badge">Pista: el peón de d3 puede avanzar una casilla hacia d4.</div>`:''}
+ ${tried?`<div class="compare-box"><div class="compare-row ${success?'recommended':''}"><b>12. d4</b><span>En esta simulación ocupa más espacio central. Es la alternativa didáctica que queríamos explorar.</span></div><div class="compare-row ${!success?'recommended':''}"><b>12. h3</b><span>Previene posibles molestias en el flanco de rey, pero no desafía el centro de inmediato.</span></div></div>`:''}
+ <p class="lesson-footer">Nota: este ejercicio permite únicamente las dos jugadas ilustrativas y la respuesta ...d5. No es un tablero de juego libre ni comprueba legalidad con un motor. Puedes regresar a tu análisis cuando quieras.</p>`;
+}
+function renderResult(){const labels={summary:['Resumen de errores','Observaciones destacadas de la partida'],advice:['Consejos','Fortalezas, amenazas y recomendaciones'],resources:['Referencias','Recursos para estudiar'],chain:['Cadena de análisis','Una explicación dividida en objetivos pequeños'],learn:['Aprende · tablero interactivo','Prueba tus ideas con movimientos de ejemplo']};
+ $('result-title').textContent=labels[view][0];$('result-subtitle').textContent=labels[view][1];
+ $('results').innerHTML=({summary:renderSummary,advice:renderAdvice,resources:renderResources,chain:renderChain,learn:renderLearn})[view]();
+ $('composer-context').textContent=`${view==='learn'?'Práctica': 'Vinculada a '+currentMove().san}${queryStep!==null&&view==='chain'?' · paso '+(queryStep+1):''}`;
+ $('question').disabled=view==='learn';$('ask-form').querySelector('.send').disabled=view==='learn';
+ $('question').placeholder=view==='learn'?'Vuelve al análisis para plantear preguntas...':'Pregunta sobre esta jugada o un paso del análisis...';
+ document.querySelectorAll('.view-option').forEach(el=>{el.classList.toggle('chosen',el.dataset.view===view);el.setAttribute('aria-pressed',String(el.dataset.view===view));});
+}
+function render(){renderBoard();renderTree();renderResult();}
+function hideMenu(){const el=$('view-menu');el.hidden=true;$('view-toggle').setAttribute('aria-expanded','false');}
+function beginLearn(){if(view!=='learn')learnReturn={index:currentIndex,branch,view,taskMode,expandedStep,queryStep,secondary};currentIndex=21;branch=null;view='learn';taskMode='learn';secondary=null;queryStep=null;learnStage='ready';learnSelected='';learnShowReply=false;learnHint=false;learnMessage='Selecciona el peón de d3 y luego la casilla d4. También puedes probar h2 → h3.';hideMenu();render();$('results').scrollTop=0;}
+function exitLearn(nextView=null){const original=learnReturn;if(original){currentIndex=original.index;branch=original.branch;expandedStep=original.expandedStep;queryStep=original.queryStep;}learnReturn=null;learnStage='ready';learnSelected='';learnShowReply=false;view=nextView||(original?original.view:'summary');secondary=nextView?null:(original?original.secondary:null);taskMode=nextView?null:(original?original.taskMode:null);render();$('results').scrollTop=0;}
+function setView(next){if(next==='learn'){beginLearn();return;}if(view==='learn'){exitLearn(next);hideMenu();return;}view=next;expandedStep=1;queryStep=null;secondary=null;taskMode=null;hideMenu();render();$('results').scrollTop=0;}
+function startTask(which){hideMenu();$('notice').classList.remove('show');if(which==='learn'){beginLearn();return;}currentIndex=22;branch=null;view='chain';expandedStep=1;queryStep=null;secondary=null;taskMode=which;if(which==='doubt'){expandedStep=2;openSecondary('¿Qué significa ...d5 y por qué es una amenaza?',2,true);}else{render();$('results').scrollTop=0;}}
+function lessonSquare(sq){if(view!=='learn')return;if(learnStage!=='ready'){learnMessage='Ya probaste un movimiento. Pulsa «Reintentar» para elegir otro.';renderResult();return;}
+ if(!learnSelected){if(sq==='d3'||sq==='h2'){learnSelected='$'+sq;learnMessage=`Has seleccionado el peón de ${sq}. Ahora pulsa ${sq==='d3'?'d4':'h3'} para completar el movimiento.`;}else learnMessage='En este ejercicio, selecciona primero el peón de d3 o de h2.';renderBoard();renderResult();return;}
+ const origin=learnSelected.slice(1),expected=origin==='d3'?'d4':'h3';
+ if(sq===origin){learnSelected='';learnMessage='Selección cancelada. Elige un peón.';}
+ else if(sq===expected){learnStage=expected;learnSelected='';learnShowReply=false;learnMessage=expected==='d4'?'¡Bien! Has probado 12. d4. En nuestro ejemplo, esto disputa el centro. Es una alternativa que merece compararse con 12. h3.':'Has probado 12. h3. Es una jugada preventiva, pero en este ejemplo no enfrenta de inmediato la presión central. Prueba también 12. d4.';}
+ else if(sq==='d3'||sq==='h2'){learnSelected='$'+sq;learnMessage=`Peón de ${sq} seleccionado. Pulsa ${sq==='d3'?'d4':'h3'}.`;}
+ else learnMessage=`En este ejercicio, el peón de ${origin} solo se mueve a ${expected}. Prueba esa casilla o elige otro peón.`;
+ renderBoard();renderResult();
+}
+$('board').addEventListener('click',e=>{const sq=e.target.closest('[data-square]');if(sq)lessonSquare(sq.dataset.square);});
+$('view-toggle').addEventListener('click',e=>{e.stopPropagation();const show=$('view-menu').hidden;$('view-menu').hidden=!show;$('view-toggle').setAttribute('aria-expanded',String(show));});
+$('view-menu').addEventListener('click',e=>{const btn=e.target.closest('button[data-view]');if(btn){setView(btn.dataset.view);$('view-toggle').focus();}});
+document.addEventListener('click',e=>{if(!e.target.closest('.view-menu-wrap'))hideMenu();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(secondary){secondary=null;taskMode='error';renderResult();}hideMenu();}});
+$('tree').addEventListener('click',e=>{const btn=e.target.closest('button');if(!btn)return;if(btn.hasAttribute('data-index'))selectMove(+btn.dataset.index);else if(btn.hasAttribute('data-branch'))selectMove(22,btn.dataset.branch);else if(btn.hasAttribute('data-open')){expandedOpening=btn.dataset.open==='1';renderTree();}});
+$('results').addEventListener('click',e=>{
+ if(e.target.closest('a'))return;
+ const row=e.target.closest('[data-jump]');if(row){selectMove(+row.dataset.jump);return;}
+ const btn=e.target.closest('button');if(!btn)return;
+ if(btn.dataset.task){startTask(btn.dataset.task);return;}
+ if(btn.hasAttribute('data-return-analysis')){secondary=null;taskMode='error';queryStep=null;render();$('results').scrollTop=0;return;}
+ if(btn.dataset.preset){openSecondary(btn.dataset.preset,+btn.dataset.presetStep,true);return;}
+ if(btn.hasAttribute('data-step')){const i=+btn.dataset.step;expandedStep=expandedStep===i?-1:i;queryStep=null;renderResult();return;}
+ if(btn.hasAttribute('data-ask')){queryStep=+btn.dataset.ask;$('composer-context').textContent=`Vinculada a ${currentMove().san} · paso ${queryStep+1}`;$('question').placeholder=`Pregunta sobre el paso ${queryStep+1}...`;$('question').focus();return;}
+ if(btn.hasAttribute('data-lesson')){
+  if(btn.dataset.lesson==='hint'){learnHint=true;learnMessage='Observa el peón blanco de d3 y busca una casilla central a la que pueda avanzar.';renderResult();}
+  else if(btn.dataset.lesson==='reset'){learnStage='ready';learnSelected='';learnShowReply=false;learnHint=false;learnMessage='Selecciona d3 y luego d4, o prueba h2 → h3.';render();}
+  else if(btn.dataset.lesson==='reply'){learnShowReply=!learnShowReply;learnMessage=learnShowReply?'Se muestra ...d5 como respuesta de negras, únicamente dentro del ejemplo guiado.':'Vuelves a ver la posición tras tu movimiento.';renderBoard();renderResult();}
+  else if(btn.dataset.lesson==='exit')exitLearn();
+ }
+});
+$('results').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-jump]')){e.preventDefault();selectMove(+e.target.dataset.jump);}});
+$('prev').addEventListener('click',()=>{if(view==='learn')return;if(branch)selectMove(21);else selectMove(Math.max(0,currentIndex-1));});
+$('next').addEventListener('click',()=>{if(view==='learn')return;if(branch)selectMove(23);else selectMove(Math.min(moves.length-1,currentIndex+1));});
+$('ask-form').addEventListener('submit',e=>{
+ e.preventDefault();if(view==='learn')return;const field=$('question'),content=field.value.trim();if(!content)return;
+ const step=queryStep===null?1:queryStep;
+ field.value='';openSecondary(content,step,true);
+ const note=$('notice');note.textContent='Respuesta simulada y vinculada a '+currentMove().san+'. Puedes volver al análisis original.';note.classList.add('show');
+});
+$('reset').addEventListener('click',()=>{currentIndex=22;branch=null;view='summary';expandedStep=1;queryStep=null;expandedOpening=false;secondary=null;taskMode=null;learnReturn=null;learnStage='ready';learnSelected='';learnShowReply=false;learnHint=false;
+ for(const key of Object.keys(threads))delete threads[key];$('question').value='';$('notice').classList.remove('show');hideMenu();render();$('results').scrollTop=0;});
+render();
+</script>
+</body>
+</html>

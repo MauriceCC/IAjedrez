@@ -1,0 +1,16 @@
+[Event "rated blitz game"]
+[Site "https://lichess.org/game/sTNRsqPl"]
+[Date "2026.11.01"]
+[Round "-"]
+[White "Timmy-t"]
+[Black "Kuanynsh"]
+[Result "0-1"]
+[WhiteElo "1578"]
+[BlackElo "1594"]
+[Variant "Standard"]
+[TimeControl "180+0"]
+[ECO "D31"]
+[Opening "Semi-Slav Defense: Accelerated Move Order"]
+[Termination "Time forfeit"]
+
+1. d4 {[%clk 0:03:00]} c6 {[%clk 0:03:00]} 2. c4 {[%clk 0:02:59]} d5 {[%clk 0:03:00]} 3. Nc3 {[%clk 0:02:59]} e6 {[%clk 0:02:58]} 4. Nf3 {[%clk 0:02:58]} a6 {[%clk 0:02:58]} 5. Bg5 {[%clk 0:02:57]} Be7 {[%clk 0:02:56]} 6. Qd2 {[%clk 0:02:53]} h6 {[%clk 0:02:53]} 7. Bxe7 {[%clk 0:02:51]} Qxe7 {[%clk 0:02:51]} 8. e3 {[%clk 0:02:51]} Nf6 {[%clk 0:02:51]} 9. cxd5 {[%clk 0:02:50]} cxd5 {[%clk 0:02:49]} 10. Bd3 {[%clk 0:02:48]} b5 {[%clk 0:02:48]} 11. O-O {[%clk 0:02:44]} Nbd7 {[%clk 0:02:47]} 12. a3 {[%clk 0:02:36]} Bb7 {[%clk 0:02:45]} 13. Rac1 {[%clk 0:02:28]} O-O {[%clk 0:02:43]} 14. h3 {[%clk 0:02:28]} Rac8 {[%clk 0:02:41]} 15. Rfe1 {[%clk 0:02:19]} Nb6 {[%clk 0:02:38]} 16. e4 {[%clk 0:02:13]} dxe4 {[%clk 0:02:36]} 17. Nxe4 {[%clk 0:02:08]} Nxe4 {[%clk 0:02:32]} 18. Bxe4 {[%clk 0:02:08]} Rxc1 {[%clk 0:02:31]} 19. Qxc1 {[%clk 0:02:03]} Bxe4 {[%clk 0:02:21]} 20. Rxe4 {[%clk 0:02:03]} Nd5 {[%clk 0:02:20]} 21. Re2 {[%clk 0:01:45]} Qd7 {[%clk 0:02:18]} 22. Rc2 {[%clk 0:01:39]} Qd6 {[%clk 0:01:59]} 23. Rc6 {[%clk 0:01:30]} Qb8 {[%clk 0:01:55]} 24. Ne5 {[%clk 0:01:21]} Rd8 {[%clk 0:01:50]} 25. g3 {[%clk 0:01:11]} Nf6 {[%clk 0:01:46]} 26. Qe3 {[%clk 0:00:55]} Qb7 {[%clk 0:01:39]} 27. Rc2 {[%clk 0:00:50]} Qd5 {[%clk 0:01:30]} 28. Rc5 {[%clk 0:00:46]} Qb7 {[%clk 0:01:25]} 29. Kf1 {[%clk 0:00:33]} Nd5 {[%clk 0:01:19]} 30. Qe4 {[%clk 0:00:28]} Rc8 {[%clk 0:01:17]} 31. Rxc8+ {[%clk 0:00:27]} Qxc8 {[%clk 0:01:17]} 32. Kg2 {[%clk 0:00:25]} Qc1 {[%clk 0:01:14]} 33. Qd3 {[%clk 0:00:23]} g5 {[%clk 0:01:05]} 34. Qf3 {[%clk 0:00:21]} Qc7 {[%clk 0:01:02]} 35. Qd3 {[%clk 0:00:18]} Kg7 {[%clk 0:01:00]} 36. Nf3 {[%clk 0:00:16]} Nf6 {[%clk 0:00:59]} 37. Ne5 {[%clk 0:00:14]} Qb7+ {[%clk 0:00:57]} 38. Qf3 {[%clk 0:00:13]} Qxf3+ {[%clk 0:00:56]} 39. Kxf3 {[%clk 0:00:13]} Nd5 {[%clk 0:00:54]} 40. Ke4 {[%clk 0:00:13]} f5+ {[%clk 0:00:52]} 41. Kd3 {[%clk 0:00:11]} f4 {[%clk 0:00:44]} 42. Nd7 {[%clk 0:00:10]} Kg6 {[%clk 0:00:40]} 43. Nc5 {[%clk 0:00:09]} a5 {[%clk 0:00:38]} 44. Nxe6 {[%clk 0:00:07]} Kf5 {[%clk 0:00:36]} 45. Nc7 {[%clk 0:00:06]} Nxc7 {[%clk 0:00:34]} 46. g4+ {[%clk 0:00:05]} Ke6 {[%clk 0:00:30]} 47. f3 {[%clk 0:00:05]} Nd5 {[%clk 0:00:29]} 48. Ke4 {[%clk 0:00:05]} b4 {[%clk 0:00:26]} 49. a4 {[%clk 0:00:04]} Kd6 {[%clk 0:00:22]} 50. b3 {[%clk 0:00:04]} Ne7 {[%clk 0:00:18]} 51. Kd3 {[%clk 0:00:03]} Kd5 {[%clk 0:00:17]} 52. Ke2 {[%clk 0:00:01]} Nc6 {[%clk 0:00:16]} 53. Kd2 {[%clk 0:00:01]} Nxd4 {[%clk 0:00:15]} 54. Kd3 {[%clk 0:00:01]} Nxb3 {[%clk 0:00:15]} {Black wins on time.} 0-1
