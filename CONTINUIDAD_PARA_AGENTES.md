@@ -4,6 +4,12 @@ Actualizado: 6 de noviembre de 2026. Leer este archivo primero. Es una síntesis
 
 ## Encargo y prioridad vigente
 
+**Actualización Stockfish (6 de noviembre de 2026):** el usuario aportó una nueva partida de Chess.com, Mauricio0120–santoshglklklk (26 oct. 2026, 38 medias jugadas, 0–1 sin motivo), y una respuesta previa de ChatGPT sin motor. Solicitó validar con Stockfish y simular las mismas consultas en la interfaz. La página `/` usa ahora esa partida y `static/review.js`; conserva los estilos, componentes y tablero fijo del prototipo aprobado. `/demo` conserva la entrevista anterior. Ver `GUION_STOCKFISH.md` para el nuevo recorrido. Esta actualización prevalece sobre la descripción anterior de una demo principal sin motor.
+
+Stockfish 16 ya está instalado en `/usr/games/stockfish` y accesible por PATH. El recorrido no usa Ollama: un tutor de plantillas reconoce las preguntas de la conversación y presenta evidencia calculada. No afirmar que comprende o valida cualquier pregunta. `review.py` compara mejor candidata y jugada real desde la misma posición, con profundidad objetivo 19 y límite de 1,5 s por búsqueda, Threads 1 / Hash 128 MB. Muestra profundidad real, perspectiva de blancas y etiquetas locales orientativas de 50/100/200 cp; los mates no se restan como centipeones. La caché es en memoria y se invalida con cambios de PGN, ejecutable o parámetros; las consultas del navegador se pierden al recargar.
+
+Hallazgos que deben conservarse: 9.Cd2 no es el único error ni la primera caída relevante (también 7.Ag3). En esta revisión destacan 19.Tf3, 11.Th3 y 14.Rd2. La candidata citada 9.Df3 permite …Dc1+; mostrar esa respuesta junto a la hipótesis …Dxg3+ Dxg3. 19…Td2+ no es mate y la línea 20.Dxd2 Dxf3 21.gxf3 exd2 22.Rxd2 es legal, con cinco peones blancos y seis negros. Distinguir la respuesta calculada a 19.Tf3 de la jugada real …Td2+; sus evaluaciones son posiciones diferentes. Los valores exactos se calculan, no se codifican en la interfaz.
+
 **Prioridad visual confirmada el 6 de noviembre de 2026:** el usuario exige el diseño exacto de `IAjedrez_prototipo_interactivo.html`. La ruta `/` sirve ese mismo archivo; `/prototype` es un acceso alternativo. No sustituirlo por una adaptación ni rediseñarlo. Posteriormente se editarán sus elementos conservando este diseño. La demo de la entrevista se mantiene en `/demo`, con sus datos e interacciones anteriores; aún no está integrada en el diseño exacto aprobado. Esta decisión prevalece sobre las descripciones anteriores de la demo como página principal.
 
 El usuario, Mauricio, desarrolla un proyecto del curso universitario de Interacción Humano Computador. La entrega es una demostración de interfaz funcional para mañana, según lo indicado el 6 de noviembre de 2026. Verificar la fecha si se retoma más adelante.
@@ -59,7 +65,11 @@ La larga respuesta de ChatGPT pegada por el usuario tenía valoraciones que lueg
 | `/api/demo` | Lee el PGN y devuelve movimientos, SAN, relojes y encabezados |
 | `/api/position` | Valida secuencia desde posición inicial mediante python-chess |
 | `/lab` → `static/index.html`, `static/app.js` | Laboratorio anterior: importación, estudio JSON, adaptadores de motor y tutor |
-| `/prototype` | HTML original sin modificar |
+| `/prototype` | Mismo HTML aprobado, conectado al recorrido Stockfish |
+| `review.py`, `/api/review/*` | Partida, análisis de blancas, consultas y comparación de candidatas |
+| `static/review.js` | Navegación, consultas, variantes y práctica del recorrido principal |
+| `static/partida-mauricio.pgn`, `static/conversacion-mauricio.md` | Partida nueva y síntesis atribuida de la conversación |
+| `tests/test_review.py`, `tests/ui_review.py` | Regresiones de motor/API y simulación de navegación |
 | `INICIAR_DEMO.cmd` | Inicia servidor local en 127.0.0.1:8765 |
 | `tests/test_app.py` | Siete pruebas de API |
 | `tests/ui_demo.py` | Tres recorridos en Edge con Playwright; requiere servidor activo |
@@ -83,6 +93,8 @@ La conversación inicial también citó Interactive Reasoning (Pang et al., 2026
 
 ## Ejecución y verificación
 
+Recorrido Stockfish verificado: 17 pruebas de servidor pasan, incluidas comparaciones reales, variantes legales, interpretación acotada, rechazo de PGN distinto y motor ausente. `tests/ui_review.py` reproduce la pregunta con PGN, 9.Cd2, 9.Df3, defensa del final, práctica evaluada por el motor y retorno al paso exacto; sin errores de consola. Se comprobó tablero fijo y scroll independiente a 1440×900, 1366×768, 900×900 y 390×844. La ruta de fallo 503 conserva la pregunta y permite reintentar sin inventar respuestas. Capturas en `/tmp/iajedrez-stockfish-*.png`.
+
 Verificación del desplazamiento (Linux, 6 de noviembre de 2026): Playwright 1.64.1 y Chromium Headless Shell instalados en `venv` y la caché del usuario. Se comprobó `/` a 1440×900, 1366×768, 900×900 y 390×844: lista de jugadas y cuerpo de las cuatro vistas con desplazamiento independiente, coordenadas del tablero constantes, práctica d3→d4 y retorno, menú inicialmente oculto y consola sin errores. Se revisaron capturas de escritorio y móvil; scripts y capturas de esta comprobación están en `/tmp`, no forman parte del repositorio. En Linux se ejecuta con `venv/bin/python`; los comandos Windows siguientes corresponden al entorno anterior.
 
 Entorno Windows/PowerShell; Python 3.13 y Node 22 observados. `.venv` contiene dependencias instaladas. Puede no existir en otro equipo. `requirements.txt` y `requirements-dev.txt` son las fuentes de instalación. Para extraer/ver PDF se instalaron además pypdf y pymupdf en el entorno, sin añadirlos como dependencias de la aplicación.
@@ -102,8 +114,8 @@ No confundir estas comprobaciones con evaluación de usabilidad con participante
 
 ## Pendientes y cómo retomar
 
-1. Si el usuario pide cambios para la exposición, priorizar los tres recorridos y el guion. No reinstalar modelos ni rediseñar desde cero por iniciativa propia.
-2. Probar cambios de interfaz con `tests/ui_demo.py`; verificar que se conserva jugada, paso y consulta al regresar.
+1. Si el usuario pide cambios para la exposición, priorizar el nuevo recorrido Stockfish y `GUION_STOCKFISH.md`. No reinstalar modelos ni rediseñar desde cero por iniciativa propia.
+2. Probar cambios de la interfaz principal con `tests/ui_review.py` (`tests/ui_demo.py` corresponde a `/demo`); verificar que se conserva jugada, paso y consulta al regresar.
 3. Si se retoma el producto después de la entrega: instalar/verificar motor y modelo, análisis completo de errores, persistencia y preguntas generativas son trabajo futuro.
 4. No quedan preguntas de contexto que bloqueen la demo. Confirmar solo requisitos nuevos o cambios de fecha/entrega.
 
@@ -111,6 +123,6 @@ Preferencias del usuario: avanzar con lo disponible; preguntar si falta contexto
 
 ## Estado del repositorio y cautelas
 
-No se hicieron commits. En el último estado había numerosos archivos sin seguimiento, incluidos los PDF, prototipo e imágenes aportados por el usuario. Revisar `git status` antes de modificar; no borrar ni atribuir como propios esos materiales. El HTML original y los PNG se conservaron.
+El diseño aprobado y el desplazamiento se guardaron en el commit `1b12f7e`, solicitado por el usuario. Los cambios del nuevo recorrido Stockfish están pendientes de commit. Revisar `git status` antes de modificar; no incluir el entorno local `venv/` ni borrar materiales aportados por el usuario. Los PNG de referencia se conservan.
 
 Este documento no reemplaza el código: verificar estado real antes de prometer una funcionalidad. La conversación literal no está archivada en su totalidad; los requisitos, decisiones y hallazgos relevantes sí están resumidos entre estos documentos y los datos de la demo.

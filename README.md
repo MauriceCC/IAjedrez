@@ -6,11 +6,28 @@
 
 La página principal (`/`) muestra directamente **`IAjedrez_prototipo_interactivo.html`**, conservando su diseño, con desplazamiento independiente en Jugadas y variantes y en el cuerpo de respuestas, mientras el tablero permanece fijo. Este diseño es la base obligatoria para los próximos cambios: conservar distribución, colores, tipografía, espaciado y componentes; las futuras ediciones se harán sobre sus elementos.
 
-Para mostrarlo, inicia el servidor y abre http://127.0.0.1:8765. También puede abrirse el HTML directamente. `/prototype` conserva el acceso al mismo archivo. El prototipo utiliza sus ejemplos y respuestas simuladas originales.
+La interfaz principal carga ahora **Mauricio0120 (783) — santoshglklklk (804)**, Chess.com, 26 de octubre de 2026, 5 minutos. Analiza las 19 decisiones de blancas con Stockfish real y contrasta la conversación aportada. [Guion de este recorrido](GUION_STOCKFISH.md).
 
-La demostración funcional de la entrevista Timmy-t–Kuanynsh se conserva en **`/demo`**. Incluye la partida completa, relojes del PGN, ocho momentos, consultas por jugada y paso, retorno al análisis y práctica con movimientos legales. Su [guion](GUION_DEMOSTRACION.md) corresponde a esa ruta; sus consultas duran la sesión de la página. No requiere Stockfish, Ollama ni Internet para los tres recorridos. La trazabilidad está en [Investigación a interfaz](INVESTIGACION_A_INTERFAZ.md).
+- Escribe «¿Cuál fue mi error en esta partida?» o pulsa «Analizar mi partida». La primera revisión tarda alrededor de un minuto; las consultas posteriores reutilizan el análisis en memoria del servidor.
+- Puedes preguntar por `9. Nd2` / `9. Cd2`, `9. Qf3` / `9. Df3`, el final tras `19…Rd2+` / `19…Td2+` y otras jugadas blancas concretas. Se admite la pregunta original con el PGN adjunto **de esta misma partida**. Un PGN distinto se rechaza explícitamente.
+- La tabla muestra caídas estimadas, candidatas y evaluaciones desde blancas. Cadena permite volver al paso exacto; Aprende valida una candidata legal y la evalúa con el motor.
+- Stockfish calcula; el tutor emplea **plantillas de alcance limitado**, sin LLM. Una consulta no reconocida se indica como no validada. Las etiquetas locales no equivalen a las clasificaciones de Chess.com.
+- El PGN indica `0–1`, sin motivo de terminación. No se inventa abandono ni derrota por tiempo.
 
-Las herramientas generales descritas debajo siguen disponibles en `/lab`; su integración con Stockfish/Ollama continúa pendiente de verificación real. Integrar los datos de la entrevista en el diseño aprobado queda para las próximas ediciones de sus elementos.
+Usa el servidor local: el HTML ya requiere la API para cargar la partida. `/prototype` sirve la misma interfaz. La demo anterior de Timmy-t–Kuanynsh sigue en `/demo`, con su [guion de la entrevista](GUION_DEMOSTRACION.md) y sus respuestas preparadas. El laboratorio general permanece en `/lab`.
+
+## Ejecutar en Linux
+
+```bash
+python3 -m venv venv
+venv/bin/python -m pip install -r requirements-dev.txt
+# Instala Stockfish desde el gestor de paquetes de tu sistema si falta.
+# Si no está en PATH, indica el ejecutable:
+export STOCKFISH_PATH=/usr/games/stockfish
+venv/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8765
+```
+
+Abre http://127.0.0.1:8765. Stockfish 16 está instalado y probado en el equipo actual. No se distribuye el binario en el repositorio. No necesitas Ollama para este recorrido.
 
 ## Ejecutar (PowerShell)
 
@@ -20,9 +37,9 @@ python -m venv .venv
 .venv/Scripts/python -m uvicorn app:app --host 127.0.0.1 --port 8765
 ```
 
-Abre http://127.0.0.1:8765. El prototipo original está en `/prototype`.
+Abre http://127.0.0.1:8765. La misma interfaz está disponible en `/prototype`.
 
-## Stockfish y Ollama
+## Stockfish y Ollama (laboratorio `/lab`)
 
 Descarga y extrae [Stockfish](https://stockfishchess.org/download/). Configura en la misma terminal antes de iniciar el servidor:
 
@@ -35,7 +52,7 @@ Instala [Ollama](https://ollama.com), descarga el modelo elegido con `ollama pul
 
 Sin Stockfish funcionan importación, navegación y movimientos legales. Sin Ollama funciona el motor, pero no el tutor. Los fallos muestran mensajes explícitos, sin respuestas simuladas.
 
-## Implementado
+## Implementado en el laboratorio `/lab`
 
 - Importar línea principal de PGN estándar y cargar ejemplo.
 - Movimientos legales con python-chess, enroque, captura al paso y promoción.
@@ -46,6 +63,8 @@ Sin Stockfish funcionan importación, navegación y movimientos legales. Sin Oll
 - Cadena de cuatro etapas didácticas; no expone razonamiento interno del modelo.
 
 ## Plan para completar el producto
+
+El recorrido principal ya compara las decisiones blancas de la partida precargada. Los siguientes puntos corresponden a generalizar el laboratorio a partidas arbitrarias.
 
 1. Resumen automático de errores de toda la partida: comparar evaluación antes/después desde el jugador que mueve, tratar mates separadamente, calibrar umbrales, añadir progreso y cancelación. Actualmente se analizan posiciones, no se genera esa tabla.
 2. Generar conclusiones estructuradas por etapa y preguntas hijas con historial conversacional. Actualmente las consultas son independientes y se conservan bajo su posición.
@@ -58,7 +77,7 @@ La descripción suministrada de los artículos orienta la interacción; no equiv
 
 ## Arquitectura y pruebas
 
-`static/`: interfaz sin framework. `app.py`: validación, motor y tutor. El navegador no determina legalidad ni aporta evaluaciones confiables. Los textos generados se escapan. Stockfish usa un proceso acotado y un bloqueo para evitar cálculos simultáneos.
+`review.py`: análisis, comparación de candidatas y consultas del recorrido. `static/review.js`: comportamiento del diseño aprobado. `static/`: interfaz sin framework. `app.py`: validación, motor y tutor. El navegador no determina legalidad ni aporta evaluaciones confiables. Los textos generados se escapan. Stockfish usa un proceso acotado y un bloqueo para evitar cálculos simultáneos.
 
 ```powershell
 .venv/Scripts/python -m pip install -r requirements-dev.txt
@@ -66,7 +85,19 @@ La descripción suministrada de los artículos orienta la interacción; no equiv
 node --check static/app.js
 ```
 
-Stockfish y Ollama necesitan verificación con instalaciones reales. Las dependencias usan rangos compatibles; generar un lock al validar el entorno de distribución.
+Verificación del recorrido principal:
+
+```bash
+venv/bin/python -m pytest -q
+node --check static/review.js
+venv/bin/python -m playwright install chromium --only-shell
+# Con el servidor activo:
+venv/bin/python tests/ui_review.py
+```
+
+El test UI envía la pregunta original y el PGN, consulta 9.Cd2 y 9.Df3, recorre la defensa del final, prueba candidatas con Stockfish y verifica retorno, desplazamiento y tablero fijo en escritorio y móvil. Las capturas se guardan en el directorio temporal del sistema.
+
+Stockfish se verificó en el recorrido principal; Ollama sigue pendiente. Las dependencias usan rangos compatibles; generar un lock al validar el entorno de distribución.
 
 Fuentes: [python-chess UCI](https://python-chess.readthedocs.io/en/latest/engine.html), [Ollama Chat](https://docs.ollama.com/api/chat). Stockfish y python-chess tienen licencias GPL; revisar obligaciones antes de distribuir. No se asignó licencia al código propio.
 

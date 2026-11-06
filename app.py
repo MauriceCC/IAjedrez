@@ -2,13 +2,13 @@
 import io
 import os
 import shutil
-import threading
 from pathlib import Path
 
 import chess
 import chess.engine
 import chess.pgn
 import httpx
+import review
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -16,7 +16,7 @@ from pydantic import BaseModel, Field
 
 ROOT = Path(__file__).parent
 app = FastAPI(title="IAjedrez local")
-engine_lock = threading.Lock()
+engine_lock = review.ENGINE_LOCK
 app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
 
 
@@ -170,3 +170,47 @@ def chat(data: Question):
         return {"answer": response.json()["message"]["content"], "evidence": evidence, "model": model}
     except (httpx.HTTPError, KeyError, ValueError) as exc:
         raise HTTPException(503, "Ollama no respondió. Comprueba el servicio y que el modelo esté descargado.") from exc
+
+
+class ReviewQuestion(BaseModel):
+    question: str = Field(min_length=1, max_length=6000)
+    ply: int = Field(default=0, ge=0, le=38)
+    step: int = Field(default=0, ge=0, le=3)
+
+
+class Candidate(Position):
+    candidate: str = Field(pattern=r"^[a-h][1-8][a-h][1-8][qrbn]?$")
+
+
+def review_call(operation, *args):
+    path = engine_path()
+    if not path:
+        raise HTTPException(503, "Stockfish no está disponible. Instálalo o configura STOCKFISH_PATH y reintenta.")
+    try:
+        return operation(path, *args)
+    except (OSError, chess.engine.EngineError, TimeoutError) as exc:
+        raise HTTPException(503, "Stockfish no pudo completar el análisis. Revisa STOCKFISH_PATH y reintenta.") from exc
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+
+@app.get("/api/review/game")
+def review_game():
+    return review.load_game()
+
+
+@app.post("/api/review/analyze")
+def review_analyze():
+    return review_call(review.analyze_game)
+
+
+@app.post("/api/review/query")
+def review_query(data: ReviewQuestion):
+    if not data.question.strip():
+        raise HTTPException(422, "Escribe una pregunta.")
+    return review_call(review.query, data.question, data.ply)
+
+
+@app.post("/api/review/compare")
+def review_compare(data: Candidate):
+    return review_call(review.practice, data.moves, data.candidate)
