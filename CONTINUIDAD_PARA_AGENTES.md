@@ -4,6 +4,8 @@ Actualizado: 6 de noviembre de 2026. Leer este archivo primero. Es una síntesis
 
 ## Encargo y prioridad vigente
 
+**Prioridad visual confirmada el 6 de noviembre de 2026:** el usuario exige el diseño exacto de `IAjedrez_prototipo_interactivo.html`. La ruta `/` sirve ese mismo archivo; `/prototype` es un acceso alternativo. No sustituirlo por una adaptación ni rediseñarlo. Posteriormente se editarán sus elementos conservando este diseño. La demo de la entrevista se mantiene en `/demo`, con sus datos e interacciones anteriores; aún no está integrada en el diseño exacto aprobado. Esta decisión prevalece sobre las descripciones anteriores de la demo como página principal.
+
 El usuario, Mauricio, desarrolla un proyecto del curso universitario de Interacción Humano Computador. La entrega es una demostración de interfaz funcional para mañana, según lo indicado el 6 de noviembre de 2026. Verificar la fecha si se retoma más adelante.
 
 El propósito es adaptar la interacción de un chat tradicional con IA para revisar partidas y aprender ajedrez. **No es prioritario construir una plataforma completa ni integrar una IA real para esta entrega.** El usuario autorizó partidas precargadas y funcionalidad acotada. Esta aclaración sustituye el plan inicial de priorizar Stockfish/Ollama.
@@ -16,6 +18,10 @@ El propósito es adaptar la interacción de un chat tradicional con IA para revi
 4. Se confirmó hardware: 32 GB RAM informados por el usuario; RTX 3050 con 6144 MiB VRAM comprobados con nvidia-smi. Se propuso Qwen3 4B en Ollama, sin instalarlo. No era una elección final medida.
 5. El usuario aclaró el objetivo académico y plazo. Aportó una partida completa y una entrevista donde cuestionaba respuestas de ChatGPT.
 6. Se consultaron tres PDF locales y se construyó una demo funcional basada en esa partida, sin depender de una IA en vivo.
+
+## Desplazamiento de la interfaz
+
+Por petición del usuario, el tablero permanece fijo en la ventana. Solo se desplazan la lista de Jugadas y variantes y el cuerpo de resultados (Consejos, Cadena, Referencias y Aprende); los encabezados y el formulario quedan fuera de esas áreas. En tablet los paneles dinámicos se apilan junto al tablero; en móvil se alternan con los botones Jugadas y variantes / Respuestas debajo del tablero fijo. Mantener esta estructura al editar contenido.
 
 ## Requisitos de interacción que deben conservarse
 
@@ -45,7 +51,8 @@ La larga respuesta de ChatGPT pegada por el usuario tenía valoraciones que lueg
 | Archivo/ruta | Función |
 | --- | --- |
 | `app.py` | Servidor FastAPI; validación de jugadas y API del laboratorio |
-| `/` → `static/demo.html` | Demo principal para la exposición |
+| `/` → `IAjedrez_prototipo_interactivo.html` | Diseño exacto aprobado para mostrar el proyecto |
+| `/demo` → `static/demo.html` | Demo de la entrevista conservada |
 | `static/demo.js` | Estados, consultas, retorno al paso, variantes, ejercicio |
 | `static/demo-data.js` | Ocho momentos y respuestas editoriales preparadas |
 | `static/demo.css`, `static/style.css` | Estilos; se conserva la organización visual del prototipo |
@@ -75,6 +82,8 @@ Material de investigación revisado:
 La conversación inicial también citó Interactive Reasoning (Pang et al., 2026), PromptChainer (Wu et al., 2022), Beyond Code Generation (Zamfirescu-Pereira et al., 2025) y From Conversation to Human-AI Common Ground (Chen et al., 2026). No se verificaron aquí sus textos completos ni todos los datos bibliográficos. Evitar afirmar una revisión académica exhaustiva.
 
 ## Ejecución y verificación
+
+Verificación del desplazamiento (Linux, 6 de noviembre de 2026): Playwright 1.64.1 y Chromium Headless Shell instalados en `venv` y la caché del usuario. Se comprobó `/` a 1440×900, 1366×768, 900×900 y 390×844: lista de jugadas y cuerpo de las cuatro vistas con desplazamiento independiente, coordenadas del tablero constantes, práctica d3→d4 y retorno, menú inicialmente oculto y consola sin errores. Se revisaron capturas de escritorio y móvil; scripts y capturas de esta comprobación están en `/tmp`, no forman parte del repositorio. En Linux se ejecuta con `venv/bin/python`; los comandos Windows siguientes corresponden al entorno anterior.
 
 Entorno Windows/PowerShell; Python 3.13 y Node 22 observados. `.venv` contiene dependencias instaladas. Puede no existir en otro equipo. `requirements.txt` y `requirements-dev.txt` son las fuentes de instalación. Para extraer/ver PDF se instalaron además pypdf y pymupdf en el entorno, sin añadirlos como dependencias de la aplicación.
 

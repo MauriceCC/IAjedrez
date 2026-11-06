@@ -1,5 +1,7 @@
 # Demostración IHC · IAjedrez
 
+Este guion corresponde a la demo de la entrevista en `/demo`. La página principal muestra el prototipo con el diseño exacto aprobado y sus ejemplos originales.
+
 ## Objetivo de la propuesta
 
 Mostrar cómo adaptar la interacción de un chat con IA a la revisión de partidas: el usuario localiza una decisión, ve su posición, cuestiona una explicación y prueba una alternativa sin reconstruir el contexto en otra pestaña.
@@ -9,7 +11,7 @@ Esta entrega es una **demostración funcional con contenido preparado**, no una 
 ## Preparación
 
 1. Abre `INICIAR_DEMO.cmd` y deja la ventana abierta. Si ya hay un servidor en 8765, usa ese servidor; no hace falta iniciar otro.
-2. Abre http://127.0.0.1:8765 en Edge o Chrome.
+2. Abre http://127.0.0.1:8765/demo en Edge o Chrome.
 3. Pulsa «Reiniciar recorrido» para comenzar sin consultas anteriores.
 4. Verifica que aparece 29.Rf1 y que «Otras respuestas» está cerrado.
 

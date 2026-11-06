@@ -9,7 +9,7 @@ with sync_playwright() as p:
     errors = []
     page.on('pageerror', lambda e: errors.append(str(e)))
     page.on('console', lambda msg: errors.append(msg.text) if msg.type == 'error' else None)
-    page.goto('http://127.0.0.1:8765')
+    page.goto('http://127.0.0.1:8765/demo')
     expect(page).to_have_title('IAjedrez · Revisión guiada')
     expect(page.locator('#board button')).to_have_count(64)
     expect(page.locator('#menu')).to_be_hidden()

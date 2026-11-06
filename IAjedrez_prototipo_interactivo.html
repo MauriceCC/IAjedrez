@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="data:,">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>IAjedrez — Análisis de ajedrez con IA | Prototipo</title>
 <style>
@@ -29,6 +30,54 @@
 /* Composer */
 .composer{margin-top:auto;border-top:1px solid #e9edf3;padding:13px 16px 14px;background:#fdfefe;border-radius:0 0 var(--radius) var(--radius)}.composer-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.composer-label{font-size:12px;font-weight:770;color:#405067}.composer-context{font-size:11px;color:#2062bd;background:#edf4ff;border-radius:24px;padding:5px 8px}.compose-controls{display:flex;align-items:flex-end;gap:9px}.question{min-width:0;flex:1;resize:vertical;min-height:48px;max-height:130px;border:1px solid #cfd8e7;border-radius:10px;padding:12px;color:#23354c;font-size:13px;line-height:1.55}.question::placeholder{color:#8492a5}.send{border:1px solid #1556c5;background:var(--blue);color:#fff;border-radius:10px;min-height:48px;padding:10px 18px;font-weight:750;font-size:12px}.send:hover{background:#1552b9}.composer-tip{margin:8px 0 0;font-size:10px;color:#8b96a6;line-height:1.5}.notice{display:none;margin-top:9px;padding:9px 11px;border:1px solid #c6e5d8;background:#edf9f3;border-radius:8px;color:#225f4d;font-size:11px;line-height:1.5}.notice.show{display:block}
 @media(max-width:1270px){.layout{grid-template-columns:minmax(188px,.55fr) minmax(340px,1fr) minmax(425px,1.4fr);gap:12px;padding:12px}.panel-header{padding:15px 12px}.result-area{padding:12px}.piece{font-size:clamp(24px,3.5vw,49px)}.topbar{padding:0 17px}}@media(max-width:1020px){.layout{grid-template-columns:minmax(220px,.65fr) minmax(340px,1fr);align-items:stretch}.right-panel{grid-column:1/-1;min-height:560px}.tree-panel,.board-panel{min-height:630px}.piece{font-size:clamp(32px,5vw,55px)}.result-area{min-height:260px}}@media(max-width:660px){.demo-grid{grid-template-columns:1fr}.demo-card{min-height:0}.secondary-box{padding:12px}.lesson-hero{padding:12px}.layout{grid-template-columns:1fr;padding:10px;gap:12px}.board-panel{grid-row:1;min-height:auto}.tree-panel{grid-row:2;min-height:450px;max-height:540px}.right-panel{grid-column:1;grid-row:3;min-height:620px}.topbar{height:auto;min-height:65px;padding:10px 14px}.brand h1{font-size:15px}.top-pill{display:none}.board-frame{max-width:480px}.board-main{padding:10px 12px 0}.piece{font-size:clamp(28px,9vw,54px)}.right-head{padding:13px}.right-head h2{font-size:15px}.change-view{font-size:11px;padding:9px}.view-menu{width:min(250px,85vw)}.result-area{padding:12px}.context-line{flex-wrap:wrap}.topmeta{gap:4px}.text-btn{font-size:11px;padding:7px}.tree-scroll{max-height:450px}}@media(prefers-reduced-motion:no-preference){.tree-move,.view-option,.change-view,.nav-arrow,.step-main,.send{transition:background .14s ease,border-color .14s ease}}
+
+/* Fixed workspace: only the move list and the response body scroll. */
+.mobile-panel-switch{display:none}
+html,body{height:100%;overflow:hidden}
+body{height:100dvh;display:flex;flex-direction:column}
+.topbar{flex-shrink:0}
+.layout{width:100%;flex:1;min-height:0;grid-template-rows:minmax(0,1fr);overflow:hidden}
+.tree-panel,.right-panel,.board-panel{min-height:0}
+.panel-header,.tree-footer,.right-head,.composer,.board-controls,.board-bottom{flex-shrink:0}
+.tree-scroll,.result-area{flex:1 1 0;min-height:0;max-height:none;overflow:auto;overscroll-behavior:contain}
+.tree-scroll:focus-visible,.result-area:focus-visible{outline:2px solid #80a8ff;outline-offset:-3px}
+.board-main{min-height:0;position:relative}
+/* Reserve room for players, navigation and the practice hint in every view. */
+.board-frame{max-width:min(575px,62vh,calc(100dvh - 390px));flex-shrink:0}
+.piece{font-size:min(clamp(25px,3.35vw,54px),calc((100dvh - 412px)*.106))}
+.board-mode-hint{position:absolute;bottom:0;left:19px;right:19px;width:auto;margin:0;font-size:10px;padding:4px 8px}
+@media(max-width:1020px) and (min-width:661px){
+ .layout{grid-template-columns:minmax(270px,.9fr) minmax(340px,1.1fr);grid-template-rows:minmax(0,.35fr) minmax(0,.65fr)}
+ .board-panel{grid-column:1;grid-row:1/3}
+ .tree-panel{grid-column:2;grid-row:1}
+ .right-panel{grid-column:2;grid-row:2}
+ .tree-footer{padding:6px 12px}
+ .board-frame{max-width:min(575px,calc(100dvh - 390px))}
+}
+@media(max-width:660px){
+ /* Keep the board above a horizontally paged pair of independently scrolling panels. */
+ .layout{grid-template-columns:100% 100%;grid-template-rows:minmax(0,1fr);padding:calc(40dvh + 35px) 10px 10px;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;position:relative}
+ .mobile-panel-switch{display:flex;position:fixed;top:calc(40dvh + 62px);left:10px;right:10px;gap:8px;height:28px;z-index:2}
+ .mobile-panel-switch button{flex:1;padding:3px 8px}
+ .board-panel{position:fixed;top:75px;left:10px;right:10px;height:calc(40dvh - 15px);z-index:1;background:var(--card)}
+ .tree-panel,.right-panel{grid-row:1;min-height:0;max-height:none;scroll-snap-align:center}
+ .tree-panel{grid-column:1}.right-panel{grid-column:2}
+ .board-panel>.panel-header{padding:6px 12px}
+ .board-main{padding:4px 12px;gap:3px}
+ .board-info{position:absolute;left:12px;width:auto;max-width:25%;display:block;font-size:10px}
+ .board-info:first-child{top:8px}.board-info:last-child{bottom:8px}
+ .player{font-size:10px;gap:3px;flex-wrap:wrap}.player-meta,.board-info>.subtle{display:none}
+ .board-frame{max-width:calc(40dvh - 125px)}
+ .piece{font-size:min(30px,calc((40dvh - 147px)*.106))}
+ .board-controls{padding:3px 12px 6px;max-width:280px}
+ .move-current{padding:3px 8px}.move-current strong{font-size:12px}.move-current span{font-size:9px}
+ .nav-arrow{height:30px;width:32px}.board-bottom{display:none}
+ .board-mode-hint{left:auto;right:8px;bottom:8px;max-width:calc((100% - (40dvh - 125px))/2 - 12px);font-size:9px}
+ .right-head{padding:10px}.right-head p{font-size:10px}
+ .composer{padding:8px 12px}.composer-tip{margin-top:4px}
+ .topbar{height:65px;min-height:65px}
+ .brand h1{white-space:normal}.brand small{font-size:10px}
+}
 </style>
 </head>
 <body>
@@ -36,10 +85,11 @@
   <div class="brand"><span class="logo" aria-hidden="true">♙</span><div><h1>IAjedrez <span style="font-weight:450;color:#cbdcf2">/ Análisis de partida</span></h1><small>Aprende de tus jugadas, paso a paso</small></div></div>
   <div class="topmeta"><span class="top-pill">✦ 3 recorridos de demostración</span><button class="text-btn" id="reset" type="button" title="Restablecer la vista inicial">↺ Reiniciar</button></div>
 </header>
+<nav class="mobile-panel-switch" aria-label="Paneles de análisis"><button type="button" class="small-button" data-panel="tree-panel">Jugadas y variantes</button><button type="button" class="small-button" data-panel="right-panel">Respuestas</button></nav>
 <main class="layout">
   <section class="panel tree-panel" aria-label="Árbol de jugadas">
     <div class="panel-header"><h2 class="panel-title"><span class="icon-dot" aria-hidden="true">⑂</span> Jugadas y variantes</h2><span class="subtle">Partida ejemplo</span></div>
-    <div class="tree-scroll">
+    <div class="tree-scroll" tabindex="0" role="region" aria-label="Jugadas y variantes desplazables">
       <div class="tree-help">Selecciona una jugada para verla en el tablero. Las consultas que añadas quedarán vinculadas a esa jugada.</div>
       <nav aria-label="Seleccionar jugada" class="tree-list" id="tree"></nav>
     </div>
@@ -69,7 +119,7 @@
       </div>
     </div>
     <!-- ÚNICO CONTENEDOR de salida: la tabla o la cadena se dibujan AQUÍ. -->
-    <div id="results" class="result-area" aria-live="polite" aria-atomic="false"></div>
+    <div id="results" class="result-area" tabindex="0" role="region" aria-label="Contenido de la respuesta" aria-live="polite" aria-atomic="false"></div>
     <form class="composer" id="ask-form">
       <div class="composer-top"><label class="composer-label" for="question">Tu consulta</label><span class="composer-context" id="composer-context">Vinculada a 12. h3</span></div>
       <div class="compose-controls"><textarea id="question" class="question" rows="1" maxlength="300" required placeholder="Pregunta sobre esta jugada o un paso del análisis..."></textarea><button class="send" type="submit">Enviar ↗</button></div>
@@ -80,6 +130,11 @@
 </main>
 <script>
 'use strict';
+document.querySelector('.mobile-panel-switch').addEventListener('click',e=>{
+ const button=e.target.closest('[data-panel]');if(!button)return;
+ const layout=document.querySelector('.layout');
+ layout.scrollTo({left:document.querySelector('.'+button.dataset.panel).offsetLeft-10,behavior:'instant'});
+});
 // Cada jugada se representa con la casilla de origen y destino: suficiente para este prototipo visual.
 const moves = [
  ['1. e4','e2','e4'],['1... e5','e7','e5'],['2. Cf3','g1','f3'],['2... Cc6','b8','c6'],

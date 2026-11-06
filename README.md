@@ -2,15 +2,15 @@
 
 **Para retomar el trabajo con otro agente:** leer primero [Continuidad para agentes](CONTINUIDAD_PARA_AGENTES.md), que resume el contexto, las decisiones vigentes, el estado técnico y las verificaciones.
 
-## Entrega IHC: demo con la partida de la entrevista
+## Diseño principal aprobado
 
-La página principal ahora es la **demostración funcional con respuestas preparadas** de Timmy-t–Kuanynsh. Para exponer, ejecuta `INICIAR_DEMO.cmd`, abre http://127.0.0.1:8765 y sigue [el guion](GUION_DEMOSTRACION.md). No requiere Stockfish, Ollama ni Internet para los tres recorridos.
+La página principal (`/`) muestra directamente **`IAjedrez_prototipo_interactivo.html`**, conservando su diseño, con desplazamiento independiente en Jugadas y variantes y en el cuerpo de respuestas, mientras el tablero permanece fijo. Este diseño es la base obligatoria para los próximos cambios: conservar distribución, colores, tipografía, espaciado y componentes; las futuras ediciones se harán sobre sus elementos.
 
-Incluye la partida completa, relojes del PGN, ocho momentos, consultas por jugada y paso, retorno al análisis original y práctica con movimientos legales. Las consultas de la demo se guardan solo durante la sesión de la página. La trazabilidad a los PDF está en [Investigación a interfaz](INVESTIGACION_A_INTERFAZ.md).
+Para mostrarlo, inicia el servidor y abre http://127.0.0.1:8765. También puede abrirse el HTML directamente. `/prototype` conserva el acceso al mismo archivo. El prototipo utiliza sus ejemplos y respuestas simuladas originales.
 
-Las herramientas generales descritas debajo siguen disponibles en `/lab`; su integración con Stockfish/Ollama continúa pendiente de verificación real. El prototipo original sigue en `/prototype`.
+La demostración funcional de la entrevista Timmy-t–Kuanynsh se conserva en **`/demo`**. Incluye la partida completa, relojes del PGN, ocho momentos, consultas por jugada y paso, retorno al análisis y práctica con movimientos legales. Su [guion](GUION_DEMOSTRACION.md) corresponde a esa ruta; sus consultas duran la sesión de la página. No requiere Stockfish, Ollama ni Internet para los tres recorridos. La trazabilidad está en [Investigación a interfaz](INVESTIGACION_A_INTERFAZ.md).
 
-Base local para convertir el prototipo educativo en una aplicación. Se conservan el HTML y PNG originales. La nueva interfaz reutiliza sus estilos y mantiene el menú Otras respuestas oculto inicialmente.
+Las herramientas generales descritas debajo siguen disponibles en `/lab`; su integración con Stockfish/Ollama continúa pendiente de verificación real. Integrar los datos de la entrevista en el diseño aprobado queda para las próximas ediciones de sus elementos.
 
 ## Ejecutar (PowerShell)
 
