@@ -1,5 +1,11 @@
 # Continuidad de IAjedrez para otros agentes
 
+## Mejoras de tablero, resumen y aprendizaje
+
+El tablero define explícitamente ocho filas y ocho columnas iguales, incluso en finales sin piezas. Al abrir cualquiera de los estudios se solicita automáticamente Stockfish y se muestra la tabla prioritaria al terminar; los fallos conservan un acceso para reintentar. `static/study-ui.js` comparte la tabla entre ambos estudios: símbolos accesibles con etiqueta, ventaja perdida en peones de valoración y barras (tope visual de 5), comparación explícita de jugada real y alternativa.
+
+Las pestañas son ahora Resumen de errores, Consejos, Cadena y Aprende. Aprende reúne recursos gratuitos verificados de Lichess, temas vinculados a jugadas concretas y acceso a la práctica existente con motor. Las antiguas referencias están dentro de un detalle desplegable. Los temas son una selección para las dos partidas precargadas, no extracción semántica general ni búsqueda automática de videos. Los enlaces de aperturas permiten explorar continuaciones y partidas; los de táctica ofrecen ejercicios y lecciones.
+
 ## Inicio y navegación de vistas
 
 La ruta `/` muestra ahora el inicio de chat (`static/home.html`, `home.css`, `home.js`): historial con los dos estudios, bienvenida y campo PGN visual. Seleccionar un estudio muestra el prompt y PGN completos y un enlace al análisis `/?game=mauricio` o `/?game=entrevista`. `/prototype` sigue mostrando el tablero. No se importan nuevas partidas desde el inicio.
