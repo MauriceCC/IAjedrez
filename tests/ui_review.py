@@ -19,7 +19,7 @@ with sync_playwright() as p:
     page.goto(BASE_URL+'/?game=mauricio')
     expect(page).to_have_title('IAjedrez — Análisis de ajedrez con IA | Prototipo')
     expect(page.locator('#board .square')).to_have_count(64)
-    expect(page.locator('#view-menu')).to_be_hidden()
+    expect(page.locator('.response-tabs button')).to_have_count(5)
     board_box = page.locator('#board').bounding_box()
 
     def fixed_board():
@@ -34,9 +34,8 @@ with sync_playwright() as p:
         fixed_board()
 
     def view(name):
-        page.locator('#view-toggle').click()
         page.locator(f'#view-menu [data-view="{name}"]').click()
-        expect(page.locator('#view-toggle')).to_be_enabled(timeout=180000)
+        expect(page.locator('[data-view="summary"]')).to_be_enabled(timeout=180000)
         fixed_board()
 
     # The same first question, including the supplied PGN, is sent to the real API.

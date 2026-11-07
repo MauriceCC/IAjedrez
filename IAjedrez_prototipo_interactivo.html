@@ -91,12 +91,18 @@ body{height:100dvh;display:flex;flex-direction:column}
  .board-info .player>span{max-width:100%}
  .board-info .player-name{max-width:100%}
 }
+.tree-entry.black-move::before{background:#171c24;border-color:#171c24}
+.tree-entry.selected::before{background:white;border:2px solid #a3b0c1;box-shadow:0 0 0 2px white,0 0 0 4px var(--blue)}
+.tree-entry.black-move.selected::before{background:#171c24;border-color:#171c24}
+.response-tabs{display:flex;gap:5px;width:100%;overflow-x:auto;padding:2px}
+.response-tabs .view-option{padding:9px 7px;font-size:11px;white-space:nowrap;justify-content:center;flex:1}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="brand"><span class="logo" aria-hidden="true">♙</span><div><h1>IAjedrez <span style="font-weight:450;color:#cbdcf2">/ Análisis de partida</span></h1><small>Aprende de tus jugadas, paso a paso</small></div></div>
-  <div class="topmeta"><span class="top-pill">✦ Revisión con Stockfish</span><button class="text-btn" id="reset" type="button" title="Restablecer la vista inicial">↺ Reiniciar</button></div>
+  <div class="topmeta"><a class="text-btn" href="/" style="text-decoration:none">Inicio</a><span class="top-pill">✦ Revisión con Stockfish</span><button class="text-btn" id="reset" type="button" title="Restablecer la vista inicial">↺ Reiniciar</button></div>
 </header>
 <nav class="mobile-panel-switch" aria-label="Paneles de análisis"><button type="button" class="small-button" data-panel="tree-panel">Jugadas y variantes</button><button type="button" class="small-button" data-panel="right-panel">Respuestas</button></nav>
 <main class="layout">
@@ -120,18 +126,8 @@ body{height:100dvh;display:flex;flex-direction:column}
     <div class="board-bottom"><span class="sample-tag">Partida cargada · esperando consulta</span></div>
   </section>
   <section class="panel right-panel" aria-label="Resultados del análisis">
-    <div class="right-head"><div><h2 id="result-title">Resumen de errores</h2><p id="result-subtitle">Observaciones destacadas de la partida</p></div>
-      <div class="view-menu-wrap"><button id="view-toggle" class="change-view" type="button" aria-haspopup="true" aria-controls="view-menu" aria-expanded="false"><span class="vicon" aria-hidden="true">▦</span> Otras respuestas <span aria-hidden="true">⌄</span></button>
-        <!-- Opciones ocultas al iniciar. Solo los botones están en este módulo; todas las vistas reemplazan #results. -->
-        <div id="view-menu" class="view-menu" hidden role="group" aria-label="Otras respuestas de IA">
-          <button type="button" class="view-option" data-view="advice"><span aria-hidden="true">◉</span> Consejos</button>
-          <button type="button" class="view-option" data-view="resources"><span aria-hidden="true">▤</span> Referencias</button>
-          <button type="button" class="view-option" data-view="chain"><span aria-hidden="true">⑂</span> Cadena</button>
-          <button type="button" class="view-option" data-view="learn"><span aria-hidden="true">♙</span> Aprende</button>
-        </div>
-      </div>
-    </div>
-    <!-- ÚNICO CONTENEDOR de salida: la tabla o la cadena se dibujan AQUÍ. -->
+    <div class="right-head"><div id="view-menu" class="response-tabs" role="group" aria-label="Vistas">
+<button type="button" class="view-option" data-view="summary">Resumen de errores</button><button type="button" class="view-option" data-view="advice">Consejos</button><button type="button" class="view-option" data-view="resources">Referencias</button><button type="button" class="view-option" data-view="chain">Cadena</button><button type="button" class="view-option" data-view="learn">Aprende</button></div><h2 id="result-title" class="sr-only"></h2><p id="result-subtitle" class="sr-only"></p></div>
     <div id="results" class="result-area" tabindex="0" role="region" aria-label="Contenido de la respuesta" aria-live="polite" aria-atomic="false"></div>
     <form class="composer" id="ask-form">
       <div class="composer-top"><label class="composer-label" for="question">Tu consulta</label><span class="composer-context" id="composer-context">Posición inicial</span></div>

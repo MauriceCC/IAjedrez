@@ -16,12 +16,12 @@ with sync_playwright() as p:
     errors = []
     page.on('pageerror', lambda e: errors.append(str(e)))
     page.on('console', lambda m: errors.append(m.text) if m.type == 'error' else None)
-    page.goto(BASE)
+    page.goto(BASE+'/?game=entrevista')
     expect(page).to_have_title('IAjedrez — Análisis de ajedrez con IA | Prototipo')
     expect(page.locator('#board .square')).to_have_count(64)
     expect(page.locator('.player-name').last).to_have_text('Timmy-t')
     expect(page.locator('.sample-tag')).to_contain_text('tiempo')
-    expect(page.locator('#view-menu')).to_be_hidden()
+    expect(page.locator('.response-tabs button')).to_have_count(5)
     box = page.locator('#board').bounding_box()
 
     def ask(question):
@@ -32,9 +32,8 @@ with sync_playwright() as p:
         assert page.locator('#board').bounding_box() == box
 
     def view(name):
-        page.locator('#view-toggle').click()
         page.locator(f'[data-view="{name}"]').click()
-        expect(page.locator('#view-toggle')).to_be_enabled(timeout=300000)
+        expect(page.locator('[data-view="summary"]')).to_be_enabled(timeout=300000)
 
     ask('¿Cuáles fueron mis errores?\n'+Path('static/partida-entrevista.pgn').read_text(encoding='utf-8'))
     expect(page.locator('.secondary-box')).to_contain_text('54 decisiones')

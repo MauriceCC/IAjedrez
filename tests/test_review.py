@@ -28,7 +28,7 @@ def test_loaded_game_and_final_defense():
 
 
 def test_root_page_retains_approved_layout():
-    response = client.get('/')
+    response = client.get('/?game=mauricio')
     assert response.content == Path('IAjedrez_prototipo_interactivo.html').read_bytes()
     assert '/static/review.js' in response.text
     assert client.get('/demo').status_code == 200

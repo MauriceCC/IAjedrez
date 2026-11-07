@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IAjedrez · Revisa tus partidas</title><link rel="stylesheet" href="/static/home.css"></head>
+<body><header>♙ <strong>IAjedrez</strong><span>Aprende de tus jugadas, paso a paso</span></header>
+<div class="workspace"><aside><button id="new-chat">＋ Nueva consulta</button><h2>Historial</h2><button class="history" data-game="mauricio"><strong>Mi error en esta partida</strong><span>Mauricio0120 · Chess.com</span><small>26 oct. 2026 · 5 min</small></button><button class="history" data-game="entrevista"><strong>Errores desde la apertura al final</strong><span>Timmy-t · Lichess</span><small>1 nov. 2026 · 3+0</small></button></aside>
+<main><section id="welcome"><div><span class="eyebrow">Tu espacio de ajedrez</span><h1>Revisa tus partidas</h1><p>Vuelve a tus jugadas, comprende tus decisiones y descubre cómo mejorar.</p></div><div class="input-box"><label class="sr-only" for="pgn">Tu partida en PGN</label><textarea id="pgn" placeholder="Pega tu partida en PGN..."></textarea><p>Selecciona una partida del historial para explorar su análisis.</p></div></section>
+<section id="conversation" hidden><h1 id="chat-title"></h1><div class="message"><span>Tu mensaje</span><pre id="prompt"></pre></div><a id="open-analysis" class="primary">Abrir análisis de la partida →</a></section><p id="status" role="status"></p></main></div>
+<script src="/static/home.js"></script></body></html>

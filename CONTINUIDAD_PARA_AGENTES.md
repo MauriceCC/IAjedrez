@@ -1,5 +1,11 @@
 # Continuidad de IAjedrez para otros agentes
 
+## Inicio y navegación de vistas
+
+La ruta `/` muestra ahora el inicio de chat (`static/home.html`, `home.css`, `home.js`): historial con los dos estudios, bienvenida y campo PGN visual. Seleccionar un estudio muestra el prompt y PGN completos y un enlace al análisis `/?game=mauricio` o `/?game=entrevista`. `/prototype` sigue mostrando el tablero. No se importan nuevas partidas desde el inicio.
+
+El encabezado de respuestas contiene cinco botones visibles, en orden: Resumen de errores, Consejos, Referencias, Cadena, Aprende. Se eliminó el desplegable Otras respuestas. Los nodos de jugadas negras tienen centro negro; los de blancas, blanco; la selección usa un aro azul exterior. El resto de la distribución se conserva. Referencias aportadas: `IAjedrez_inicio.png` y `IAjedrez_modulo_opciones.png`.
+
 ## Actualización vigente: segunda partida con motor (6 nov. 2026)
 
 El usuario pidió incorporar la conversación Timmy-t–Kuanynsh al diseño aprobado y comprobarla con Stockfish. La página `/` carga ahora este estudio; `/?game=mauricio` conserva el anterior. Esta actualización prevalece sobre la descripción de la partida principal que sigue debajo. No se rediseñó la estructura ni se retiró `/demo`.

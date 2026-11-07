@@ -52,9 +52,8 @@ def describe(board):
 
 
 @app.get("/")
-def index():
-    # The approved prototype is the canonical presentation, with no visual overrides.
-    return FileResponse(ROOT / "IAjedrez_prototipo_interactivo.html")
+def index(game: str | None = None):
+    return FileResponse(ROOT / ("IAjedrez_prototipo_interactivo.html" if game else "static/home.html"))
 
 
 @app.get("/demo")
