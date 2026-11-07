@@ -1,5 +1,15 @@
 # Continuidad de IAjedrez para otros agentes
 
+## Actualización vigente: segunda partida con motor (6 nov. 2026)
+
+El usuario pidió incorporar la conversación Timmy-t–Kuanynsh al diseño aprobado y comprobarla con Stockfish. La página `/` carga ahora este estudio; `/?game=mauricio` conserva el anterior. Esta actualización prevalece sobre la descripción de la partida principal que sigue debajo. No se rediseñó la estructura ni se retiró `/demo`.
+
+`interview.py` reutiliza las funciones de comparación de `review.py`, analiza las 54 decisiones blancas y comprueba explícitamente …Dh1+, …Cd5, Cc5 y Cg7+. `static/interview-ui.js` presenta las objeciones del usuario, síntesis atribuida y evidencia separadas. `static/review.js` selecciona el estudio mediante `?game=`; las API mantienen `mauricio` como valor predeterminado por compatibilidad y la interfaz envía explícitamente `entrevista`. No cambiar globalmente GAME_PATH para seleccionar partidas: deben coexistir de forma segura.
+
+Stockfish 19 funciona en Windows en `engines/stockfish/stockfish-windows-x86-64-universal.exe`; detección: variable de entorno, PATH, carpeta local. No se distribuye el ejecutable. Hallazgo importante: 16.e4 permite …Txc3! seguido de …dxe4, omitido en ChatGPT; 21.Te2 coincide con la candidata principal en la ejecución observada. 29.Rf1 permite …Dh1+ y 45.Cc7 pierde el caballo. No codificar puntuaciones: se calculan en ejecución. Ver `GUION_ENTREVISTA_STOCKFISH.md` para cifras observadas, parámetros, atribución y límites.
+
+Validación: 22 pruebas de servidor con motor real; `tests/ui_interview.py` verifica consultas conjuntas, variantes, práctica, retorno, JSON y escritorio/móvil con Edge. El script anterior `tests/ui_review.py` apunta ahora a `/?game=mauricio`. La conversación se archiva como síntesis en `static/conversacion-entrevista.md`, no como transcripción literal. PGN completo con relojes y encabezados aportados. Las consultas no persisten al recargar; la caché de motor no persiste al reiniciar el servidor.
+
 Actualizado: 6 de noviembre de 2026. Leer este archivo primero. Es una síntesis operativa de la conversación, no una transcripción literal. No asumir acceso al historial del chat.
 
 ## Encargo y prioridad vigente

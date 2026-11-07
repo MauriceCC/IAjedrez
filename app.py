@@ -9,6 +9,7 @@ import chess.engine
 import chess.pgn
 import httpx
 import review
+import interview
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -93,7 +94,11 @@ def health():
 
 
 def engine_path():
-    return os.getenv("STOCKFISH_PATH") or shutil.which("stockfish")
+    configured = os.getenv("STOCKFISH_PATH") or shutil.which("stockfish")
+    if configured:
+        return configured
+    local = Path(__file__).parent / 'engines'
+    return next((str(p) for p in local.rglob('stockfish*.exe')), None)
 
 
 @app.post("/api/position")
@@ -173,8 +178,8 @@ def chat(data: Question):
 
 
 class ReviewQuestion(BaseModel):
-    question: str = Field(min_length=1, max_length=6000)
-    ply: int = Field(default=0, ge=0, le=38)
+    question: str = Field(min_length=1, max_length=20000)
+    ply: int = Field(default=0, ge=0, le=108)
     step: int = Field(default=0, ge=0, le=3)
 
 
@@ -194,21 +199,30 @@ def review_call(operation, *args):
         raise HTTPException(422, str(exc)) from exc
 
 
+def review_module(game):
+    if game not in ('mauricio', 'entrevista'):
+        raise HTTPException(422, 'Partida desconocida.')
+    return interview if game == 'entrevista' else review
+
+
 @app.get("/api/review/game")
-def review_game():
-    return review.load_game()
+def review_game(game: str = 'mauricio'):
+    return review_module(game).load_game()
 
 
 @app.post("/api/review/analyze")
-def review_analyze():
-    return review_call(review.analyze_game)
+def review_analyze(game: str = 'mauricio'):
+    return review_call(review_module(game).analyze_game)
 
 
 @app.post("/api/review/query")
-def review_query(data: ReviewQuestion):
+def review_query(data: ReviewQuestion, game: str = 'mauricio'):
     if not data.question.strip():
         raise HTTPException(422, "Escribe una pregunta.")
-    return review_call(review.query, data.question, data.ply)
+    module = review_module(game)
+    if data.ply > len(module.load_game()['moves']):
+        raise HTTPException(422, 'La posición no pertenece a la partida.')
+    return review_call(module.query, data.question, data.ply)
 
 
 @app.post("/api/review/compare")

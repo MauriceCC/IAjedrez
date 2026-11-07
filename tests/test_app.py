@@ -19,8 +19,7 @@ def test_import():
     assert client.post('/api/import', json={'pgn': '1. e5'}).status_code == 422
 
 def test_missing_engine(monkeypatch):
-    monkeypatch.delenv('STOCKFISH_PATH', raising=False)
-    monkeypatch.setattr('app.shutil.which', lambda _: None)
+    monkeypatch.setattr('app.engine_path', lambda: None)
     assert client.post('/api/analyze', json={'moves': []}).status_code == 503
 
 def test_mate():

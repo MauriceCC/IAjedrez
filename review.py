@@ -24,19 +24,21 @@ SECONDS = 1.5
 _cache = {}
 
 
-def load_game():
-    pgn = GAME_PATH.read_text(encoding='utf-8')
+def load_game(game_path=GAME_PATH):
+    pgn = game_path.read_text(encoding='utf-8')
     game = chess.pgn.read_game(io.StringIO(pgn))
     if game is None or game.errors:
         raise ValueError('La partida precargada no es válida.')
     board = game.board()
-    moves, sans, positions = [], [], [position(board)]
-    for move in game.mainline_moves():
+    moves, sans, positions, clocks = [], [], [position(board)], []
+    for node in game.mainline():
+        move = node.move
+        clocks.append(node.clock())
         sans.append(board.san(move))
         moves.append(move.uci())
         board.push(move)
         positions.append(position(board))
-    return dict(pgn=pgn, headers=dict(game.headers), moves=moves, sans=sans, positions=positions)
+    return dict(pgn=pgn, headers=dict(game.headers), moves=moves, sans=sans, positions=positions, clocks=clocks)
 
 
 def position(board):

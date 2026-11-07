@@ -1,5 +1,9 @@
 # IAjedrez
 
+**Actualización vigente — Timmy-t–Kuanynsh (6 nov. 2026):** la página principal carga la partida y conversación aportadas (Lichess, 54 jugadas, 3+0). Contrasta las 54 decisiones blancas con Stockfish real y permite consultar 16.e4, 21.Te2, 29.Rf1 y 45.Cc7, reproducir variantes y practicar alternativas. Conserva el diseño aprobado. Ver [recorrido y resultados verificados](GUION_ENTREVISTA_STOCKFISH.md).
+
+Stockfish 19 funciona en este equipo Windows desde `engines/stockfish/stockfish-windows-x86-64-universal.exe`, excluido de Git y detectado automáticamente. En otros equipos configura `STOCKFISH_PATH` o instala el motor en PATH. No es necesario Ollama. El estudio anterior descrito debajo permanece disponible en `/?game=mauricio`; `/demo` conserva la demostración preparada sin motor.
+
 **Para retomar el trabajo con otro agente:** leer primero [Continuidad para agentes](CONTINUIDAD_PARA_AGENTES.md), que resume el contexto, las decisiones vigentes, el estado técnico y las verificaciones.
 
 ## Diseño principal aprobado

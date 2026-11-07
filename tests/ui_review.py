@@ -16,7 +16,7 @@ with sync_playwright() as p:
     errors = []
     page.on('pageerror', lambda error: errors.append(str(error)))
     page.on('console', lambda msg: errors.append(msg.text) if msg.type == 'error' else None)
-    page.goto(BASE_URL)
+    page.goto(BASE_URL+'/?game=mauricio')
     expect(page).to_have_title('IAjedrez — Análisis de ajedrez con IA | Prototipo')
     expect(page.locator('#board .square')).to_have_count(64)
     expect(page.locator('#view-menu')).to_be_hidden()

@@ -85,6 +85,12 @@ body{height:100dvh;display:flex;flex-direction:column}
 .notice.error{background:var(--red-soft);border-color:#e7b5b0;color:var(--red)}
 .player-name{display:inline-block;max-width:150px;overflow:hidden;text-overflow:ellipsis;vertical-align:bottom}
 @media(max-width:660px){.player-name{max-width:65px;white-space:nowrap}.composer-context{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+@media(max-width:660px){
+ .board-info{max-width:calc((100% - (40dvh - 125px))/2 - 28px)}
+ .board-info .player{flex-direction:column;align-items:flex-start;gap:2px}
+ .board-info .player>span{max-width:100%}
+ .board-info .player-name{max-width:100%}
+}
 </style>
 </head>
 <body>
@@ -135,6 +141,7 @@ body{height:100dvh;display:flex;flex-direction:column}
     </form>
   </section>
 </main>
+<script src="/static/interview-ui.js"></script>
 <script src="/static/review.js"></script>
 </body>
 </html>
