@@ -10,6 +10,8 @@ import chess.pgn
 import httpx
 import review
 import interview
+import gemini
+import history_evidence
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -199,14 +201,16 @@ def review_call(operation, *args):
 
 
 def review_module(game):
-    if game not in ('mauricio', 'entrevista'):
+    if game not in ('mauricio', 'entrevista', 'gemini'):
         raise HTTPException(422, 'Partida desconocida.')
-    return interview if game == 'entrevista' else review
+    return {'entrevista': interview, 'gemini': gemini, 'mauricio': review}[game]
 
 
 @app.get("/api/review/game")
 def review_game(game: str = 'mauricio'):
-    return review_module(game).load_game()
+    loaded = review_module(game).load_game()
+    loaded['report'] = history_evidence.load(game, loaded['pgn'], review.DEPTH, review.SECONDS)
+    return loaded
 
 
 @app.post("/api/review/analyze")

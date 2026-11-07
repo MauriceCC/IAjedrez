@@ -1,5 +1,9 @@
 # IAjedrez
 
+**Historial precargado:** las tres partidas incluyen informes reales de Stockfish guardados en `data/history/`. Al abrirlas, la tabla se carga directamente sin recalcular la partida, incluso después de reiniciar el servidor. Cada informe conserva su fecha, motor y parámetros. Los cambios de PGN o parámetros invalidan el informe correspondiente; probar candidatas nuevas sigue requiriendo el motor.
+
+**Tercer caso disponible (7 nov. 2026):** el historial del inicio incluye j017371–zhorzho11 y su conversación con Gemini. El estudio `/?game=gemini` verifica 34 decisiones blancas y dos decisiones negras con Stockfish, responde a las consultas sobre nivel, recomendaciones y notación, y ofrece práctica con recursos vinculados. Ver [síntesis y correcciones](static/conversacion-gemini.md). No requiere Ollama.
+
 **Actualización vigente — Timmy-t–Kuanynsh (6 nov. 2026):** la página principal carga la partida y conversación aportadas (Lichess, 54 jugadas, 3+0). Contrasta las 54 decisiones blancas con Stockfish real y permite consultar 16.e4, 21.Te2, 29.Rf1 y 45.Cc7, reproducir variantes y practicar alternativas. Conserva el diseño aprobado. Ver [recorrido y resultados verificados](GUION_ENTREVISTA_STOCKFISH.md).
 
 Stockfish 19 funciona en este equipo Windows desde `engines/stockfish/stockfish-windows-x86-64-universal.exe`, excluido de Git y detectado automáticamente. En otros equipos configura `STOCKFISH_PATH` o instala el motor en PATH. No es necesario Ollama. El estudio anterior descrito debajo permanece disponible en `/?game=mauricio`; `/demo` conserva la demostración preparada sin motor.

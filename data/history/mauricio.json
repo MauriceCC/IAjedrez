@@ -1,0 +1,2964 @@
+{
+  "version": 1,
+  "pgn_sha256": "69d08240f65fd62ac475e643e9d26a94ae4f4ab8e695105b39ef372a5165d7c4",
+  "depth": 19,
+  "seconds": 1.5,
+  "report": {
+    "engine": "Stockfish 19",
+    "generated_at": "2026-11-07T18:28:20.739374+00:00",
+    "settings": {
+      "depth_target": 19,
+      "seconds_per_search": 1.5,
+      "threads": 1,
+      "hash_mb": 128
+    },
+    "perspective": "white",
+    "rows": [
+      {
+        "ply": 1,
+        "label": "1. e4",
+        "best": {
+          "cp_white": 29,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 212775,
+          "pv": [
+            "e2e4",
+            "c7c5",
+            "g1f3",
+            "d7d6",
+            "d2d4",
+            "c5d4",
+            "f3d4",
+            "g8f6",
+            "b1c3",
+            "a7a6"
+          ],
+          "san": [
+            "e4",
+            "c5",
+            "Nf3",
+            "d6",
+            "d4",
+            "cxd4",
+            "Nxd4",
+            "Nf6",
+            "Nc3",
+            "a6"
+          ]
+        },
+        "played": {
+          "cp_white": 29,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 212775,
+          "pv": [
+            "e2e4",
+            "c7c5",
+            "g1f3",
+            "d7d6",
+            "d2d4",
+            "c5d4",
+            "f3d4",
+            "g8f6",
+            "b1c3",
+            "a7a6"
+          ],
+          "san": [
+            "e4",
+            "c5",
+            "Nf3",
+            "d6",
+            "d4",
+            "cxd4",
+            "Nxd4",
+            "Nf6",
+            "Nc3",
+            "a6"
+          ]
+        },
+        "move": "e2e4",
+        "san": "e4",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 3,
+        "label": "2. d3",
+        "best": {
+          "cp_white": 29,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 430701,
+          "pv": [
+            "g1f3",
+            "b8c6",
+            "f1b5",
+            "a7a6",
+            "b5a4",
+            "g8f6",
+            "e1g1",
+            "f6e4",
+            "d2d4",
+            "b7b5"
+          ],
+          "san": [
+            "Nf3",
+            "Nc6",
+            "Bb5",
+            "a6",
+            "Ba4",
+            "Nf6",
+            "O-O",
+            "Nxe4",
+            "d4",
+            "b5"
+          ]
+        },
+        "played": {
+          "cp_white": -6,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 117851,
+          "pv": [
+            "d2d3",
+            "g8f6",
+            "g1f3",
+            "b8c6",
+            "g2g3",
+            "f8c5",
+            "f1g2",
+            "d7d6",
+            "c2c3",
+            "a7a5"
+          ],
+          "san": [
+            "d3",
+            "Nf6",
+            "Nf3",
+            "Nc6",
+            "g3",
+            "Bc5",
+            "Bg2",
+            "d6",
+            "c3",
+            "a5"
+          ]
+        },
+        "move": "d2d3",
+        "san": "d3",
+        "loss_cp": 35,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 35
+      },
+      {
+        "ply": 5,
+        "label": "3. f4",
+        "best": {
+          "cp_white": 4,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 254899,
+          "pv": [
+            "g1f3",
+            "g8f6",
+            "g2g3",
+            "f8c5",
+            "f1g2",
+            "d7d6",
+            "e1g1",
+            "a7a5",
+            "c2c3",
+            "e8g8"
+          ],
+          "san": [
+            "Nf3",
+            "Nf6",
+            "g3",
+            "Bc5",
+            "Bg2",
+            "d6",
+            "O-O",
+            "a5",
+            "c3",
+            "O-O"
+          ]
+        },
+        "played": {
+          "cp_white": -16,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 264175,
+          "pv": [
+            "f2f4",
+            "d7d5",
+            "e4d5",
+            "d8d5",
+            "b1c3",
+            "d5c5",
+            "f4e5",
+            "c8f5",
+            "g1f3",
+            "e8c8"
+          ],
+          "san": [
+            "f4",
+            "d5",
+            "exd5",
+            "Qxd5",
+            "Nc3",
+            "Qc5",
+            "fxe5",
+            "Bf5",
+            "Nf3",
+            "O-O-O"
+          ]
+        },
+        "move": "f2f4",
+        "san": "f4",
+        "loss_cp": 20,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 20
+      },
+      {
+        "ply": 7,
+        "label": "4. Axf4",
+        "best": {
+          "cp_white": -20,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 230095,
+          "pv": [
+            "c1f4",
+            "d7d5",
+            "e4d5",
+            "d8d5",
+            "b1c3",
+            "d5a5",
+            "f1e2",
+            "g8f6",
+            "g1f3",
+            "f8a3"
+          ],
+          "san": [
+            "Bxf4",
+            "d5",
+            "exd5",
+            "Qxd5",
+            "Nc3",
+            "Qa5",
+            "Be2",
+            "Nf6",
+            "Nf3",
+            "Ba3"
+          ]
+        },
+        "played": {
+          "cp_white": -20,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 230095,
+          "pv": [
+            "c1f4",
+            "d7d5",
+            "e4d5",
+            "d8d5",
+            "b1c3",
+            "d5a5",
+            "f1e2",
+            "g8f6",
+            "g1f3",
+            "f8a3"
+          ],
+          "san": [
+            "Bxf4",
+            "d5",
+            "exd5",
+            "Qxd5",
+            "Nc3",
+            "Qa5",
+            "Be2",
+            "Nf6",
+            "Nf3",
+            "Ba3"
+          ]
+        },
+        "move": "c1f4",
+        "san": "Bxf4",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 9,
+        "label": "5. c3",
+        "best": {
+          "cp_white": 61,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 433815,
+          "pv": [
+            "c2c3",
+            "b4e7",
+            "d3d4",
+            "d7d5",
+            "b1d2",
+            "d5e4",
+            "d2e4",
+            "g8f6",
+            "f1d3",
+            "f6e4"
+          ],
+          "san": [
+            "c3",
+            "Be7",
+            "d4",
+            "d5",
+            "Nd2",
+            "dxe4",
+            "Nxe4",
+            "Nf6",
+            "Bd3",
+            "Nxe4"
+          ]
+        },
+        "played": {
+          "cp_white": 61,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 433815,
+          "pv": [
+            "c2c3",
+            "b4e7",
+            "d3d4",
+            "d7d5",
+            "b1d2",
+            "d5e4",
+            "d2e4",
+            "g8f6",
+            "f1d3",
+            "f6e4"
+          ],
+          "san": [
+            "c3",
+            "Be7",
+            "d4",
+            "d5",
+            "Nd2",
+            "dxe4",
+            "Nxe4",
+            "Nf6",
+            "Bd3",
+            "Nxe4"
+          ]
+        },
+        "move": "c2c3",
+        "san": "c3",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 11,
+        "label": "6. d4",
+        "best": {
+          "cp_white": 62,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 364415,
+          "pv": [
+            "b1d2",
+            "d7d5",
+            "d3d4",
+            "d5e4",
+            "d2e4",
+            "c8f5",
+            "f1d3",
+            "d8d5",
+            "d1e2",
+            "e8c8"
+          ],
+          "san": [
+            "Nd2",
+            "d5",
+            "d4",
+            "dxe4",
+            "Nxe4",
+            "Bf5",
+            "Bd3",
+            "Qd5",
+            "Qe2",
+            "O-O-O"
+          ]
+        },
+        "played": {
+          "cp_white": 54,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 346205,
+          "pv": [
+            "d3d4",
+            "d7d5",
+            "b1d2",
+            "d5e4",
+            "d2e4",
+            "g8f6",
+            "f1d3",
+            "e8g8",
+            "d1f3",
+            "f6e4"
+          ],
+          "san": [
+            "d4",
+            "d5",
+            "Nd2",
+            "dxe4",
+            "Nxe4",
+            "Nf6",
+            "Bd3",
+            "O-O",
+            "Qf3",
+            "Nxe4"
+          ]
+        },
+        "move": "d3d4",
+        "san": "d4",
+        "loss_cp": 8,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 8
+      },
+      {
+        "ply": 13,
+        "label": "7. Ag3",
+        "best": {
+          "cp_white": 120,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 278351,
+          "pv": [
+            "g2g3",
+            "h4g5",
+            "g1h3",
+            "g5f4",
+            "h3f4",
+            "d7d6",
+            "f1d3",
+            "g8f6",
+            "b1d2",
+            "a8b8"
+          ],
+          "san": [
+            "g3",
+            "Bg5",
+            "Nh3",
+            "Bxf4",
+            "Nxf4",
+            "d6",
+            "Bd3",
+            "Nf6",
+            "Nd2",
+            "Rb8"
+          ]
+        },
+        "played": {
+          "cp_white": -27,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 578304,
+          "pv": [
+            "f4g3",
+            "h4g3",
+            "h2g3",
+            "d8g5",
+            "g1e2",
+            "g8f6",
+            "d1d3",
+            "d7d5",
+            "b1d2",
+            "f6e4"
+          ],
+          "san": [
+            "Bg3",
+            "Bxg3+",
+            "hxg3",
+            "Qg5",
+            "Ne2",
+            "Nf6",
+            "Qd3",
+            "d5",
+            "Nd2",
+            "Nxe4"
+          ]
+        },
+        "move": "f4g3",
+        "san": "Bg3",
+        "loss_cp": 147,
+        "kind": "Error",
+        "grade": "danger",
+        "priority": 147
+      },
+      {
+        "ply": 15,
+        "label": "8. hxg3",
+        "best": {
+          "cp_white": -20,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 379041,
+          "pv": [
+            "h2g3",
+            "d8g5",
+            "g1e2",
+            "d7d6",
+            "d1d2",
+            "g5e7",
+            "d2d3",
+            "g8f6",
+            "b1d2",
+            "g7g5"
+          ],
+          "san": [
+            "hxg3",
+            "Qg5",
+            "Ne2",
+            "d6",
+            "Qd2",
+            "Qe7",
+            "Qd3",
+            "Nf6",
+            "Nd2",
+            "g5"
+          ]
+        },
+        "played": {
+          "cp_white": -20,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 379041,
+          "pv": [
+            "h2g3",
+            "d8g5",
+            "g1e2",
+            "d7d6",
+            "d1d2",
+            "g5e7",
+            "d2d3",
+            "g8f6",
+            "b1d2",
+            "g7g5"
+          ],
+          "san": [
+            "hxg3",
+            "Qg5",
+            "Ne2",
+            "d6",
+            "Qd2",
+            "Qe7",
+            "Qd3",
+            "Nf6",
+            "Nd2",
+            "g5"
+          ]
+        },
+        "move": "h2g3",
+        "san": "hxg3",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 17,
+        "label": "9. Cd2",
+        "best": {
+          "cp_white": -10,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 434068,
+          "pv": [
+            "g1e2",
+            "g8f6",
+            "d1d3",
+            "d7d5",
+            "b1d2",
+            "f6e4",
+            "d2e4",
+            "d5e4",
+            "d3e4",
+            "c8e6"
+          ],
+          "san": [
+            "Ne2",
+            "Nf6",
+            "Qd3",
+            "d5",
+            "Nd2",
+            "Nxe4",
+            "Nxe4",
+            "dxe4",
+            "Qxe4+",
+            "Be6"
+          ]
+        },
+        "played": {
+          "cp_white": -143,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 269858,
+          "pv": [
+            "b1d2",
+            "g5g3",
+            "e1e2",
+            "g8f6",
+            "d1e1",
+            "g3e1",
+            "a1e1",
+            "d7d6",
+            "e2d1",
+            "c8d7"
+          ],
+          "san": [
+            "Nd2",
+            "Qxg3+",
+            "Ke2",
+            "Nf6",
+            "Qe1",
+            "Qxe1+",
+            "Rxe1",
+            "d6",
+            "Kd1",
+            "Bd7"
+          ]
+        },
+        "move": "b1d2",
+        "san": "Nd2",
+        "loss_cp": 133,
+        "kind": "Error",
+        "grade": "danger",
+        "priority": 133
+      },
+      {
+        "ply": 19,
+        "label": "10. Re2",
+        "best": {
+          "cp_white": -153,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 291951,
+          "pv": [
+            "e1e2",
+            "g8f6",
+            "d1e1",
+            "g3e1",
+            "a1e1",
+            "d7d6",
+            "g1h3",
+            "c8d7",
+            "e2d3",
+            "e8g8"
+          ],
+          "san": [
+            "Ke2",
+            "Nf6",
+            "Qe1",
+            "Qxe1+",
+            "Rxe1",
+            "d6",
+            "Nh3",
+            "Bd7",
+            "Kd3",
+            "O-O"
+          ]
+        },
+        "played": {
+          "cp_white": -153,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 291951,
+          "pv": [
+            "e1e2",
+            "g8f6",
+            "d1e1",
+            "g3e1",
+            "a1e1",
+            "d7d6",
+            "g1h3",
+            "c8d7",
+            "e2d3",
+            "e8g8"
+          ],
+          "san": [
+            "Ke2",
+            "Nf6",
+            "Qe1",
+            "Qxe1+",
+            "Rxe1",
+            "d6",
+            "Nh3",
+            "Bd7",
+            "Kd3",
+            "O-O"
+          ]
+        },
+        "move": "e1e2",
+        "san": "Ke2",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 21,
+        "label": "11. Th3",
+        "best": {
+          "cp_white": -74,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 362242,
+          "pv": [
+            "d1e1",
+            "c8g4",
+            "g1f3",
+            "g3d6",
+            "e4d5",
+            "e8c8",
+            "e1h4",
+            "g4f3",
+            "g2f3",
+            "c6e7"
+          ],
+          "san": [
+            "Qe1",
+            "Bg4+",
+            "Ngf3",
+            "Qd6",
+            "exd5",
+            "O-O-O",
+            "Qh4",
+            "Bxf3+",
+            "gxf3",
+            "Nce7"
+          ]
+        },
+        "played": {
+          "cp_white": -585,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 779152,
+          "pv": [
+            "h1h3",
+            "c8h3",
+            "g1h3",
+            "e8c8",
+            "d1e1",
+            "g3e1",
+            "a1e1",
+            "d5e4",
+            "h3g5",
+            "d8d7"
+          ],
+          "san": [
+            "Rh3",
+            "Bxh3",
+            "Nxh3",
+            "O-O-O",
+            "Qe1",
+            "Qxe1+",
+            "Rxe1",
+            "dxe4",
+            "Ng5",
+            "Rd7"
+          ]
+        },
+        "move": "h1h3",
+        "san": "Rh3",
+        "loss_cp": 511,
+        "kind": "Error grave",
+        "grade": "danger",
+        "priority": 511
+      },
+      {
+        "ply": 23,
+        "label": "12. Cgf3",
+        "best": {
+          "cp_white": -526,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 446917,
+          "pv": [
+            "g1f3",
+            "g4h3",
+            "e4d5",
+            "h3d7",
+            "d5c6",
+            "d7c6",
+            "f3e5",
+            "g8f6",
+            "e5c6",
+            "b7c6"
+          ],
+          "san": [
+            "Ngf3",
+            "Bxh3",
+            "exd5",
+            "Bd7",
+            "dxc6",
+            "Bxc6",
+            "Ne5",
+            "Nf6",
+            "Nxc6",
+            "bxc6"
+          ]
+        },
+        "played": {
+          "cp_white": -526,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 446917,
+          "pv": [
+            "g1f3",
+            "g4h3",
+            "e4d5",
+            "h3d7",
+            "d5c6",
+            "d7c6",
+            "f3e5",
+            "g8f6",
+            "e5c6",
+            "b7c6"
+          ],
+          "san": [
+            "Ngf3",
+            "Bxh3",
+            "exd5",
+            "Bd7",
+            "dxc6",
+            "Bxc6",
+            "Ne5",
+            "Nf6",
+            "Nxc6",
+            "bxc6"
+          ]
+        },
+        "move": "g1f3",
+        "san": "Ngf3",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 25,
+        "label": "13. Cxf3",
+        "best": {
+          "cp_white": -19,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 382681,
+          "pv": [
+            "d2f3",
+            "g3d6",
+            "e4e5",
+            "d6e6",
+            "e2d2",
+            "f7f6",
+            "f1d3",
+            "e8c8",
+            "d1f1",
+            "c8b8"
+          ],
+          "san": [
+            "Nxf3",
+            "Qd6",
+            "e5",
+            "Qe6",
+            "Kd2",
+            "f6",
+            "Bd3",
+            "O-O-O",
+            "Qf1",
+            "Kb8"
+          ]
+        },
+        "played": {
+          "cp_white": -19,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 382681,
+          "pv": [
+            "d2f3",
+            "g3d6",
+            "e4e5",
+            "d6e6",
+            "e2d2",
+            "f7f6",
+            "f1d3",
+            "e8c8",
+            "d1f1",
+            "c8b8"
+          ],
+          "san": [
+            "Nxf3",
+            "Qd6",
+            "e5",
+            "Qe6",
+            "Kd2",
+            "f6",
+            "Bd3",
+            "O-O-O",
+            "Qf1",
+            "Kb8"
+          ]
+        },
+        "move": "d2f3",
+        "san": "Nxf3",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 27,
+        "label": "14. Rd2",
+        "best": {
+          "cp_white": 21,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 328685,
+          "pv": [
+            "e4d5",
+            "g4e4",
+            "e2d2",
+            "e4d5",
+            "d1b3",
+            "e8c8",
+            "b3d5",
+            "d8d5",
+            "f1c4",
+            "d5d7"
+          ],
+          "san": [
+            "exd5",
+            "Qe4+",
+            "Kd2",
+            "Qxd5",
+            "Qb3",
+            "O-O-O",
+            "Qxd5",
+            "Rxd5",
+            "Bc4",
+            "Rd7"
+          ]
+        },
+        "played": {
+          "cp_white": -355,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1211126,
+          "pv": [
+            "e2d2",
+            "d5e4",
+            "d1e1",
+            "g8f6",
+            "d2c2",
+            "e8c8",
+            "f3d2",
+            "h7h5",
+            "a1c1",
+            "h5h4"
+          ],
+          "san": [
+            "Kd2",
+            "dxe4",
+            "Qe1",
+            "Nf6",
+            "Kc2",
+            "O-O-O",
+            "Nd2",
+            "h5",
+            "Rc1",
+            "h4"
+          ]
+        },
+        "move": "e2d2",
+        "san": "Kd2",
+        "loss_cp": 376,
+        "kind": "Error grave",
+        "grade": "danger",
+        "priority": 376
+      },
+      {
+        "ply": 29,
+        "label": "15. De2",
+        "best": {
+          "cp_white": -379,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1409019,
+          "pv": [
+            "d1e1",
+            "g8f6",
+            "d2c2",
+            "e8g8",
+            "f3h4",
+            "c6e7",
+            "f1e2",
+            "g4f4",
+            "e1g1",
+            "f6g4"
+          ],
+          "san": [
+            "Qe1",
+            "Nf6",
+            "Kc2",
+            "O-O",
+            "Nh4",
+            "Ne7",
+            "Be2",
+            "Qf4",
+            "Qg1",
+            "Ng4"
+          ]
+        },
+        "played": {
+          "cp_white": -472,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1482369,
+          "pv": [
+            "d1e2",
+            "e8c8",
+            "f3h2",
+            "g4e6",
+            "e2g4",
+            "g8f6",
+            "g4e6",
+            "f7e6",
+            "h3g3",
+            "e6e5"
+          ],
+          "san": [
+            "Qe2",
+            "O-O-O",
+            "Nh2",
+            "Qe6",
+            "Qg4",
+            "Nf6",
+            "Qxe6+",
+            "fxe6",
+            "Rg3",
+            "e5"
+          ]
+        },
+        "move": "d1e2",
+        "san": "Qe2",
+        "loss_cp": 93,
+        "kind": "Imprecisión",
+        "grade": "warning",
+        "priority": 93
+      },
+      {
+        "ply": 31,
+        "label": "16. Ce5",
+        "best": {
+          "cp_white": -459,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 722933,
+          "pv": [
+            "f3h2",
+            "g4e6",
+            "e2g4",
+            "g8f6",
+            "g4e6",
+            "f7e6",
+            "d2c2",
+            "e6e5",
+            "d4d5",
+            "c6e7"
+          ],
+          "san": [
+            "Nh2",
+            "Qe6",
+            "Qg4",
+            "Nf6",
+            "Qxe6+",
+            "fxe6",
+            "Kc2",
+            "e5",
+            "d5",
+            "Ne7"
+          ]
+        },
+        "played": {
+          "cp_white": -711,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 86655,
+          "pv": [
+            "f3e5",
+            "c6e5",
+            "d2c2",
+            "e4e3",
+            "h3e3",
+            "g4g6",
+            "c2b3",
+            "g6b6",
+            "b3a4",
+            "e5g6"
+          ],
+          "san": [
+            "Ne5",
+            "Nxe5",
+            "Kc2",
+            "e3",
+            "Rxe3",
+            "Qg6+",
+            "Kb3",
+            "Qb6+",
+            "Ka4",
+            "Ng6"
+          ]
+        },
+        "move": "f3e5",
+        "san": "Ne5",
+        "loss_cp": 252,
+        "kind": "Error grave",
+        "grade": "danger",
+        "priority": 252
+      },
+      {
+        "ply": 33,
+        "label": "17. Rc2",
+        "best": {
+          "cp_white": -586,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1527277,
+          "pv": [
+            "d2c2",
+            "c6e5",
+            "d4e5",
+            "f4e5",
+            "e2f2",
+            "c8b8",
+            "f2f7",
+            "g8h6",
+            "f7c4",
+            "h6g4"
+          ],
+          "san": [
+            "Kc2",
+            "Nxe5",
+            "dxe5",
+            "Qxe5",
+            "Qf2",
+            "Kb8",
+            "Qxf7",
+            "Nh6",
+            "Qc4",
+            "Ng4"
+          ]
+        },
+        "played": {
+          "cp_white": -586,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1527277,
+          "pv": [
+            "d2c2",
+            "c6e5",
+            "d4e5",
+            "f4e5",
+            "e2f2",
+            "c8b8",
+            "f2f7",
+            "g8h6",
+            "f7c4",
+            "h6g4"
+          ],
+          "san": [
+            "Kc2",
+            "Nxe5",
+            "dxe5",
+            "Qxe5",
+            "Qf2",
+            "Kb8",
+            "Qxf7",
+            "Nh6",
+            "Qc4",
+            "Ng4"
+          ]
+        },
+        "move": "d2c2",
+        "san": "Kc2",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 35,
+        "label": "18. dxe5",
+        "best": {
+          "cp_white": -583,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1458615,
+          "pv": [
+            "d4e5",
+            "f4e5",
+            "e2f2",
+            "c8b8",
+            "f2f7",
+            "g8h6",
+            "f7c4",
+            "h6g4",
+            "a1e1",
+            "g4f6"
+          ],
+          "san": [
+            "dxe5",
+            "Qxe5",
+            "Qf2",
+            "Kb8",
+            "Qxf7",
+            "Nh6",
+            "Qc4",
+            "Ng4",
+            "Re1",
+            "Nf6"
+          ]
+        },
+        "played": {
+          "cp_white": -583,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1458615,
+          "pv": [
+            "d4e5",
+            "f4e5",
+            "e2f2",
+            "c8b8",
+            "f2f7",
+            "g8h6",
+            "f7c4",
+            "h6g4",
+            "a1e1",
+            "g4f6"
+          ],
+          "san": [
+            "dxe5",
+            "Qxe5",
+            "Qf2",
+            "Kb8",
+            "Qxf7",
+            "Nh6",
+            "Qc4",
+            "Ng4",
+            "Re1",
+            "Nf6"
+          ]
+        },
+        "move": "d4e5",
+        "san": "dxe5",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 37,
+        "label": "19. Tf3",
+        "best": {
+          "cp_white": -101,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 638247,
+          "pv": [
+            "e2e3",
+            "f4e3",
+            "h3e3",
+            "f7f5",
+            "f1c4",
+            "g8e7",
+            "c4e6",
+            "c8b8",
+            "e6f7",
+            "h7h5"
+          ],
+          "san": [
+            "Qxe3",
+            "Qxe3",
+            "Rxe3",
+            "f5",
+            "Bc4",
+            "Ne7",
+            "Be6+",
+            "Kb8",
+            "Bf7",
+            "h5"
+          ]
+        },
+        "played": {
+          "cp_white": -803,
+          "mate_white": null,
+          "depth": 14,
+          "nodes": 1601422,
+          "pv": [
+            "h3f3",
+            "f4a4",
+            "b2b3",
+            "a4e4",
+            "c2b2",
+            "d8d2",
+            "e2d2",
+            "e3d2",
+            "a1d1",
+            "e4e5"
+          ],
+          "san": [
+            "Rf3",
+            "Qa4+",
+            "b3",
+            "Qe4+",
+            "Kb2",
+            "Rd2+",
+            "Qxd2",
+            "exd2",
+            "Rd1",
+            "Qxe5"
+          ]
+        },
+        "move": "h3f3",
+        "san": "Rf3",
+        "loss_cp": 702,
+        "kind": "Error grave",
+        "grade": "danger",
+        "priority": 702
+      }
+    ],
+    "ranking": [
+      {
+        "ply": 37,
+        "label": "19. Tf3",
+        "best": {
+          "cp_white": -101,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 638247,
+          "pv": [
+            "e2e3",
+            "f4e3",
+            "h3e3",
+            "f7f5",
+            "f1c4",
+            "g8e7",
+            "c4e6",
+            "c8b8",
+            "e6f7",
+            "h7h5"
+          ],
+          "san": [
+            "Qxe3",
+            "Qxe3",
+            "Rxe3",
+            "f5",
+            "Bc4",
+            "Ne7",
+            "Be6+",
+            "Kb8",
+            "Bf7",
+            "h5"
+          ]
+        },
+        "played": {
+          "cp_white": -803,
+          "mate_white": null,
+          "depth": 14,
+          "nodes": 1601422,
+          "pv": [
+            "h3f3",
+            "f4a4",
+            "b2b3",
+            "a4e4",
+            "c2b2",
+            "d8d2",
+            "e2d2",
+            "e3d2",
+            "a1d1",
+            "e4e5"
+          ],
+          "san": [
+            "Rf3",
+            "Qa4+",
+            "b3",
+            "Qe4+",
+            "Kb2",
+            "Rd2+",
+            "Qxd2",
+            "exd2",
+            "Rd1",
+            "Qxe5"
+          ]
+        },
+        "move": "h3f3",
+        "san": "Rf3",
+        "loss_cp": 702,
+        "kind": "Error grave",
+        "grade": "danger",
+        "priority": 702
+      },
+      {
+        "ply": 21,
+        "label": "11. Th3",
+        "best": {
+          "cp_white": -74,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 362242,
+          "pv": [
+            "d1e1",
+            "c8g4",
+            "g1f3",
+            "g3d6",
+            "e4d5",
+            "e8c8",
+            "e1h4",
+            "g4f3",
+            "g2f3",
+            "c6e7"
+          ],
+          "san": [
+            "Qe1",
+            "Bg4+",
+            "Ngf3",
+            "Qd6",
+            "exd5",
+            "O-O-O",
+            "Qh4",
+            "Bxf3+",
+            "gxf3",
+            "Nce7"
+          ]
+        },
+        "played": {
+          "cp_white": -585,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 779152,
+          "pv": [
+            "h1h3",
+            "c8h3",
+            "g1h3",
+            "e8c8",
+            "d1e1",
+            "g3e1",
+            "a1e1",
+            "d5e4",
+            "h3g5",
+            "d8d7"
+          ],
+          "san": [
+            "Rh3",
+            "Bxh3",
+            "Nxh3",
+            "O-O-O",
+            "Qe1",
+            "Qxe1+",
+            "Rxe1",
+            "dxe4",
+            "Ng5",
+            "Rd7"
+          ]
+        },
+        "move": "h1h3",
+        "san": "Rh3",
+        "loss_cp": 511,
+        "kind": "Error grave",
+        "grade": "danger",
+        "priority": 511
+      },
+      {
+        "ply": 27,
+        "label": "14. Rd2",
+        "best": {
+          "cp_white": 21,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 328685,
+          "pv": [
+            "e4d5",
+            "g4e4",
+            "e2d2",
+            "e4d5",
+            "d1b3",
+            "e8c8",
+            "b3d5",
+            "d8d5",
+            "f1c4",
+            "d5d7"
+          ],
+          "san": [
+            "exd5",
+            "Qe4+",
+            "Kd2",
+            "Qxd5",
+            "Qb3",
+            "O-O-O",
+            "Qxd5",
+            "Rxd5",
+            "Bc4",
+            "Rd7"
+          ]
+        },
+        "played": {
+          "cp_white": -355,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1211126,
+          "pv": [
+            "e2d2",
+            "d5e4",
+            "d1e1",
+            "g8f6",
+            "d2c2",
+            "e8c8",
+            "f3d2",
+            "h7h5",
+            "a1c1",
+            "h5h4"
+          ],
+          "san": [
+            "Kd2",
+            "dxe4",
+            "Qe1",
+            "Nf6",
+            "Kc2",
+            "O-O-O",
+            "Nd2",
+            "h5",
+            "Rc1",
+            "h4"
+          ]
+        },
+        "move": "e2d2",
+        "san": "Kd2",
+        "loss_cp": 376,
+        "kind": "Error grave",
+        "grade": "danger",
+        "priority": 376
+      },
+      {
+        "ply": 31,
+        "label": "16. Ce5",
+        "best": {
+          "cp_white": -459,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 722933,
+          "pv": [
+            "f3h2",
+            "g4e6",
+            "e2g4",
+            "g8f6",
+            "g4e6",
+            "f7e6",
+            "d2c2",
+            "e6e5",
+            "d4d5",
+            "c6e7"
+          ],
+          "san": [
+            "Nh2",
+            "Qe6",
+            "Qg4",
+            "Nf6",
+            "Qxe6+",
+            "fxe6",
+            "Kc2",
+            "e5",
+            "d5",
+            "Ne7"
+          ]
+        },
+        "played": {
+          "cp_white": -711,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 86655,
+          "pv": [
+            "f3e5",
+            "c6e5",
+            "d2c2",
+            "e4e3",
+            "h3e3",
+            "g4g6",
+            "c2b3",
+            "g6b6",
+            "b3a4",
+            "e5g6"
+          ],
+          "san": [
+            "Ne5",
+            "Nxe5",
+            "Kc2",
+            "e3",
+            "Rxe3",
+            "Qg6+",
+            "Kb3",
+            "Qb6+",
+            "Ka4",
+            "Ng6"
+          ]
+        },
+        "move": "f3e5",
+        "san": "Ne5",
+        "loss_cp": 252,
+        "kind": "Error grave",
+        "grade": "danger",
+        "priority": 252
+      },
+      {
+        "ply": 13,
+        "label": "7. Ag3",
+        "best": {
+          "cp_white": 120,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 278351,
+          "pv": [
+            "g2g3",
+            "h4g5",
+            "g1h3",
+            "g5f4",
+            "h3f4",
+            "d7d6",
+            "f1d3",
+            "g8f6",
+            "b1d2",
+            "a8b8"
+          ],
+          "san": [
+            "g3",
+            "Bg5",
+            "Nh3",
+            "Bxf4",
+            "Nxf4",
+            "d6",
+            "Bd3",
+            "Nf6",
+            "Nd2",
+            "Rb8"
+          ]
+        },
+        "played": {
+          "cp_white": -27,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 578304,
+          "pv": [
+            "f4g3",
+            "h4g3",
+            "h2g3",
+            "d8g5",
+            "g1e2",
+            "g8f6",
+            "d1d3",
+            "d7d5",
+            "b1d2",
+            "f6e4"
+          ],
+          "san": [
+            "Bg3",
+            "Bxg3+",
+            "hxg3",
+            "Qg5",
+            "Ne2",
+            "Nf6",
+            "Qd3",
+            "d5",
+            "Nd2",
+            "Nxe4"
+          ]
+        },
+        "move": "f4g3",
+        "san": "Bg3",
+        "loss_cp": 147,
+        "kind": "Error",
+        "grade": "danger",
+        "priority": 147
+      },
+      {
+        "ply": 17,
+        "label": "9. Cd2",
+        "best": {
+          "cp_white": -10,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 434068,
+          "pv": [
+            "g1e2",
+            "g8f6",
+            "d1d3",
+            "d7d5",
+            "b1d2",
+            "f6e4",
+            "d2e4",
+            "d5e4",
+            "d3e4",
+            "c8e6"
+          ],
+          "san": [
+            "Ne2",
+            "Nf6",
+            "Qd3",
+            "d5",
+            "Nd2",
+            "Nxe4",
+            "Nxe4",
+            "dxe4",
+            "Qxe4+",
+            "Be6"
+          ]
+        },
+        "played": {
+          "cp_white": -143,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 269858,
+          "pv": [
+            "b1d2",
+            "g5g3",
+            "e1e2",
+            "g8f6",
+            "d1e1",
+            "g3e1",
+            "a1e1",
+            "d7d6",
+            "e2d1",
+            "c8d7"
+          ],
+          "san": [
+            "Nd2",
+            "Qxg3+",
+            "Ke2",
+            "Nf6",
+            "Qe1",
+            "Qxe1+",
+            "Rxe1",
+            "d6",
+            "Kd1",
+            "Bd7"
+          ]
+        },
+        "move": "b1d2",
+        "san": "Nd2",
+        "loss_cp": 133,
+        "kind": "Error",
+        "grade": "danger",
+        "priority": 133
+      },
+      {
+        "ply": 29,
+        "label": "15. De2",
+        "best": {
+          "cp_white": -379,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1409019,
+          "pv": [
+            "d1e1",
+            "g8f6",
+            "d2c2",
+            "e8g8",
+            "f3h4",
+            "c6e7",
+            "f1e2",
+            "g4f4",
+            "e1g1",
+            "f6g4"
+          ],
+          "san": [
+            "Qe1",
+            "Nf6",
+            "Kc2",
+            "O-O",
+            "Nh4",
+            "Ne7",
+            "Be2",
+            "Qf4",
+            "Qg1",
+            "Ng4"
+          ]
+        },
+        "played": {
+          "cp_white": -472,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1482369,
+          "pv": [
+            "d1e2",
+            "e8c8",
+            "f3h2",
+            "g4e6",
+            "e2g4",
+            "g8f6",
+            "g4e6",
+            "f7e6",
+            "h3g3",
+            "e6e5"
+          ],
+          "san": [
+            "Qe2",
+            "O-O-O",
+            "Nh2",
+            "Qe6",
+            "Qg4",
+            "Nf6",
+            "Qxe6+",
+            "fxe6",
+            "Rg3",
+            "e5"
+          ]
+        },
+        "move": "d1e2",
+        "san": "Qe2",
+        "loss_cp": 93,
+        "kind": "Imprecisión",
+        "grade": "warning",
+        "priority": 93
+      },
+      {
+        "ply": 3,
+        "label": "2. d3",
+        "best": {
+          "cp_white": 29,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 430701,
+          "pv": [
+            "g1f3",
+            "b8c6",
+            "f1b5",
+            "a7a6",
+            "b5a4",
+            "g8f6",
+            "e1g1",
+            "f6e4",
+            "d2d4",
+            "b7b5"
+          ],
+          "san": [
+            "Nf3",
+            "Nc6",
+            "Bb5",
+            "a6",
+            "Ba4",
+            "Nf6",
+            "O-O",
+            "Nxe4",
+            "d4",
+            "b5"
+          ]
+        },
+        "played": {
+          "cp_white": -6,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 117851,
+          "pv": [
+            "d2d3",
+            "g8f6",
+            "g1f3",
+            "b8c6",
+            "g2g3",
+            "f8c5",
+            "f1g2",
+            "d7d6",
+            "c2c3",
+            "a7a5"
+          ],
+          "san": [
+            "d3",
+            "Nf6",
+            "Nf3",
+            "Nc6",
+            "g3",
+            "Bc5",
+            "Bg2",
+            "d6",
+            "c3",
+            "a5"
+          ]
+        },
+        "move": "d2d3",
+        "san": "d3",
+        "loss_cp": 35,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 35
+      },
+      {
+        "ply": 5,
+        "label": "3. f4",
+        "best": {
+          "cp_white": 4,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 254899,
+          "pv": [
+            "g1f3",
+            "g8f6",
+            "g2g3",
+            "f8c5",
+            "f1g2",
+            "d7d6",
+            "e1g1",
+            "a7a5",
+            "c2c3",
+            "e8g8"
+          ],
+          "san": [
+            "Nf3",
+            "Nf6",
+            "g3",
+            "Bc5",
+            "Bg2",
+            "d6",
+            "O-O",
+            "a5",
+            "c3",
+            "O-O"
+          ]
+        },
+        "played": {
+          "cp_white": -16,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 264175,
+          "pv": [
+            "f2f4",
+            "d7d5",
+            "e4d5",
+            "d8d5",
+            "b1c3",
+            "d5c5",
+            "f4e5",
+            "c8f5",
+            "g1f3",
+            "e8c8"
+          ],
+          "san": [
+            "f4",
+            "d5",
+            "exd5",
+            "Qxd5",
+            "Nc3",
+            "Qc5",
+            "fxe5",
+            "Bf5",
+            "Nf3",
+            "O-O-O"
+          ]
+        },
+        "move": "f2f4",
+        "san": "f4",
+        "loss_cp": 20,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 20
+      },
+      {
+        "ply": 11,
+        "label": "6. d4",
+        "best": {
+          "cp_white": 62,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 364415,
+          "pv": [
+            "b1d2",
+            "d7d5",
+            "d3d4",
+            "d5e4",
+            "d2e4",
+            "c8f5",
+            "f1d3",
+            "d8d5",
+            "d1e2",
+            "e8c8"
+          ],
+          "san": [
+            "Nd2",
+            "d5",
+            "d4",
+            "dxe4",
+            "Nxe4",
+            "Bf5",
+            "Bd3",
+            "Qd5",
+            "Qe2",
+            "O-O-O"
+          ]
+        },
+        "played": {
+          "cp_white": 54,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 346205,
+          "pv": [
+            "d3d4",
+            "d7d5",
+            "b1d2",
+            "d5e4",
+            "d2e4",
+            "g8f6",
+            "f1d3",
+            "e8g8",
+            "d1f3",
+            "f6e4"
+          ],
+          "san": [
+            "d4",
+            "d5",
+            "Nd2",
+            "dxe4",
+            "Nxe4",
+            "Nf6",
+            "Bd3",
+            "O-O",
+            "Qf3",
+            "Nxe4"
+          ]
+        },
+        "move": "d3d4",
+        "san": "d4",
+        "loss_cp": 8,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 8
+      },
+      {
+        "ply": 1,
+        "label": "1. e4",
+        "best": {
+          "cp_white": 29,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 212775,
+          "pv": [
+            "e2e4",
+            "c7c5",
+            "g1f3",
+            "d7d6",
+            "d2d4",
+            "c5d4",
+            "f3d4",
+            "g8f6",
+            "b1c3",
+            "a7a6"
+          ],
+          "san": [
+            "e4",
+            "c5",
+            "Nf3",
+            "d6",
+            "d4",
+            "cxd4",
+            "Nxd4",
+            "Nf6",
+            "Nc3",
+            "a6"
+          ]
+        },
+        "played": {
+          "cp_white": 29,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 212775,
+          "pv": [
+            "e2e4",
+            "c7c5",
+            "g1f3",
+            "d7d6",
+            "d2d4",
+            "c5d4",
+            "f3d4",
+            "g8f6",
+            "b1c3",
+            "a7a6"
+          ],
+          "san": [
+            "e4",
+            "c5",
+            "Nf3",
+            "d6",
+            "d4",
+            "cxd4",
+            "Nxd4",
+            "Nf6",
+            "Nc3",
+            "a6"
+          ]
+        },
+        "move": "e2e4",
+        "san": "e4",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 7,
+        "label": "4. Axf4",
+        "best": {
+          "cp_white": -20,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 230095,
+          "pv": [
+            "c1f4",
+            "d7d5",
+            "e4d5",
+            "d8d5",
+            "b1c3",
+            "d5a5",
+            "f1e2",
+            "g8f6",
+            "g1f3",
+            "f8a3"
+          ],
+          "san": [
+            "Bxf4",
+            "d5",
+            "exd5",
+            "Qxd5",
+            "Nc3",
+            "Qa5",
+            "Be2",
+            "Nf6",
+            "Nf3",
+            "Ba3"
+          ]
+        },
+        "played": {
+          "cp_white": -20,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 230095,
+          "pv": [
+            "c1f4",
+            "d7d5",
+            "e4d5",
+            "d8d5",
+            "b1c3",
+            "d5a5",
+            "f1e2",
+            "g8f6",
+            "g1f3",
+            "f8a3"
+          ],
+          "san": [
+            "Bxf4",
+            "d5",
+            "exd5",
+            "Qxd5",
+            "Nc3",
+            "Qa5",
+            "Be2",
+            "Nf6",
+            "Nf3",
+            "Ba3"
+          ]
+        },
+        "move": "c1f4",
+        "san": "Bxf4",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 9,
+        "label": "5. c3",
+        "best": {
+          "cp_white": 61,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 433815,
+          "pv": [
+            "c2c3",
+            "b4e7",
+            "d3d4",
+            "d7d5",
+            "b1d2",
+            "d5e4",
+            "d2e4",
+            "g8f6",
+            "f1d3",
+            "f6e4"
+          ],
+          "san": [
+            "c3",
+            "Be7",
+            "d4",
+            "d5",
+            "Nd2",
+            "dxe4",
+            "Nxe4",
+            "Nf6",
+            "Bd3",
+            "Nxe4"
+          ]
+        },
+        "played": {
+          "cp_white": 61,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 433815,
+          "pv": [
+            "c2c3",
+            "b4e7",
+            "d3d4",
+            "d7d5",
+            "b1d2",
+            "d5e4",
+            "d2e4",
+            "g8f6",
+            "f1d3",
+            "f6e4"
+          ],
+          "san": [
+            "c3",
+            "Be7",
+            "d4",
+            "d5",
+            "Nd2",
+            "dxe4",
+            "Nxe4",
+            "Nf6",
+            "Bd3",
+            "Nxe4"
+          ]
+        },
+        "move": "c2c3",
+        "san": "c3",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 15,
+        "label": "8. hxg3",
+        "best": {
+          "cp_white": -20,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 379041,
+          "pv": [
+            "h2g3",
+            "d8g5",
+            "g1e2",
+            "d7d6",
+            "d1d2",
+            "g5e7",
+            "d2d3",
+            "g8f6",
+            "b1d2",
+            "g7g5"
+          ],
+          "san": [
+            "hxg3",
+            "Qg5",
+            "Ne2",
+            "d6",
+            "Qd2",
+            "Qe7",
+            "Qd3",
+            "Nf6",
+            "Nd2",
+            "g5"
+          ]
+        },
+        "played": {
+          "cp_white": -20,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 379041,
+          "pv": [
+            "h2g3",
+            "d8g5",
+            "g1e2",
+            "d7d6",
+            "d1d2",
+            "g5e7",
+            "d2d3",
+            "g8f6",
+            "b1d2",
+            "g7g5"
+          ],
+          "san": [
+            "hxg3",
+            "Qg5",
+            "Ne2",
+            "d6",
+            "Qd2",
+            "Qe7",
+            "Qd3",
+            "Nf6",
+            "Nd2",
+            "g5"
+          ]
+        },
+        "move": "h2g3",
+        "san": "hxg3",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 19,
+        "label": "10. Re2",
+        "best": {
+          "cp_white": -153,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 291951,
+          "pv": [
+            "e1e2",
+            "g8f6",
+            "d1e1",
+            "g3e1",
+            "a1e1",
+            "d7d6",
+            "g1h3",
+            "c8d7",
+            "e2d3",
+            "e8g8"
+          ],
+          "san": [
+            "Ke2",
+            "Nf6",
+            "Qe1",
+            "Qxe1+",
+            "Rxe1",
+            "d6",
+            "Nh3",
+            "Bd7",
+            "Kd3",
+            "O-O"
+          ]
+        },
+        "played": {
+          "cp_white": -153,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 291951,
+          "pv": [
+            "e1e2",
+            "g8f6",
+            "d1e1",
+            "g3e1",
+            "a1e1",
+            "d7d6",
+            "g1h3",
+            "c8d7",
+            "e2d3",
+            "e8g8"
+          ],
+          "san": [
+            "Ke2",
+            "Nf6",
+            "Qe1",
+            "Qxe1+",
+            "Rxe1",
+            "d6",
+            "Nh3",
+            "Bd7",
+            "Kd3",
+            "O-O"
+          ]
+        },
+        "move": "e1e2",
+        "san": "Ke2",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 23,
+        "label": "12. Cgf3",
+        "best": {
+          "cp_white": -526,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 446917,
+          "pv": [
+            "g1f3",
+            "g4h3",
+            "e4d5",
+            "h3d7",
+            "d5c6",
+            "d7c6",
+            "f3e5",
+            "g8f6",
+            "e5c6",
+            "b7c6"
+          ],
+          "san": [
+            "Ngf3",
+            "Bxh3",
+            "exd5",
+            "Bd7",
+            "dxc6",
+            "Bxc6",
+            "Ne5",
+            "Nf6",
+            "Nxc6",
+            "bxc6"
+          ]
+        },
+        "played": {
+          "cp_white": -526,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 446917,
+          "pv": [
+            "g1f3",
+            "g4h3",
+            "e4d5",
+            "h3d7",
+            "d5c6",
+            "d7c6",
+            "f3e5",
+            "g8f6",
+            "e5c6",
+            "b7c6"
+          ],
+          "san": [
+            "Ngf3",
+            "Bxh3",
+            "exd5",
+            "Bd7",
+            "dxc6",
+            "Bxc6",
+            "Ne5",
+            "Nf6",
+            "Nxc6",
+            "bxc6"
+          ]
+        },
+        "move": "g1f3",
+        "san": "Ngf3",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 25,
+        "label": "13. Cxf3",
+        "best": {
+          "cp_white": -19,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 382681,
+          "pv": [
+            "d2f3",
+            "g3d6",
+            "e4e5",
+            "d6e6",
+            "e2d2",
+            "f7f6",
+            "f1d3",
+            "e8c8",
+            "d1f1",
+            "c8b8"
+          ],
+          "san": [
+            "Nxf3",
+            "Qd6",
+            "e5",
+            "Qe6",
+            "Kd2",
+            "f6",
+            "Bd3",
+            "O-O-O",
+            "Qf1",
+            "Kb8"
+          ]
+        },
+        "played": {
+          "cp_white": -19,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 382681,
+          "pv": [
+            "d2f3",
+            "g3d6",
+            "e4e5",
+            "d6e6",
+            "e2d2",
+            "f7f6",
+            "f1d3",
+            "e8c8",
+            "d1f1",
+            "c8b8"
+          ],
+          "san": [
+            "Nxf3",
+            "Qd6",
+            "e5",
+            "Qe6",
+            "Kd2",
+            "f6",
+            "Bd3",
+            "O-O-O",
+            "Qf1",
+            "Kb8"
+          ]
+        },
+        "move": "d2f3",
+        "san": "Nxf3",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 33,
+        "label": "17. Rc2",
+        "best": {
+          "cp_white": -586,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1527277,
+          "pv": [
+            "d2c2",
+            "c6e5",
+            "d4e5",
+            "f4e5",
+            "e2f2",
+            "c8b8",
+            "f2f7",
+            "g8h6",
+            "f7c4",
+            "h6g4"
+          ],
+          "san": [
+            "Kc2",
+            "Nxe5",
+            "dxe5",
+            "Qxe5",
+            "Qf2",
+            "Kb8",
+            "Qxf7",
+            "Nh6",
+            "Qc4",
+            "Ng4"
+          ]
+        },
+        "played": {
+          "cp_white": -586,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1527277,
+          "pv": [
+            "d2c2",
+            "c6e5",
+            "d4e5",
+            "f4e5",
+            "e2f2",
+            "c8b8",
+            "f2f7",
+            "g8h6",
+            "f7c4",
+            "h6g4"
+          ],
+          "san": [
+            "Kc2",
+            "Nxe5",
+            "dxe5",
+            "Qxe5",
+            "Qf2",
+            "Kb8",
+            "Qxf7",
+            "Nh6",
+            "Qc4",
+            "Ng4"
+          ]
+        },
+        "move": "d2c2",
+        "san": "Kc2",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      {
+        "ply": 35,
+        "label": "18. dxe5",
+        "best": {
+          "cp_white": -583,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1458615,
+          "pv": [
+            "d4e5",
+            "f4e5",
+            "e2f2",
+            "c8b8",
+            "f2f7",
+            "g8h6",
+            "f7c4",
+            "h6g4",
+            "a1e1",
+            "g4f6"
+          ],
+          "san": [
+            "dxe5",
+            "Qxe5",
+            "Qf2",
+            "Kb8",
+            "Qxf7",
+            "Nh6",
+            "Qc4",
+            "Ng4",
+            "Re1",
+            "Nf6"
+          ]
+        },
+        "played": {
+          "cp_white": -583,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1458615,
+          "pv": [
+            "d4e5",
+            "f4e5",
+            "e2f2",
+            "c8b8",
+            "f2f7",
+            "g8h6",
+            "f7c4",
+            "h6g4",
+            "a1e1",
+            "g4f6"
+          ],
+          "san": [
+            "dxe5",
+            "Qxe5",
+            "Qf2",
+            "Kb8",
+            "Qxf7",
+            "Nh6",
+            "Qc4",
+            "Ng4",
+            "Re1",
+            "Nf6"
+          ]
+        },
+        "move": "d4e5",
+        "san": "dxe5",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      }
+    ],
+    "final": {
+      "fen": "2k3nr/ppp2ppp/8/4P3/5q2/2P1pR2/PPKrQ1P1/R4B2 w - - 2 20",
+      "pieces": {
+        "h8": "r",
+        "g8": "n",
+        "c8": "k",
+        "h7": "p",
+        "g7": "p",
+        "f7": "p",
+        "c7": "p",
+        "b7": "p",
+        "a7": "p",
+        "e5": "P",
+        "f4": "q",
+        "f3": "R",
+        "e3": "p",
+        "c3": "P",
+        "g2": "P",
+        "e2": "Q",
+        "d2": "r",
+        "c2": "K",
+        "b2": "P",
+        "a2": "P",
+        "f1": "B",
+        "a1": "R"
+      },
+      "legal": [
+        "c2b3",
+        "c2c1",
+        "c2b1",
+        "e2d2"
+      ],
+      "turn": "blancas",
+      "check": true,
+      "checkmate": false,
+      "best": {
+        "cp_white": -79,
+        "mate_white": null,
+        "depth": 19,
+        "nodes": 666079,
+        "pv": [
+          "e2d2",
+          "f4f3",
+          "g2f3",
+          "e3d2",
+          "f1c4",
+          "g8e7",
+          "c4f7",
+          "h8f8",
+          "f7e6",
+          "c8d8"
+        ],
+        "san": [
+          "Qxd2",
+          "Qxf3",
+          "gxf3",
+          "exd2",
+          "Bc4",
+          "Ne7",
+          "Bxf7",
+          "Rf8",
+          "Be6+",
+          "Kd8"
+        ]
+      },
+      "defense": {
+        "best": {
+          "cp_white": -79,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 339427,
+          "pv": [
+            "e2d2",
+            "f4f3",
+            "g2f3",
+            "e3d2",
+            "f1h3",
+            "c8b8",
+            "c2d2",
+            "c7c6",
+            "d2e3",
+            "g8e7"
+          ],
+          "san": [
+            "Qxd2",
+            "Qxf3",
+            "gxf3",
+            "exd2",
+            "Bh3+",
+            "Kb8",
+            "Kxd2",
+            "c6",
+            "Ke3",
+            "Ne7"
+          ]
+        },
+        "played": {
+          "cp_white": -79,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 339427,
+          "pv": [
+            "e2d2",
+            "f4f3",
+            "g2f3",
+            "e3d2",
+            "f1h3",
+            "c8b8",
+            "c2d2",
+            "c7c6",
+            "d2e3",
+            "g8e7"
+          ],
+          "san": [
+            "Qxd2",
+            "Qxf3",
+            "gxf3",
+            "exd2",
+            "Bh3+",
+            "Kb8",
+            "Kxd2",
+            "c6",
+            "Ke3",
+            "Ne7"
+          ]
+        },
+        "move": "e2d2",
+        "san": "Qxd2",
+        "loss_cp": 0,
+        "kind": "Sin caída importante",
+        "grade": "neutral",
+        "priority": 0
+      },
+      "line": {
+        "base": 38,
+        "moves": [
+          "e2d2",
+          "f4f3",
+          "g2f3",
+          "e3d2",
+          "c2d2"
+        ],
+        "san": [
+          "Qxd2",
+          "Qxf3",
+          "gxf3",
+          "exd2",
+          "Kxd2"
+        ],
+        "name": "Variante citada: 20. Dxd2 Dxf3 21. gxf3 exd2 22. Rxd2",
+        "evaluation": {
+          "cp_white": -69,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 785508,
+          "pv": [
+            "g8e7",
+            "d2e3",
+            "h8d8",
+            "f1h3",
+            "c8b8",
+            "f3f4",
+            "c7c6",
+            "a1g1",
+            "g7g6",
+            "f4f5"
+          ],
+          "san": [
+            "Ne7",
+            "Ke3",
+            "Rd8",
+            "Bh3+",
+            "Kb8",
+            "f4",
+            "c6",
+            "Rg1",
+            "g6",
+            "f5"
+          ]
+        }
+      },
+      "material": {
+        "white": {
+          "P": 5,
+          "K": 1,
+          "B": 1,
+          "R": 1
+        },
+        "black": {
+          "R": 1,
+          "N": 1,
+          "K": 1,
+          "P": 6
+        }
+      },
+      "result": "0-1",
+      "termination": null
+    },
+    "qf3": {
+      "comparison": {
+        "best": {
+          "cp_white": -32,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 495306,
+          "pv": [
+            "g1e2",
+            "g8f6",
+            "d1d3",
+            "d7d5",
+            "b1d2",
+            "d5e4",
+            "d2e4",
+            "f6e4",
+            "d3e4",
+            "c8e6"
+          ],
+          "san": [
+            "Ne2",
+            "Nf6",
+            "Qd3",
+            "d5",
+            "Nd2",
+            "dxe4",
+            "Nxe4",
+            "Nxe4",
+            "Qxe4+",
+            "Be6"
+          ]
+        },
+        "played": {
+          "cp_white": -345,
+          "mate_white": null,
+          "depth": 19,
+          "nodes": 1358048,
+          "pv": [
+            "d1f3",
+            "g5c1",
+            "f3d1",
+            "c1b2",
+            "b1d2",
+            "b2c3",
+            "g1e2",
+            "c3a5",
+            "e1f2",
+            "d7d6"
+          ],
+          "san": [
+            "Qf3",
+            "Qc1+",
+            "Qd1",
+            "Qxb2",
+            "Nd2",
+            "Qxc3",
+            "Ne2",
+            "Qa5",
+            "Kf2",
+            "d6"
+          ]
+        },
+        "move": "d1f3",
+        "san": "Qf3",
+        "loss_cp": 313,
+        "kind": "Error grave",
+        "grade": "danger",
+        "priority": 313
+      },
+      "line": {
+        "base": 16,
+        "moves": [
+          "d1f3",
+          "g5g3",
+          "f3g3"
+        ],
+        "san": [
+          "Qf3",
+          "Qxg3+",
+          "Qxg3"
+        ],
+        "name": "Hipótesis citada: 9. Df3 Dxg3+ 10. Dxg3"
+      }
+    },
+    "method": "Mejor candidata y jugada real comparadas desde la misma posición. Búsqueda limitada; etiquetas orientativas: 50/100/200 centipeones. No son clasificaciones de Chess.com."
+  }
+}

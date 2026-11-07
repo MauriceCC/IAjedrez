@@ -12,6 +12,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 import re
+import history_evidence
 
 import chess
 import chess.engine
@@ -131,6 +132,9 @@ def line(board, sans, base, name):
 
 def analyze_game(path):
     game = load_game()
+    saved = history_evidence.load('mauricio', game['pgn'], DEPTH, SECONDS)
+    if saved:
+        return saved
     engine_file = Path(path).resolve()
     key = (str(engine_file), engine_file.stat().st_mtime_ns,
            hashlib.sha256(game['pgn'].encode()).hexdigest(), DEPTH, SECONDS)

@@ -1,5 +1,23 @@
 # Continuidad de IAjedrez para otros agentes
 
+## Historial con análisis persistente (7 nov. 2026)
+
+Los tres informes reales de Stockfish se guardan en `data/history/{mauricio,entrevista,gemini}.json`. `history_evidence.py` valida versión, hash del PGN y parámetros de búsqueda antes de reutilizarlos. Incluyen nombre del motor, fecha original, variantes y profundidad real. La API de partida incluye el informe y el navegador muestra directamente la tabla, sin pedir un análisis nuevo. Las consultas reutilizan el mismo informe. Reiniciar el servidor no invalida estos resultados históricos; cambiar PGN o parámetros sí. La práctica de nuevas candidatas sigue usando Stockfish en vivo.
+
+Para regenerar un informe después de cambios, ejecutar el analizador del módulo con Stockfish disponible y guardar el resultado mediante `history_evidence.save(nombre, pgn, review.DEPTH, review.SECONDS, informe)`. Si se desea recalcular sin cambiar PGN ni parámetros, retirar primero el archivo correspondiente. No modificar a mano sus evaluaciones. `tests/test_history_evidence.py` impide arrancar el motor y comprueba carga y consultas de los tres estudios, así como rechazo de evidencia obsoleta.
+
+## Tercer estudio: conversación con Gemini (7 nov. 2026)
+
+Se agregó `gemini` a la selección de estudios y al historial. Partida j017371–zhorzho11, 4 nov. 2026, 10 minutos, 67 medias jugadas, 1–0 sin motivo de terminación. PGN original con NAG en `static/partida-gemini.pgn`; síntesis atribuida en `static/conversacion-gemini.md`. La perspectiva es blancas, siguiendo la respuesta de Gemini; el usuario no identificó explícitamente su bando.
+
+`gemini.py` calcula las 34 decisiones blancas y las decisiones negras 13…Cc5 y 25…Dxg5, manteniéndolas separadas de la clasificación de errores blancos. Las preguntas originales sobre nivel, aprendizaje y notación tienen respuestas preparadas con evidencia; una consulta desconocida no se presenta como validada. `static/gemini-ui.js` organiza resumen, consejos, temas de Aprende y referencias. No se integró Ollama ni Gemini en vivo.
+
+Hallazgos observados con Stockfish 19, profundidad objetivo 19 / 1,5 s por búsqueda: 12.Cxd5 pasó de −1,03 a −6,86; 25.O-O de +6,67 a −2,85, con …Axf3 como respuesta calculada. Para negras, 13…Cc5 pasó de −7,44 a +5,91 y 25…Dxg5 de −3,32 a +9,61 (siempre perspectiva blanca). Son valores de una ejecución, no constantes del código. Destacan también 7.a3, 8.b4 y 9.b5. La continuación 26.Cxg5 Axd1 elimina ambas damas: el error de …Dxg5 no se explica como «dama gratis». El caballo estaba clavado relativamente a la dama d1 por el alfil g4. El último 34.Txf7 no es mate.
+
+Notación: se corrige la mezcla de signos en Gemini. $4 = ??, $6 = ?!, $9 = peor jugada; se conservan como anotaciones del PGN, no conclusiones de Stockfish. Recursos gratuitos de Lichess vinculados a seguridad de piezas, clavadas, desarrollo y mates básicos; los últimos son entrenamiento futuro, no motivos que se afirme haber ocurrido.
+
+Validación: `tests/test_gemini.py`, cuatro pruebas con motor real, legalidad de variantes, cambio de damas, consultas, PGN distinto y motor ausente. Playwright/Edge verificó historial, resumen automático, resultado correcto, variante, notación, Aprende, práctica/retorno y ancho móvil sin errores de JavaScript. Captura en el temporal del sistema: `iajedrez-gemini.png`.
+
 ## Mejoras de tablero, resumen y aprendizaje
 
 El tablero define explícitamente ocho filas y ocho columnas iguales, incluso en finales sin piezas. Al abrir cualquiera de los estudios se solicita automáticamente Stockfish y se muestra la tabla prioritaria al terminar; los fallos conservan un acceso para reintentar. `static/study-ui.js` comparte la tabla entre ambos estudios: símbolos accesibles con etiqueta, ventaja perdida en peones de valoración y barras (tope visual de 5), comparación explícita de jugada real y alternativa.

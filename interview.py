@@ -10,6 +10,7 @@ import chess
 import chess.engine
 import chess.pgn
 import review as core
+import history_evidence
 
 GAME_PATH = Path(__file__).parent / 'static/partida-entrevista.pgn'
 _cache = {}
@@ -37,6 +38,9 @@ def load_game():
 
 def analyze_game(path):
     game = load_game()
+    saved = history_evidence.load('entrevista', game['pgn'], core.DEPTH, core.SECONDS)
+    if saved:
+        return saved
     executable = Path(path).resolve()
     key = (str(executable), executable.stat().st_mtime_ns,
            hashlib.sha256(game['pgn'].encode()).hexdigest(), core.DEPTH, core.SECONDS)
