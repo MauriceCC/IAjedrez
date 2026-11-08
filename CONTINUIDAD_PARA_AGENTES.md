@@ -1,5 +1,13 @@
 # Continuidad de IAjedrez para otros agentes
 
+## Evaluación, tablas y flechas de variantes
+
+«Consejos» se renombró «Evaluación» en los tres estudios. `static/evaluation-ui.js` comparte las tablas: Jugada abre Cadena; Consejo/Explicación/Jugada sugerida abren la candidata guardada conservando la pestaña. Resumen muestra la pérdida en Tipo y los valores del motor bajo jugada real y sugerida. Las explicaciones combinan motivos revisados de las conversaciones y descripciones limitadas de la variante calculada; no se inventan diagnósticos posicionales generales.
+
+Tipos locales positivos: Mejor jugada si coincide con la primera candidata; Excelente si pierde hasta 10 cp; Buena si pierde menos de 50 cp. Se mantienen los umbrales de errores y tratamiento separado de mates. Brillante está documentada en la leyenda, pero no se asigna sin una validación específica del sacrificio: no equivale a tener puntuación alta ni a ser la mejor jugada.
+
+Botones exteriores «/» llevan al inicio/final de la partida original incluso durante variantes o práctica. Las flechas interiores siguen recorriendo la variante activa. El SVG superpuesto usa azul para el movimiento mostrado y naranja discontinuo para el siguiente movimiento de la PV: no es un mapa completo de amenazas. Se elimina al volver a la partida. `tests/ui_evaluation.py` verifica ambos tipos de clic, navegación, puntuaciones, leyenda, flechas, retorno y móvil en los tres estudios con evidencia precargada.
+
 ## Historial con análisis persistente (7 nov. 2026)
 
 Los tres informes reales de Stockfish se guardan en `data/history/{mauricio,entrevista,gemini}.json`. `history_evidence.py` valida versión, hash del PGN y parámetros de búsqueda antes de reutilizarlos. Incluyen nombre del motor, fecha original, variantes y profundidad real. La API de partida incluye el informe y el navegador muestra directamente la tabla, sin pedir un análisis nuevo. Las consultas reutilizan el mismo informe. Reiniciar el servidor no invalida estos resultados históricos; cambiar PGN o parámetros sí. La práctica de nuevas candidatas sigue usando Stockfish en vivo.

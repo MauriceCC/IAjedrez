@@ -103,6 +103,12 @@ body{height:100dvh;display:flex;flex-direction:column}
 .priority-table .move-icon{width:36px;height:36px;min-width:36px;background:transparent;vertical-align:middle;line-height:1}
 .priority-table .move-icon svg{display:block;flex-shrink:0}
 .priority-table th:nth-child(2),.priority-table td:nth-child(2){text-align:center;width:60px}
+.type-help{display:inline-grid;place-items:center;width:18px;height:18px;padding:0;margin-left:3px;border:1px solid #9fb5d1;border-radius:50%;color:#24569b;background:#edf4ff;font-size:11px;font-weight:750;cursor:help}.type-help:focus-visible{outline:2px solid #1756bf;outline-offset:2px}
+.type-legend{position:fixed;inset:auto;margin:0;width:300px;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);overflow:auto;padding:15px;border:1px solid #cbd9ec;border-radius:12px;background:#fff;color:#3b4a60;box-shadow:0 8px 28px #19314f26;font:12px/1.5 Inter,Segoe UI,sans-serif;white-space:normal;text-align:left;font-weight:400;z-index:100}
+.type-legend:popover-open{display:grid;gap:10px}.type-legend>strong{color:#19314f;font-size:13px}.type-legend b{display:inline-block;min-width:25px}.type-legend small{color:#718096;font-size:11px}.legend-grave{color:#ce3c48}.legend-error{color:#d77819}.legend-inaccuracy{color:#94720c}.legend-good{color:#287b65}.legend-extra{border-top:1px solid #e5ebf3;padding-top:10px}
+.chessboard{position:relative}.board-arrows{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.evaluation-table{min-width:520px}.evaluation-table td{vertical-align:top}.cell-preview,.cell-move{font:inherit;text-align:left;display:block;width:100%;border:0;background:transparent;color:inherit;padding:4px;border-radius:6px;cursor:pointer;line-height:1.6;white-space:normal}.cell-preview:hover,.cell-move:hover{background:#e7f0ff}.cell-preview:focus-visible,.cell-move:focus-visible{outline:2px solid #1756bf}.cell-move{font-weight:700;color:#174cac;min-width:66px}.eval-score{display:block;color:#4b6381;font-size:11px;margin:4px 0;font-weight:600}.loss-value{display:block;white-space:nowrap;font-size:10px;margin-top:5px}.evaluation-table .loss-track{width:65px;margin:6px auto}.evaluation-table td:nth-child(3),.evaluation-table td:nth-child(4){min-width:150px}
+@media(max-width:660px){.board-controls{max-width:340px;gap:5px}.board-controls .nav-arrow{width:29px}.move-current strong{font-size:11px}}
 </style>
 </head>
 <body>
@@ -115,10 +121,8 @@ body{height:100dvh;display:flex;flex-direction:column}
   <section class="panel tree-panel" aria-label="Árbol de jugadas">
     <div class="panel-header"><h2 class="panel-title"><span class="icon-dot" aria-hidden="true">⑂</span> Jugadas y variantes</h2><span class="subtle">5 min · 0–1</span></div>
     <div class="tree-scroll" tabindex="0" role="region" aria-label="Jugadas y variantes desplazables">
-      <div class="tree-help">Selecciona una jugada para verla en el tablero. Las consultas que añadas quedarán vinculadas a esa jugada.</div>
       <nav aria-label="Seleccionar jugada" class="tree-list" id="tree"></nav>
     </div>
-    <div class="tree-footer">● Azul: jugada seleccionada &nbsp; · &nbsp; ◌ Rama: alternativa<br>Consultas vinculadas a cada jugada · evaluaciones desde blancas.</div>
   </section>
   <section class="panel board-panel" aria-label="Tablero de ajedrez">
     <div class="panel-header"><h2 class="panel-title">Posición de la partida</h2><span class="subtle" id="side-to-move">Turno: negras</span></div>
@@ -128,12 +132,12 @@ body{height:100dvh;display:flex;flex-direction:column}
       <div id="board-mode-hint" class="board-mode-hint" hidden></div>
       <div class="board-info"><div class="player"><span class="player-icon" aria-hidden="true">♙</span><span><span class="player-name">Mauricio0120</span> <span class="player-meta">· 783</span></span></div><span class="subtle">Vista desde blancas</span></div>
     </div>
-    <div class="board-controls"><button class="nav-arrow" id="prev" type="button" aria-label="Jugada anterior">‹</button><div class="move-current"><strong id="current-move">Posición inicial</strong><span id="move-subtitle">Seleccionada en el árbol</span></div><button class="nav-arrow" id="next" type="button" aria-label="Jugada siguiente">›</button></div>
+    <div class="board-controls"><button class="nav-arrow" id="first" type="button" aria-label="Inicio de la partida" title="Inicio de la partida">«</button><button class="nav-arrow" id="prev" type="button" aria-label="Jugada anterior">‹</button><div class="move-current"><strong id="current-move">Posición inicial</strong><span id="move-subtitle">Seleccionada en el árbol</span></div><button class="nav-arrow" id="next" type="button" aria-label="Jugada siguiente">›</button><button class="nav-arrow" id="last" type="button" aria-label="Final de la partida" title="Final de la partida">»</button></div>
     <div class="board-bottom"><span class="sample-tag">Partida cargada · esperando consulta</span></div>
   </section>
   <section class="panel right-panel" aria-label="Resultados del análisis">
     <div class="right-head"><div id="view-menu" class="response-tabs" role="group" aria-label="Vistas">
-<button type="button" class="view-option" data-view="summary">Resumen de errores</button><button type="button" class="view-option" data-view="advice">Consejos</button><button type="button" class="view-option" data-view="chain">Cadena</button><button type="button" class="view-option" data-view="learn">Aprende</button></div><h2 id="result-title" class="sr-only"></h2><p id="result-subtitle" class="sr-only"></p></div>
+<button type="button" class="view-option" data-view="summary">Resumen de errores</button><button type="button" class="view-option" data-view="advice">Evaluación</button><button type="button" class="view-option" data-view="chain">Cadena</button><button type="button" class="view-option" data-view="learn">Aprende</button></div><h2 id="result-title" class="sr-only"></h2><p id="result-subtitle" class="sr-only"></p></div>
     <div id="results" class="result-area" tabindex="0" role="region" aria-label="Contenido de la respuesta" aria-live="polite" aria-atomic="false"></div>
     <form class="composer" id="ask-form">
       <div class="composer-top"><label class="composer-label" for="question">Tu consulta</label><span class="composer-context" id="composer-context">Posición inicial</span></div>
@@ -144,8 +148,9 @@ body{height:100dvh;display:flex;flex-direction:column}
   </section>
 </main>
 <script src="/static/interview-ui.js"></script>
-<script src="/static/study-ui.js?v=type-icons-2"></script>
+<script src="/static/study-ui.js?v=type-legend-3"></script>
 <script src="/static/gemini-ui.js"></script>
+<script src="/static/evaluation-ui.js"></script>
 <script src="/static/review.js"></script>
 </body>
 </html>
