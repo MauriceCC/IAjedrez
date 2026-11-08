@@ -143,7 +143,7 @@ body{height:100dvh;display:flex;flex-direction:column}
       <div class="composer-top"><label class="composer-label" for="question">Tu consulta</label><span class="composer-context" id="composer-context">Posición inicial</span></div>
       <div class="compose-controls"><textarea id="question" class="question" rows="1" maxlength="6000" required placeholder="Pregunta sobre esta jugada o un paso del análisis..."></textarea><button class="send" type="submit">Enviar ↗</button></div>
       <div id="notice" class="notice" role="status"></div>
-      <p class="composer-tip">Stockfish calcula posiciones y variantes. El tutor usa explicaciones de plantilla para las preguntas de este recorrido.</p>
+      <p class="composer-tip">Stockfish calcula posiciones y variantes. Ollama genera las explicaciones del tutor con esos resultados.</p>
     </form>
   </section>
 </main>
@@ -153,4 +153,4 @@ body{height:100dvh;display:flex;flex-direction:column}
 <script src="/static/evaluation-ui.js"></script>
 <script src="/static/review.js"></script>
 </body>
-</html>
+<script src="/static/chat-input.js"></script></html>

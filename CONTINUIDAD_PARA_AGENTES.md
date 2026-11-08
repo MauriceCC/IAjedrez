@@ -1,3 +1,7 @@
+# Restauración de funciones
+
+Se recuperaron .env/python-dotenv, Ollama en ambos tutores, importación de PGN por texto y archivo local, controles de adjunto, Enter/Shift+Enter y Roni con ejemplos guardados. Se integraron sobre la versión con Gemini y history_evidence sin eliminar esas mejoras. studies.py gestiona importaciones temporales; RONI_STUDY es permanente; static/roni-example.json conserva tres consultas y una práctica. API y pruebas: tests/test_generative.py, tests/test_roni.py, tests/ui_pgn_file.py y tests/ui_generative.py. Las respuestas guardadas identifican extractos y correcciones editoriales.
+
 # Continuidad de IAjedrez para otros agentes
 
 ## Evaluación, tablas y flechas de variantes
