@@ -31,7 +31,7 @@ function renderBoard(){
  $('board').innerHTML='';
  for(let rank=8;rank>=1;rank--)for(let f=0;f<8;f++){
   const sq='abcdefgh'[f]+rank,p=position.pieces[sq],b=document.createElement('button');b.type='button';b.dataset.square=sq;
-  b.className='square '+((rank+f)%2?'light':'dark')+(last?.slice(0,2)===sq?' from':'')+(last?.slice(2,4)===sq?' to':'')+(selected===sq?' selected-square':'')+(selected&&position.legal.some(m=>m.startsWith(selected+sq))?' legal-target':'')+(highlights.includes(sq)?' focus-square':'');
+  b.className='square '+((rank+f)%2?'dark':'light')+(last?.slice(0,2)===sq?' from':'')+(last?.slice(2,4)===sq?' to':'')+(selected===sq?' selected-square':'')+(selected&&position.legal.some(m=>m.startsWith(selected+sq))?' legal-target':'')+(highlights.includes(sq)?' focus-square':'');
   b.setAttribute('aria-label',sq+(p?' '+PIECE_NAMES[p.toLowerCase()]+' '+(p===p.toUpperCase()?'blanco':'negro'):''));b.setAttribute('aria-pressed',String(selected===sq));
   b.innerHTML=(p?`<span class="piece ${p===p.toUpperCase()?'white':'black'}" aria-hidden="true">${SYMBOLS[p]}</span>`:'')+`<span class="coord" aria-hidden="true">${sq}</span>`;
   b.onclick=()=>square(sq);$('board').append(b);

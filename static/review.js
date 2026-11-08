@@ -32,7 +32,7 @@ function renderBoard(){if(!game)return;const pos=currentPosition(),practice=stat
  let last=practice?.moves.at(-1)||(line?line.moves[line.offset-1]:game.moves[state.cursor-1]);
  let html='';for(let rank=8;rank>=1;rank--)for(const file of 'abcdefgh'){
   const square=file+rank,p=pos.pieces[square];const targets=selected&&pos.legal.some(m=>m.startsWith(selected+square));
-  const classes=`square ${('abcdefgh'.indexOf(file)+rank)%2?'light':'dark'} ${last?.slice(0,2)===square?'from':''} ${last?.slice(2,4)===square?'to':''} ${selected===square?'learn-origin':''} ${targets?'target-hint':''} ${practice?'learn-square':''}`;
+  const classes=`square ${('abcdefgh'.indexOf(file)+rank)%2?'dark':'light'} ${last?.slice(0,2)===square?'from':''} ${last?.slice(2,4)===square?'to':''} ${selected===square?'learn-origin':''} ${targets?'target-hint':''} ${practice?'learn-square':''}`;
   const piece=p?`<span class="piece ${p===p.toUpperCase()?'white':'black'}" aria-hidden="true">${symbols[p]}</span>`:'';
   const description=esc(square+(p?' '+names[p.toLowerCase()]+' '+(p===p.toUpperCase()?'blanco':'negro'):' vacía'));
   html+=practice?`<button type="button" class="${classes}" data-square="${square}" aria-label="${description}">${piece}</button>`:`<div class="${classes}" data-square="${square}" aria-label="${description}" title="${description}">${piece}</div>`;
