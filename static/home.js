@@ -18,4 +18,4 @@ document.querySelectorAll('[data-game]').forEach(button=>button.onclick=async()=
   document.querySelector('main').scrollTop=0;
  }catch(error){if(request===selection)byId('status').textContent=error.message;}
 });
-byId('new-chat').onclick=()=>{selection++;byId('welcome').hidden=false;byId('conversation').hidden=true;byId('status').textContent='';document.querySelectorAll('.history').forEach(b=>b.classList.remove('active'));byId('pgn').focus();};
+byId('new-chat').onclick=()=>{selection++;document.querySelector('[name="player-color"][value="white"]').checked=true;byId('welcome').hidden=false;byId('conversation').hidden=true;byId('status').textContent='';document.querySelectorAll('.history').forEach(b=>b.classList.remove('active'));byId('pgn').focus();};

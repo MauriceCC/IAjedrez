@@ -55,7 +55,8 @@ def describe(board):
 
 @app.get("/")
 def index(game: str | None = None):
-    return FileResponse(ROOT / ("IAjedrez_prototipo_interactivo.html" if game else "static/home.html"))
+    return FileResponse(ROOT / ("IAjedrez_prototipo_interactivo.html" if game else "static/home.html"),
+                        headers={"Cache-Control": "no-store"})
 
 
 @app.get("/demo")
