@@ -109,6 +109,7 @@ body{height:100dvh;display:flex;flex-direction:column}
 .chessboard{position:relative}.board-arrows{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
 .evaluation-table{min-width:520px}.evaluation-table td{vertical-align:top}.cell-preview,.cell-move{font:inherit;text-align:left;display:block;width:100%;border:0;background:transparent;color:inherit;padding:4px;border-radius:6px;cursor:pointer;line-height:1.6;white-space:normal}.cell-preview:hover,.cell-move:hover{background:#e7f0ff}.cell-preview:focus-visible,.cell-move:focus-visible{outline:2px solid #1756bf}.cell-move{font-weight:700;color:#174cac;min-width:66px}.eval-score{display:block;color:#4b6381;font-size:11px;margin:4px 0;font-weight:600}.loss-value{display:block;white-space:nowrap;font-size:10px;margin-top:5px}.evaluation-table .loss-track{width:65px;margin:6px auto}.evaluation-table td:nth-child(3),.evaluation-table td:nth-child(4){min-width:150px}
 @media(max-width:660px){.board-controls{max-width:340px;gap:5px}.board-controls .nav-arrow{width:29px}.move-current strong{font-size:11px}}
+.tree-panel>.panel-header{flex-wrap:wrap}.tree-heading{display:flex;align-items:center;gap:5px}.download-menu{position:relative}.download-menu>summary{list-style:none;cursor:pointer;display:grid;place-items:center;width:28px;height:28px;border:1px solid #d6e0ed;border-radius:7px;color:#24569b;background:#f8fbff}.download-menu>summary::-webkit-details-marker{display:none}.download-menu>summary:focus-visible{outline:2px solid #1756bf}.download-options{position:absolute;right:0;top:34px;z-index:20;width:185px;padding:6px;background:white;border:1px solid #d6e0ed;border-radius:9px;box-shadow:0 5px 18px #19314f22}.download-options button{display:block;width:100%;text-align:left;padding:10px;border:0;background:white;color:#19314f;border-radius:6px;cursor:pointer;font:12px Segoe UI,sans-serif}.download-options button:hover{background:#edf4ff}
 </style>
 </head>
 <body>
@@ -119,7 +120,7 @@ body{height:100dvh;display:flex;flex-direction:column}
 <nav class="mobile-panel-switch" aria-label="Paneles de análisis"><button type="button" class="small-button" data-panel="tree-panel">Jugadas y variantes</button><button type="button" class="small-button" data-panel="right-panel">Respuestas</button></nav>
 <main class="layout">
   <section class="panel tree-panel" aria-label="Árbol de jugadas">
-    <div class="panel-header"><h2 class="panel-title"><span class="icon-dot" aria-hidden="true">⑂</span> Jugadas y variantes</h2><span class="subtle">5 min · 0–1</span></div>
+    <div class="panel-header"><div class="tree-heading"><h2 class="panel-title"><span class="icon-dot" aria-hidden="true">⑂</span> Jugadas y variantes</h2><details class="download-menu"><summary aria-label="Descargar partida o tablero" title="Descargar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></summary><div class="download-options"><button type="button" data-download="pgn">Partida (.pgn)</button><button type="button" data-download="png">Tablero actual (.png)</button></div></details></div><span class="subtle">5 min · 0–1</span></div>
     <div class="tree-scroll" tabindex="0" role="region" aria-label="Jugadas y variantes desplazables">
       <nav aria-label="Seleccionar jugada" class="tree-list" id="tree"></nav>
     </div>
@@ -152,5 +153,6 @@ body{height:100dvh;display:flex;flex-direction:column}
 <script src="/static/gemini-ui.js"></script>
 <script src="/static/evaluation-ui.js"></script>
 <script src="/static/review.js"></script>
+<script src="/static/download-study.js"></script>
 </body>
 </html>

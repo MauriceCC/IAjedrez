@@ -35,7 +35,7 @@ function evaluationTable(priority=false){
  const real=`<button class="cell-move" type="button" data-jump="${row.ply}">${esc(row.label)}<small class="eval-score">${esc(score(row.played))}</small></button>`;
  const recommended=`<b>${esc(es(row.best.san[0]))}</b><small class="eval-score">${esc(score(row.best))}</small>`;
  return `<tr class="${focusPly()===row.ply?'highlight-row':''}"><td>${real}</td><td>${typeCell(row)}</td><td>${preview(priority?reason:suggestion)}</td><td>${preview(priority?suggestion:reason,priority?recommended:'')}</td></tr>`;
- }).join('')||'<tr><td colspan="4">No se detectaron pérdidas importantes en esta búsqueda.</td></tr>'}</tbody></table></div><p class="table-foot">Puntuaciones desde blancas: + favorece a blancas, − a negras. Pulsa la jugada para abrir Cadena; pulsa un consejo o una explicación para ver la sugerencia sin salir de esta vista.</p>`;
+ }).join('')||'<tr><td colspan="4">No se detectaron pérdidas importantes en esta búsqueda.</td></tr>'}</tbody></table></div>`;
 }
 async function previewSuggestion(ply){
  const row=report.rows.find(r=>r.ply===ply);if(!row)return;
