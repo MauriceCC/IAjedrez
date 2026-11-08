@@ -18,7 +18,7 @@ document.querySelectorAll('[data-game]').forEach(button=>button.onclick=async()=
   document.querySelector('main').scrollTop=0;
  }catch(error){if(request===selection)byId('status').textContent=error.message;}
 });
-byId('new-chat').onclick=()=>{selection++;byId('welcome').hidden=false;byId('conversation').hidden=true;byId('status').textContent='';document.querySelectorAll('.history').forEach(b=>b.classList.remove('active'));byId('pgn').focus();};
+byId('new-chat').onclick=()=>{selection++;document.querySelector('[name="player-color"][value="white"]').checked=true;byId('welcome').hidden=false;byId('conversation').hidden=true;byId('status').textContent='';document.querySelectorAll('.history').forEach(b=>b.classList.remove('active'));byId('pgn').focus();};
 
 byId('remove-file').onclick=()=>{fileRead++;byId('pgn-file').value='';byId('pgn').value='';byId('file-preview').hidden=true;byId('status').textContent='';byId('send-pgn').disabled=false;byId('pgn').focus();};
 byId('pgn').addEventListener('input',()=>{fileRead++;byId('pgn-file').value='';byId('file-preview').hidden=true;byId('send-pgn').disabled=false;});
@@ -37,7 +37,7 @@ byId('pgn-file').onchange=async()=>{
 byId('pgn-form').onsubmit=async event=>{
  event.preventDefault();const pgn=byId('pgn').value.trim();if(!pgn){byId('status').textContent='Pega una partida en formato PGN.';return;}
  const request=++selection;byId('send-pgn').disabled=true;byId('status').textContent='Validando tu partida…';
- try{const response=await fetch('/api/review/import',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pgn})});const result=await response.json();
+ try{const response=await fetch('/api/review/import',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pgn,player_color:document.querySelector('[name="player-color"]:checked').value})});const result=await response.json();
  if(!response.ok)throw Error(typeof result.detail==='string'?result.detail:'Revisa el formato del PGN.');
  if(request===selection)location.href='/?game='+encodeURIComponent(result.id);
  }catch(error){if(request===selection)byId('status').textContent=error.message;}

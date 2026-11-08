@@ -3,6 +3,7 @@
 const InterviewUI={
  headers(){
   const h=game.headers;
+  document.querySelector('.board-main .board-info:last-child > .subtle').textContent=game.player_color==='black'?'Analizando negras · tablero desde blancas':'Analizando blancas';
   document.querySelectorAll('.player-name').forEach((el,i)=>el.textContent=h[i===0?'Black':'White']);
   document.querySelectorAll('.player-meta').forEach((el,i)=>el.textContent='· '+(h[i===0?'BlackElo':'WhiteElo']||'Sin Elo'));
   document.querySelector('.board-info > .subtle').textContent=(h.Date||'Fecha no indicada').replaceAll('.','/');

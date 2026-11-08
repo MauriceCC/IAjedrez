@@ -52,7 +52,7 @@ function moveTypeIcon(row){
 }
 function priorityTable(){return evaluationTable(true);}
 function studyLearning(){
- if(isCustom){if(!report)return summary();return contextBar()+(game.example?.practice?`<article class="lesson-prompt"><h3>Práctica de ejemplo realizada</h3><p>Antes de ${esc(label(game.example.practice.base+1))} se probó ${esc(es(game.example.practice.result.san))}: ${esc(game.example.practice.result.kind)}.</p>${button('Repetir esta práctica',`data-topic-practice="${game.example.practice.base+1}"`)}</article>`:'')+`<h3>Aprende de tu partida</h3><p>Selecciona una jugada de blancas y prueba una alternativa.</p>${button('Practicar una alternativa','data-learn')}${button('Pedir un ejercicio al tutor','data-question="Propón un ejercicio breve con las variantes calculadas de esta posición."')}`;}
+ if(isCustom){if(!report)return summary();return contextBar()+(game.example?.practice?`<article class="lesson-prompt"><h3>Práctica de ejemplo realizada</h3><p>Antes de ${esc(label(game.example.practice.base+1))} se probó ${esc(es(game.example.practice.result.san))}: ${esc(game.example.practice.result.kind)}.</p>${button('Repetir esta práctica',`data-topic-practice="${game.example.practice.base+1}"`)}</article>`:'')+`<h3>Aprende de tu partida</h3><p>Selecciona una jugada del lado analizado y prueba una alternativa.</p>${button('Practicar una alternativa','data-learn')}${button('Pedir un ejercicio al tutor','data-question="Propón un ejercicio breve con las variantes calculadas de esta posición."')}`;}
 
  if(!report)return summary();
  const topics=isGemini?GeminiUI.topics:isInterview?[

@@ -1,3 +1,7 @@
+# Integración con la nueva interfaz
+
+Se integraron las tarjetas Blancas/Negras y las descargas PGN/PNG de origin/main con la importación y Ollama. POST /api/review/import recibe player_color (white por defecto); Study analiza solo ese lado y compara las pérdidas con su signo correcto. Las puntuaciones siguen desde blancas. La práctica usa el turno de la posición; el tablero indica el lado analizado. Probado en navegador: adjunto nativo, negras, análisis, flechas, consulta real llama3.1:8b, práctica negra y descargas. Prueba de regresión: tests/test_player_color.py.
+
 # Restauración de funciones
 
 Se recuperaron .env/python-dotenv, Ollama en ambos tutores, importación de PGN por texto y archivo local, controles de adjunto, Enter/Shift+Enter y Roni con ejemplos guardados. Se integraron sobre la versión con Gemini y history_evidence sin eliminar esas mejoras. studies.py gestiona importaciones temporales; RONI_STUDY es permanente; static/roni-example.json conserva tres consultas y una práctica. API y pruebas: tests/test_generative.py, tests/test_roni.py, tests/ui_pgn_file.py y tests/ui_generative.py. Las respuestas guardadas identifican extractos y correcciones editoriales.
