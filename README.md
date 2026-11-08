@@ -1,5 +1,11 @@
 # IAjedrez
 
+## Funciones restauradas
+
+El inicio permite pegar PGN o adjuntar un archivo `.pgn` de hasta 100 KB, revisar su contenido y enviarlo al tablero. Los estudios importados se conservan en memoria hasta reiniciar el servidor (máximo 100). El análisis compara las decisiones del color elegido con Stockfish (las cifras mantienen la perspectiva de blancas); las consultas usan Ollama mediante `OLLAMA_BASE_URL` y `OLLAMA_MODEL`, cargados automáticamente de `.env`. Las variables de la terminal tienen prioridad. Consulta `.env.example` para configurar el motor y el modelo.
+
+El historial incluye Roni — Computer con tres consultas de ejemplo y una práctica guardada. Enter envía las consultas y Shift+Enter inserta un salto de línea. Las explicaciones del modelo pueden contener errores; las variantes se calculan con Stockfish. Se conservan las demás partidas y las mejoras de la tabla de evaluaciones.
+
 **Historial precargado:** las tres partidas incluyen informes reales de Stockfish guardados en `data/history/`. Al abrirlas, la tabla se carga directamente sin recalcular la partida, incluso después de reiniciar el servidor. Cada informe conserva su fecha, motor y parámetros. Los cambios de PGN o parámetros invalidan el informe correspondiente; probar candidatas nuevas sigue requiriendo el motor.
 
 **Tercer caso disponible (7 nov. 2026):** el historial del inicio incluye j017371–zhorzho11 y su conversación con Gemini. El estudio `/?game=gemini` verifica 34 decisiones blancas y dos decisiones negras con Stockfish, responde a las consultas sobre nivel, recomendaciones y notación, y ofrece práctica con recursos vinculados. Ver [síntesis y correcciones](static/conversacion-gemini.md). No requiere Ollama.

@@ -3,10 +3,11 @@
 const InterviewUI={
  headers(){
   const h=game.headers;
+  document.querySelector('.board-main .board-info:last-child > .subtle').textContent=game.player_color==='black'?'Analizando negras · tablero desde blancas':'Analizando blancas';
   document.querySelectorAll('.player-name').forEach((el,i)=>el.textContent=h[i===0?'Black':'White']);
-  document.querySelectorAll('.player-meta').forEach((el,i)=>el.textContent='· '+h[i===0?'BlackElo':'WhiteElo']);
-  document.querySelector('.board-info > .subtle').textContent=h.Date.replaceAll('.','/');
-  document.querySelector('.tree-panel .panel-header .subtle').textContent=(isGemini?'10 min':isInterview?'3+0':'5 min')+' · '+h.Result;
+  document.querySelectorAll('.player-meta').forEach((el,i)=>el.textContent='· '+(h[i===0?'BlackElo':'WhiteElo']||'Sin Elo'));
+  document.querySelector('.board-info > .subtle').textContent=(h.Date||'Fecha no indicada').replaceAll('.','/');
+  document.querySelector('.tree-panel .panel-header .subtle').textContent=(isCustom?(h.TimeControl||'Sin control de tiempo'):isGemini?'10 min':isInterview?'3+0':'5 min')+' · '+h.Result;
  },
  cards(){return `<div class="demo-intro"><strong>Tu conversación, paso a paso</strong><small>Elige una duda y contrástala</small></div><div class="demo-grid">${[
   ['16.e4','¿Activo el alfil de b7 con 16.e4?','Apertura → ruptura central'],

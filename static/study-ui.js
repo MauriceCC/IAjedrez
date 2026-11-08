@@ -52,6 +52,8 @@ function moveTypeIcon(row){
 }
 function priorityTable(){return evaluationTable(true);}
 function studyLearning(){
+ if(isCustom){if(!report)return summary();return contextBar()+(game.example?.practice?`<article class="lesson-prompt"><h3>Práctica de ejemplo realizada</h3><p>Antes de ${esc(label(game.example.practice.base+1))} se probó ${esc(es(game.example.practice.result.san))}: ${esc(game.example.practice.result.kind)}.</p>${button('Repetir esta práctica',`data-topic-practice="${game.example.practice.base+1}"`)}</article>`:'')+`<h3>Aprende de tu partida</h3><p>Selecciona una jugada del lado analizado y prueba una alternativa.</p>${button('Practicar una alternativa','data-learn')}${button('Pedir un ejercicio al tutor','data-question="Propón un ejercicio breve con las variantes calculadas de esta posición."')}`;}
+
  if(!report)return summary();
  const topics=isGemini?GeminiUI.topics:isInterview?[
   ['Defensa Semieslava · D31',5,'La apertura indicada en tu PGN: 1.d4 c6 2.c4 d5 3.Cc3 e6. Explora cómo se construye el centro antes de la ruptura e4.','https://lichess.org/opening/Semi-Slav_Defense','Explorar la apertura y partidas modelo'],

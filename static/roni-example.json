@@ -1,0 +1,381 @@
+{
+  "threads": [
+    {
+      "id": 1,
+      "question": "¿Cuáles fueron mis tres errores principales?",
+      "answer": {
+        "question": "¿Cuáles fueron mis tres errores principales?",
+        "target_ply": 67,
+        "supported": true,
+        "paragraphs": [
+          "Los tres errores principales fueron: ",
+          "1. Permitir el mate en 11 movimientos con la jugada 34. Rh4. \n2. Cometer un error grave con la jugada 30. Dxf8+, perdiendo 2,18 peones. \n3. Cometer un error con la jugada 20. cxd5, perdiendo 1,33 peones."
+        ],
+        "lines": [
+          {
+            "base": 66,
+            "moves": [
+              "g3f2",
+              "c3b3",
+              "h3h4",
+              "f8e7",
+              "h4h5",
+              "h7h6",
+              "f2g2",
+              "a5a4",
+              "g2f2",
+              "b3d3"
+            ],
+            "name": "Candidata de Stockfish"
+          },
+          {
+            "base": 66,
+            "moves": [
+              "g3h4",
+              "c3b3",
+              "h4g5",
+              "a5a4",
+              "g5f4",
+              "f8e7",
+              "f4e4",
+              "a4a3",
+              "e4d4",
+              "e7d6"
+            ],
+            "name": "Jugada real y respuesta"
+          }
+        ],
+        "engine": "Stockfish 17.1",
+        "model": "llama3.1:8b",
+        "generated_at": "2026-11-08T02:49:39.662089+00:00",
+        "source": "Consulta de ejemplo guardada. Explicación generada por Ollama (llama3.1:8b) con evidencia de Stockfish 17.1. Puede contener errores; contrasta las variantes."
+      },
+      "context": {
+        "cursor": 0,
+        "view": "summary",
+        "step": 0,
+        "secondary": null,
+        "line": null,
+        "practice": null
+      }
+    },
+    {
+      "id": 2,
+      "question": "Explica 21.Td1 y la alternativa que calculó Stockfish.",
+      "answer": {
+        "question": "Explica 21.Td1 y la alternativa que calculó Stockfish.",
+        "target_ply": 41,
+        "supported": true,
+        "paragraphs": [
+          "La jugada 21.Td1 es una decisión de Roni, el jugador blanco. Según los datos proporcionados, Stockfish calculó que esta jugada es una \"Imprecisión\" y recomienda la alternativa 21.Tg3."
+        ],
+        "lines": [
+          {
+            "base": 40,
+            "moves": [
+              "e3g3",
+              "e4e3",
+              "d2d4",
+              "e3f2",
+              "g1f1",
+              "c5d4",
+              "e2d4",
+              "g7g6",
+              "f1f2",
+              "d5f4"
+            ],
+            "name": "Candidata de Stockfish"
+          },
+          {
+            "base": 40,
+            "moves": [
+              "a1d1",
+              "c5e7",
+              "d1e1",
+              "d5e3",
+              "d2e3",
+              "e7a3",
+              "e2g3",
+              "a3a5",
+              "b3b4",
+              "a5b6"
+            ],
+            "name": "Jugada real y respuesta"
+          }
+        ],
+        "engine": "Stockfish 17.1",
+        "model": "llama3.1:8b",
+        "generated_at": "2026-11-08T02:49:39.662089+00:00",
+        "source": "Consulta de ejemplo guardada: extracto de la respuesta de Ollama (llama3.1:8b), limitado a la comparación verificada con Stockfish. Las variantes conservan el cálculo original."
+      },
+      "context": {
+        "cursor": 41,
+        "view": "summary",
+        "step": 0,
+        "secondary": null,
+        "line": null,
+        "practice": null
+      }
+    },
+    {
+      "id": 3,
+      "question": "¿Por qué 38...g6 fue jaque mate? Explica la posición final.",
+      "answer": {
+        "question": "¿Por qué 38...g6 fue jaque mate? Explica la posición final.",
+        "target_ply": 76,
+        "supported": true,
+        "paragraphs": [
+          "Tras 38…g6#, el peón negro de g6 da jaque al rey blanco situado en h5. La posición no tiene ninguna respuesta legal para las blancas: es jaque mate y el resultado es 0–1.",
+          "El peón está en la sexta fila; no es una promoción."
+        ],
+        "lines": [],
+        "engine": "Stockfish 17.1",
+        "model": "llama3.1:8b",
+        "generated_at": "2026-11-08T02:49:39.662089+00:00",
+        "source": "Consulta de ejemplo realizada con Ollama (llama3.1:8b). Explicación corregida editorialmente y verificada con python-chess: rey blanco en h5, jaque del peón g6 y cero movimientos legales."
+      },
+      "context": {
+        "cursor": 76,
+        "view": "summary",
+        "step": 0,
+        "secondary": null,
+        "line": null,
+        "practice": null
+      }
+    }
+  ],
+  "practice": {
+    "base": 40,
+    "moves": [
+      "e3g3"
+    ],
+    "sans": [
+      "Rg3"
+    ],
+    "position": {
+      "fen": "3rr1k1/pp3ppp/2p5/2qn4/4p3/PP4RP/2PQNPP1/R5K1 b - - 1 21",
+      "pieces": {
+        "g8": "k",
+        "e8": "r",
+        "d8": "r",
+        "h7": "p",
+        "g7": "p",
+        "f7": "p",
+        "b7": "p",
+        "a7": "p",
+        "c6": "p",
+        "d5": "n",
+        "c5": "q",
+        "e4": "p",
+        "h3": "P",
+        "g3": "R",
+        "b3": "P",
+        "a3": "P",
+        "g2": "P",
+        "f2": "P",
+        "e2": "N",
+        "d2": "Q",
+        "c2": "P",
+        "g1": "K",
+        "a1": "R"
+      },
+      "legal": [
+        "g8h8",
+        "g8f8",
+        "e8f8",
+        "e8e7",
+        "e8e6",
+        "e8e5",
+        "d8c8",
+        "d8b8",
+        "d8a8",
+        "d8d7",
+        "d8d6",
+        "d5e7",
+        "d5c7",
+        "d5f6",
+        "d5b6",
+        "d5f4",
+        "d5b4",
+        "d5e3",
+        "d5c3",
+        "c5f8",
+        "c5e7",
+        "c5d6",
+        "c5b6",
+        "c5b5",
+        "c5a5",
+        "c5d4",
+        "c5c4",
+        "c5b4",
+        "c5e3",
+        "c5c3",
+        "c5a3",
+        "c5f2",
+        "c5c2",
+        "h7h6",
+        "g7g6",
+        "f7f6",
+        "b7b6",
+        "a7a6",
+        "e4e3",
+        "h7h5",
+        "g7g5",
+        "f7f5",
+        "b7b5",
+        "a7a5"
+      ],
+      "turn": "negras",
+      "check": false,
+      "checkmate": false
+    },
+    "result": {
+      "best": {
+        "cp_white": -363,
+        "mate_white": null,
+        "depth": 19,
+        "nodes": 349715,
+        "pv": [
+          "e3g3",
+          "e4e3",
+          "d2d4",
+          "e3f2",
+          "g1f1",
+          "c5d4",
+          "e2d4",
+          "g7g6",
+          "f1f2",
+          "d5f4"
+        ],
+        "san": [
+          "Rg3",
+          "e3",
+          "Qd4",
+          "exf2+",
+          "Kf1",
+          "Qxd4",
+          "Nxd4",
+          "g6",
+          "Kxf2",
+          "Nf4"
+        ]
+      },
+      "played": {
+        "cp_white": -363,
+        "mate_white": null,
+        "depth": 19,
+        "nodes": 349715,
+        "pv": [
+          "e3g3",
+          "e4e3",
+          "d2d4",
+          "e3f2",
+          "g1f1",
+          "c5d4",
+          "e2d4",
+          "g7g6",
+          "f1f2",
+          "d5f4"
+        ],
+        "san": [
+          "Rg3",
+          "e3",
+          "Qd4",
+          "exf2+",
+          "Kf1",
+          "Qxd4",
+          "Nxd4",
+          "g6",
+          "Kxf2",
+          "Nf4"
+        ]
+      },
+      "move": "e3g3",
+      "san": "Rg3",
+      "loss_cp": 0,
+      "kind": "Sin caída importante",
+      "grade": "neutral",
+      "priority": 0,
+      "engine": "Stockfish 17.1",
+      "position": {
+        "fen": "3rr1k1/pp3ppp/2p5/2qn4/4p3/PP4RP/2PQNPP1/R5K1 b - - 1 21",
+        "pieces": {
+          "g8": "k",
+          "e8": "r",
+          "d8": "r",
+          "h7": "p",
+          "g7": "p",
+          "f7": "p",
+          "b7": "p",
+          "a7": "p",
+          "c6": "p",
+          "d5": "n",
+          "c5": "q",
+          "e4": "p",
+          "h3": "P",
+          "g3": "R",
+          "b3": "P",
+          "a3": "P",
+          "g2": "P",
+          "f2": "P",
+          "e2": "N",
+          "d2": "Q",
+          "c2": "P",
+          "g1": "K",
+          "a1": "R"
+        },
+        "legal": [
+          "g8h8",
+          "g8f8",
+          "e8f8",
+          "e8e7",
+          "e8e6",
+          "e8e5",
+          "d8c8",
+          "d8b8",
+          "d8a8",
+          "d8d7",
+          "d8d6",
+          "d5e7",
+          "d5c7",
+          "d5f6",
+          "d5b6",
+          "d5f4",
+          "d5b4",
+          "d5e3",
+          "d5c3",
+          "c5f8",
+          "c5e7",
+          "c5d6",
+          "c5b6",
+          "c5b5",
+          "c5a5",
+          "c5d4",
+          "c5c4",
+          "c5b4",
+          "c5e3",
+          "c5c3",
+          "c5a3",
+          "c5f2",
+          "c5c2",
+          "h7h6",
+          "g7g6",
+          "f7f6",
+          "b7b6",
+          "a7a6",
+          "e4e3",
+          "h7h5",
+          "g7g5",
+          "f7f5",
+          "b7b5",
+          "a7a5"
+        ],
+        "turn": "negras",
+        "check": false,
+        "checkmate": false
+      }
+    },
+    "hint": true,
+    "promotion": null
+  }
+}
